@@ -1,14 +1,8 @@
-from typing import List, Any, Tuple, Optional
-from statistics import median
-from .helpers import clip
+from .helpers import clamp, _to_setish
+from typing import Tuple, Optional
+from ..distributions.distributions import numeric_constraints_intersection
 from ..models.models import Issue
 
-
-def _as_set(x: Any) -> set:
-    if x is None: return set()
-    if isinstance(x, set): return x
-    if isinstance(x, (list, tuple)): return set(x)
-    return {x}
 
 def _intervals_overlap(a: Tuple[float, float, bool, bool],
                        b: Tuple[float, float, bool, bool]) -> bool:
@@ -48,62 +42,16 @@ def _interval(op: str, v: float) -> Tuple[float, float, bool, bool]:
 
 # -------------------- per-issue similarity --------------------
 
-def _num_similarity(issue: Issue) -> float:
-    """Similarity in [0,1] for numeric/time kinds using both operators and interval overlap."""
-    ai = issue.to_internal(issue.lastValue)
-    bi = issue.to_internal(issue.oppLastValue)
-    if ai is None or bi is None:
-        return 0.0
-
-    try:
-        ai = float(ai)
-        bi = float(bi)
-    except Exception:
-        # If conversion failed, we cannot do numeric semantics
-        return 0.0
-
-    A = issue.operator
-    B = issue.oppOperator
-
-    # Build intervals and check feasibility
-    IA = _interval(A, ai)
-    IB = _interval(B, bi)
-
-    # Normalization span
-    L, U = _LU(issue)
-    if (L is not None) and (U is not None) and (U > L):
-        span = max(1e-6, U - L)
-    else:
-        span = max(1.0, abs(ai), abs(bi))
-
-    # If intervals don't overlap, no assignment satisfies both → similarity 0
-    if not _intervals_overlap(IA, IB):
-        return 0.0
-
-    # If both are "eq", they overlap only if equal
-    if A in ("eq", "==") and B in ("eq", "=="):
-        return 1.0 if ai == bi else 0.0
-
-    # If one is "eq", check if that point satisfies the other's half-space
-    if A in ("eq", "=="):
-        # ai must be within IB
-        return 1.0  # we already know intervals overlap
-    if B in ("eq", "=="):
-        # bi must be within IA
-        return 1.0  # already overlapping
-
-    # Both half-spaces and they overlap → fully compatible.
-    # Optionally add a tiny soft penalty for widely separated bounds.
-    # Here we keep it simple and treat as fully compatible.
-    return 1.0
-
-
-def _set_similarity(issue: Issue) -> float:
+def _set_similarity(issue: Issue, with_init) -> float:
     """Similarity in [0,1] for set/enum kinds using both operators."""
-    Aset = _as_set(issue.lastValue)
-    Bset = _as_set(issue.oppLastValue)
-    Aop = issue.operator
+    Bset = _to_setish(issue.oppLastValue)
     Bop = issue.oppOperator
+    if with_init:
+        Aset = _to_setish(issue.initValue)
+        Aop = issue.initOperator
+    else:
+        Aset = _to_setish(issue.lastValue)
+        Aop = issue.operator
 
     if not (Aset or Bset):
         return 1.0
@@ -116,10 +64,6 @@ def _set_similarity(issue: Issue) -> float:
         """How much of 'required' is contained by 'superset' (|∩|/|required|)."""
         return (len(superset & required) / max(1, len(required)))
 
-    def frac_partof(subset: set, container: set) -> float:
-        """How much of 'subset' is present in 'container' (|∩|/|subset|)."""
-        return (len(subset & container) / max(1, len(subset)))
-
     def sat(opX: str, X: set, opY: str, Y: set) -> float:
         """Satisfaction of (X opX ·) against the counterpart Y/opY."""
         # normalize a representative counterpart set for eq vs set
@@ -129,15 +73,11 @@ def _set_similarity(issue: Issue) -> float:
         else:
             Yeff = Y
 
-        if opX == "isallof":    # want Y ⊆ X
+        if opX == "isAllOf":    # want Y ⊆ X
             return frac_allof(X, Yeff)
-        if opX == "haspart":    # same as isAllOf wrt counterpart
-            return frac_allof(X, Yeff)
-        if opX == "ispartof":   # want X ⊆ Y
-            return frac_partof(X, Yeff)
-        if opX == "isanyof":    # any overlap is enough
+        if opX == "isAnyOf":    # any overlap is enough
             return 1.0 if (X & Yeff) else j
-        if opX == "isnoneof":   # must be disjoint
+        if opX == "isNoneOf":   # must be disjoint
             return 1.0 if not (X & Yeff) else max(0.0, 1.0 - j)
         if opX == "eq":
             # exact match if sets equal; else allow singleton-in-set as soft match
@@ -159,11 +99,80 @@ def _set_similarity(issue: Issue) -> float:
     sat_A = sat(Aop, Aset, Bop, Bset)
     sat_B = sat(Bop, Bset, Aop, Aset)
     sim = 0.25 * j + 0.375 * sat_A + 0.375 * sat_B
-    return float(clip(sim, 0.0, 1.0))
+    return float(clamp(sim, 0.0, 1.0))
+
+def _num_similarity(issue: Issue, with_init) -> float:
+    """
+    Soft similarity in [0,1] for numeric issues.
+
+    - 0.0 if constraints are semantically incompatible
+    - Higher when operators/values are compatible and close
+    - Inequalities are treated more forgivingly than strict eq
+    """
+    if with_init:
+        ai = issue.to_internal(issue.initValue)
+    else:
+        ai = issue.to_internal(issue.lastValue)
+    bi = issue.to_internal(issue.oppLastValue)
+    if ai is None or bi is None:
+        return 0.0
+
+    try:
+        ai = float(ai)
+        bi = float(bi)
+    except Exception:
+        return 0.0
 
 
-def _issue_similarity(issue: Issue) -> float:
+    A = issue.operator or "eq"    # one of: eq, neq, gt, gteq, lt, lteq
+    if with_init:
+        A = issue.initOperator
+    B = issue.oppOperator or "eq"
+
+    # 1) semantic compatibility using your existing logic
+    compatible, interval = numeric_constraints_intersection(
+        op_a=A,
+        val_a=ai,
+        op_b=B,
+        val_b=bi,
+    )
+    if not compatible or interval is None:
+        return 0.0
+
+    # 2) define a numeric domain for scaling distances
+    L, U = _LU(issue)
+    if (L is None) or (U is None) or not (U > L):
+        base_min = min(ai, bi)
+        base_max = max(ai, bi)
+        half_span = max(1.0, abs(base_max - base_min))
+        L = base_min - half_span
+        U = base_max + half_span
+
+    L = float(L)
+    U = float(U)
+    dom_span = max(1e-9, U - L)
+
+    # 3) distance-based component (0 if very far, 1 if identical)
+    dist = abs(ai - bi) / dom_span
+    dist_sim = max(0.0, 1.0 - dist)
+
+    # 4) raw similarity:
+    #    - eq/eq only happens when ai == bi (otherwise incompatible above) → dist_sim=1
+    #    - inequalities: more forgiving
+    if A == "eq" and B == "eq":
+        sim_raw = dist_sim  # will be 1.0 in practice
+    else:
+        # inequalities / mixed: keep ≥0.5 even when far but compatible
+        sim_raw = 0.5 + 0.5 * dist_sim  # ∈ [0.5,1]
+
+    # 5) final: any compatible pair gets at least ~0.3
+    sim = 0.3 + 0.7 * sim_raw  # ∈ [0.3,1] for compatible, 0 for incompatible
+    return float(clamp(sim, 0.0, 1.0))
+
+
+
+def _issue_similarity(issue: Issue, with_init=False) -> float:
     if issue.kind == "num":
-        return _num_similarity(issue)
+        return _num_similarity(issue, with_init)
     # treat enums as sets (singletons)
-    return _set_similarity(issue)
+    return _set_similarity(issue, with_init)

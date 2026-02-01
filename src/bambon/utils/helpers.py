@@ -1,149 +1,142 @@
-# src/bambon/utils/helpers.py
 from __future__ import annotations
 from collections.abc import Iterable
-
 import random
 from datetime import datetime, timedelta, timezone
 from functools import partial
-from typing import Any, Dict, List, Tuple
-
-from ..models.expressions import BASE_DATE, _ISO_DATE_RE, _ISO_DURATION_RE, _ISO_DATETIME_RE
-from ..models.models import IssueKey, Issue
+from typing import Any, List, Tuple
+from ..models.expressions import BASE_DATE, _ISO_DURATION_RE, _ISO_DATETIME_RE
+from ..models.models import Issue
 
 def _to_setish(x):
     if isinstance(x, (set, list, tuple)): return set(x)
     return {x}
-# , {'mine': my_val, 'op': my_op, 'their':their_val}
 
-# def satisfies(my_op, my_val, their_op, their_val) -> (bool, Any):
-#     A, B = _to_setish(my_val), _to_setish(their_val)
-#
-#     # ENUM/SET logic
-#     if my_op == "eq":
-#         # they satisfy iff they allow my exact value
-#         if their_op == "eq": return their_val == my_val, None
-#         # if their_op == "isAnyOf":return my_val in B, None
-#         # if their_op == "isAllOf":return A.issubset(B), None
-#         # if their_op == "isNoneOf":return my_val not in B, None
-#         return False, None
-#
-#     if my_op == "isAnyOf":
-#         if their_op == "eq":     return their_val in A
-#         if their_op == "isAnyOf":return len(A & B) > 0
-#         if their_op == "isAllOf":return B.issubset(A)   # they require a subset of what I allow
-#         if their_op == "isNoneOf":return len(A & B) == 0
-#         return False
-#
-#     if my_op == "isAllOf":
-#         if their_op == "eq":     return A.issubset(B)
-#         if their_op == "isAnyOf":return A.issubset(B)   # they must at least allow all I require
-#         if their_op == "isAllOf":return A.issubset(B)
-#         if their_op == "isNoneOf":return len(A & B) == 0 and len(A) == 0
-#         return False
-#
-#     if my_op == "isNoneOf":
-#         if their_op == "eq":     return their_val not in A
-#         if their_op in ("isAnyOf","isAllOf"): return len(A & B) == 0
-#         return False
-#
-#     # NUM/TIME logic via intervals (use your existing helpers)
-#     if my_op in ("lt","lteq","gt","gteq","eq"):
-#         IA = _interval(my_op,   float(_to_num(my_val)))
-#         IB = _interval(their_op,float(_to_num(their_val)))
-#         # require at least overlap; if you want "they entail me", require inclusion instead:
-#         return _intervals_overlap(IA, IB)
-#
-#     return False
-#
-#
+def _is_iterable(value):
+    """Return True if value is an iterable (list, tuple, set, etc.) but not a string or bytes."""
+    return isinstance(value, Iterable) and not isinstance(value, (str, bytes))
 
+def format_operator_roperand(operator, right_operand):
+    if _is_iterable(right_operand):
+        right_operand = list(right_operand)
+        if len(right_operand) > 1 and operator == 'eq':
+            operator = 'isAllOf'
+        elif len(right_operand) == 1 and operator == 'isAllOf':
+            operator = 'eq'
+            right_operand = right_operand[0]
+        # elif len(right_operand) == 0:
+        #     print(operator, right_operand)
+        #     raise
+        else:
 
+            pass
+    return operator, right_operand
 
+def satisfies(my_op, my_val, their_op, their_val) -> bool | None:
+    from .context import _intervals_overlap, _interval
+    if isinstance(their_val,(set, list, tuple)) and len(their_val)==1:
+        their_val = list(their_val)[0]
 
+    A, B = _to_setish(my_val), _to_setish(their_val)
 
+    # ---------- ENUM/SET logic ----------
+    if my_op == "eq":
+        if their_op == "eq":        return their_val == my_val
+        if their_op == "neq":       return their_val != my_val
+        if their_op == "isAnyOf":   return my_val in B
+        if their_op == "isAllOf":   return A.issubset(B)
+        if their_op == "isNoneOf":  return my_val not in B
+        return False
 
+    if my_op == "neq":
+        if their_op == "eq":        return their_val != my_val
+        if their_op == "neq":       return True
+        if their_op == "isAnyOf":   return my_val not in B
+        if their_op == "isAllOf":   return my_val not in B
+        if their_op == "isNoneOf":  return True
+        return False
 
+    if my_op == "isAnyOf":
+        if their_op == "eq":        return their_val in A
+        if their_op == "neq":       return len(A - B) > 0
+        if their_op == "isAnyOf":   return len(A & B) > 0
+        if their_op == "isAllOf":   return B.issubset(A)
+        if their_op == "isNoneOf":  return len(A & B) == 0
+        return False
 
+    if my_op == "isAllOf":
+        if their_op == "eq":        return A.issubset(B)
+        if their_op == "neq":       return their_val not in A
+        if their_op == "isAnyOf":   return A.issubset(B)
+        if their_op == "isAllOf":   return A.issubset(B)
+        if their_op == "isNoneOf":  return len(A & B) == 0 and len(A) == 0
+        return False
 
+    if my_op == "isNoneOf":
+        if their_op == "eq":        return their_val not in A
+        if their_op == "neq":       return True  # they exclude one value; I exclude A — overlap exists
+        if their_op in ("isAnyOf","isAllOf"): return len(A & B) == 0
+        if their_op == "isNoneOf":  return True
+        return False
 
+    # ---------- NUM/TIME logic (numbers already) ----------
+    if my_op in ("lt","lteq","gt","gteq","eq","neq"):
+        # handle 'neq' by splitting into two rays
+        if my_op == "neq" or their_op == "neq":
+            if my_op == "neq" and their_op == "eq":
+                return float(their_val) != float(my_val)
+            if my_op == "eq" and their_op == "neq":
+                return float(my_val) != float(their_val)
+            if my_op == "neq" and their_op == "neq":
+                return True  # anything except two points still overlaps on R
 
+            # general split cases
+            IA1 = _interval("lt", float(my_val)) if my_op == "neq" else _interval(my_op, float(my_val))
+            IA2 = _interval("gt", float(my_val)) if my_op == "neq" else None
+            IB1 = _interval("lt", float(their_val)) if their_op == "neq" else _interval(their_op, float(their_val))
+            IB2 = _interval("gt", float(their_val)) if their_op == "neq" else None
 
+            if my_op == "neq" and their_op != "neq":
+                return _intervals_overlap(IA1, IB1) or _intervals_overlap(IA2, IB1)
+            if my_op != "neq" and their_op == "neq":
+                return _intervals_overlap(IA1, IB1) or _intervals_overlap(IA1, IB2)
+            return False  # shouldn't reach
 
+        # regular inequalities/equality
+        IA = _interval(my_op,   float(my_val))
+        IB = _interval(their_op,float(their_val))
+        return _intervals_overlap(IA, IB)
+
+    return None
 
 
 class HardRule:
     def __init__(self,key,val):
         self.operator = strip_key(key)
         self.value = val
-        self.func = partial(LAMBDA_OPS.get(self.operator, __no_hard_constraint__), val)
-    def __call__(self, their_value):
+        self.func = partial(satisfies, self.operator, val)
+
+
+    def __call__(self, their_operator, their_value):
         # print(self.key, self.val, their_value)
-        return self.func(their_value)
-
-LAMBDA_OPS = {
-    "eq":   lambda mine, their: (
-        # accept if their single value equals mine
-        their == mine
-        # OR if their is a set/list that CONTAINS mine (e.g. their isAnyOf)
-        or (mine in _to_setish(their))
-    ),
-
-    "neq":  lambda mine, their: (
-        their != mine
-        # if their is a set, ensure it does not contain mine
-        and (mine not in _to_setish(their))
-    ),
-
-    "lt":   lambda mine, their: float(their) <  float(mine),
-    "lteq": lambda mine, their: float(their) <= float(mine),
-    "gt":   lambda mine, their: float(their) >  float(mine),
-    "gteq": lambda mine, their: float(their) >= float(mine),
-
-    # I allow ANY of 'mine'; their value(s) must intersect mine
-    "isAnyOf": lambda mine, their: (
-        len(_to_setish(mine) & _to_setish(their)) > 0
-        # and len(_to_setish(their) - _to_setish(mine)) == 0
-    ),
-
-    # I require ALL of 'mine'; their must include mine (subset the right way)
-    "isAllOf": lambda mine, their: _to_setish(mine).issubset(_to_setish(their)),
-
-    # I forbid all of 'mine'; their must be disjoint from mine
-    "isNoneOf": lambda mine, their: len(_to_setish(mine) & _to_setish(their)) == 0,
-}
-
-def __no_hard_constraint__(mine, their):
-    return None
+        return self.func(their_operator, their_value)
+        # return self.func(their_value)
 
 
 # ---------------------- small math ---------------------- #
 def clamp(v: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, v))
 
-def _interp(lo: float, hi: float, t: float) -> float:
-    """Linear interpolation for t in [0, 1]."""
-    t = clamp(t, 0.0, 1.0)
-    return lo + (hi - lo) * t
 
 # ---------------------- dates ---------------------- #
 def is_iso_date(s: str) -> bool:
     return bool(_ISO_DATETIME_RE.match(s))
 
-def iso_to_days(s: str) -> int:
+def iso_to_days(s: str | None) -> int:
+    if not s:
+        return None
     d = datetime.fromisoformat(s).date()
     return (d - BASE_DATE).days
 
-def is_iso_datetime(s: str) -> bool:
-    return bool(_ISO_DATETIME_RE.match(s))
-
-def iso_datetime_to_xsd_date(s: str) -> str:
-    """ Parse an ISO-8601 datetime (Z or ±HH:MM) and return xsd:date (YYYY-MM-DD) in UTC. """
-    if s.endswith("Z"):
-        s = s[:-1] + "+00:00"
-    dt = datetime.fromisoformat(s)
-    if dt.tzinfo is not None:
-        dt = dt.astimezone(timezone.utc)
-    return dt.date().isoformat()
 
 def days_to_iso(days: int) -> str:
     return (BASE_DATE + timedelta(days=int(days))).isoformat()
@@ -152,8 +145,11 @@ def days_to_iso(days: int) -> str:
 def is_iso_duration(s: str) -> bool:
     return bool(_ISO_DURATION_RE.match(s))
 
-def duration_to_seconds(s: str) -> float:
+def duration_to_seconds(s: str | None) -> float:
     """ Parse ISO-8601 duration PnYnMnWnDTnHnMnS into seconds. """
+    if not s:
+        return None
+
     m = _ISO_DURATION_RE.match(s)
     if not m:
         raise ValueError(f"Not an ISO-8601 duration: {s}")
@@ -199,64 +195,6 @@ def seconds_to_duration(total_seconds: float) -> str:
     else:
         return "P" + "".join(parts)
 
-# ---------------------- offer (ODRL) helpers ---------------------- #
-def parse_offer_generic(offer: Dict[str, Any]) -> Dict[IssueKey, Any]:
-    """ Parse an ODRL offer into {(leftOperand, operator, index): rightOperand}.
-        Normalizations:
-        - odrl:dateTime odrl:isWithin [start,end] -> emit two constraints (gteq/lteq)
-        - any odrl:dateTime datetime strings -> coerced to xsd:date (YYYY-MM-DD)
-    """
-    permissions = offer.get("permission") or []
-    if not permissions:
-        return {}
-
-    constraints = permissions[0].get("constraint") or []
-    groups: Dict[Tuple[str, str], int] = {}
-    out: Dict[IssueKey, Any] = {}
-
-    def _add(lo: str, op: str, ro: Any):
-        k0 = (lo, op)
-        idx = groups.get(k0, 0)
-        groups[k0] = idx + 1
-        out[(lo, op, None)] = ro
-
-    for c in constraints:
-        lo = c["leftOperand"]
-        op = c["operator"]
-        ro = c["rightOperand"]
-        if lo == "odrl:dateTime":
-            if op == "odrl:isWithin" and isinstance(ro, list) and len(ro) == 2:
-                a, b = ro[0], ro[1]
-                a = iso_datetime_to_xsd_date(a) if isinstance(a, str) and is_iso_datetime(a) else (a if is_iso_date(a) else a)
-                b = iso_datetime_to_xsd_date(b) if isinstance(b, str) and is_iso_datetime(b) else (b if is_iso_date(b) else b)
-                _add(lo, "odrl:gteq", a)
-                _add(lo, "odrl:lteq", b)
-                continue
-            if isinstance(ro, str) and is_iso_datetime(ro):
-                ro = iso_datetime_to_xsd_date(ro)
-            elif isinstance(ro, list):
-                ro = [iso_datetime_to_xsd_date(x) if isinstance(x, str) and is_iso_datetime(x) else x for x in ro]
-        _add(lo, op, ro)
-    return out
-
-def build_offer_from_issues(issues: Dict[IssueKey, Any]) -> Dict[str, Any]:
-    """ Build an ODRL offer from issue dict. """
-    items = sorted(issues.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2]))
-    constraint = []
-    for (lo, op, idx), ro in items:
-        if isinstance(ro, set):
-            ro = sorted(ro)
-        constraint.append({"leftOperand": lo, "operator": op, "rightOperand": ro})
-    return {
-        "type": "odrl:Offer",
-        "permission": [
-            {
-                "target": "urn:asset:demo-123",
-                "action": "odrl:use",
-                "constraint": constraint,
-            }
-        ],
-    }
 
 # ---------------------- Bayesian primitives ---------------------- #
 def beta_sample(alpha: float, beta: float) -> float:
@@ -270,15 +208,6 @@ def dirichlet_sample(alphas: List[float]) -> List[float]:
     s = sum(xs) or 1.0
     return [x / s for x in xs]
 
-# ---------------------- numeric-like detection ---------------------- #
-def is_numeric_like(sample: Any) -> bool:
-    """Number, ISO date, or ISO duration."""
-    if isinstance(sample, (int, float)):
-        return True
-    if isinstance(sample, str) and (is_iso_date(sample) or is_iso_duration(sample)):
-        return True
-    return False
-
 
 def strip_key(key:str):
     key = key.split('/')[-1]
@@ -287,17 +216,28 @@ def strip_key(key:str):
 def is_iterable(x):
     return isinstance(x, Iterable) and not isinstance(x, (str, bytes))
 
-def create_issue(left_operand, operator, value) -> Issue:
+def create_issue(left_operand, operator, value, num_bounds:Tuple = None) -> Issue:
     from ..distributions.distributions import EnumDirichlet, NumericBeta, SetBelief
 
     if isinstance(value, (int, float)):
-        m = NumericBeta(L=float(value) - 0.2*float(value), U=float(value) + 0.2*float(value))
+        if num_bounds:
+            L, U = num_bounds
+            if L and not U:
+                U = value + (value - L)
+            if U and not L:
+                L = value + (U - value)
+            m = NumericBeta(L=L, U=U)
+        else:
+            m = NumericBeta(L=float(value) - 0.2*float(value), U=float(value) + 0.2*float(value))
+
         current = Issue(
             kind='num',
             operand=left_operand,
             operator=operator,
             oppOperator=None,
             lastValue=value,
+            initOperator=operator,
+            initValue=value,
             oppLastValue=None,
             model=m,
             to_internal=lambda x: float(x),
@@ -309,13 +249,25 @@ def create_issue(left_operand, operator, value) -> Issue:
     if isinstance(value, str):
         if is_iso_duration(value):
             base = float(duration_to_seconds(value))
-            m = NumericBeta(L=base - 0.2*base, U=base + 0.2*base)
+            if num_bounds:
+                L, U = num_bounds
+                L = duration_to_seconds(L)
+                U = duration_to_seconds(U)
+                if L and not U:
+                    U = base + (base - L)
+                if U and not L:
+                    L = base + (U - base)
+                m = NumericBeta(L=L, U=U)
+            else:
+                m = NumericBeta(L=base - 0.2*base, U=base + 0.2*base)
             current = Issue(
                 kind='num',
                 operand=left_operand,
                 operator=operator,
                 oppOperator=None,
                 lastValue=value,
+                initOperator=operator,
+                initValue=value,
                 oppLastValue=None,
                 model=m,
                 to_internal=lambda s: float(duration_to_seconds(s)),
@@ -326,13 +278,25 @@ def create_issue(left_operand, operator, value) -> Issue:
 
         if is_iso_date(value):
             base = float(iso_to_days(value))
-            m = NumericBeta(L=base - 15, U=base + 15)
+            if num_bounds:
+                L, U = num_bounds
+                L = iso_to_days(L)
+                U = iso_to_days(U)
+                if L and not U:
+                    U = base + (base - L)
+                if U and not L:
+                    L = base + (U - base)
+                m = NumericBeta(L=L, U=U)
+            else:
+                m = NumericBeta(L=base - 15, U=base + 15)
             current = Issue(
                 kind='num',
                 operand=left_operand,
                 operator=operator,
                 oppOperator=None,
                 lastValue=value,
+                initOperator=operator,
+                initValue=value,
                 oppLastValue=None,
                 model=m,
                 to_internal=lambda s: float(iso_to_days(s)),
@@ -349,6 +313,8 @@ def create_issue(left_operand, operator, value) -> Issue:
             operator=operator,
             oppOperator=None,
             lastValue=value,
+            initOperator=operator,
+            initValue=value,
             oppLastValue=None,
             model=m,
             to_internal=lambda s: set(s) if is_iterable(s) else str(s),
@@ -366,6 +332,8 @@ def create_issue(left_operand, operator, value) -> Issue:
             operator=operator,
             oppOperator=None,
             lastValue=value,
+            initOperator=operator,
+            initValue=value,
             oppLastValue=None,
             model=m,
             to_internal=lambda xs: set(xs) if ( isinstance(xs, list) or isinstance(xs, tuple)) else {xs},
@@ -382,6 +350,8 @@ def create_issue(left_operand, operator, value) -> Issue:
         operator=operator,
         oppOperator=None,
         lastValue=value,
+        initOperator=operator,
+        initValue=value,
         oppLastValue=None,
         model=m,
         to_internal=lambda s: set(s) if is_iterable(s) else str(s),
@@ -390,6 +360,42 @@ def create_issue(left_operand, operator, value) -> Issue:
     )
     return current
 
-def clip(x: float, lo: float, hi: float) -> float:
-    return max(lo, min(hi, x))
 
+
+def update_inertia(
+    *,
+    ctx: float,                 # c(t) in [0,1]
+    sev: float | None = None,   # s(t) in [0,1] (optional)
+    iota_min: float = 0.05,
+    iota_max: float = 0.65,
+    ctx_switch: float = 0.70,   # when ctx >= this, we consider "near agreement"
+    use_severity: bool = True,  # if True, also reduce inertia when severity is low
+) -> float:
+    """
+    Inertia schedule for ENUM + SET issues.
+
+    - High inertia when context is low (exploration phases persist).
+    - Low inertia when context is high (fast convergence).
+    - Optionally also lowers inertia when severity is low (agreement is near).
+
+    Returns iota in [iota_min, iota_max].
+    """
+    c = clamp(ctx, 0.0, 1.0)
+
+    # Base: iota = iota_max*(1 - c), then clipped to [iota_min, iota_max]
+    iota = iota_max * (1.0 - c)
+    iota = clamp(iota, iota_min, iota_max)
+
+    # If we are near agreement (high context), force minimal inertia
+    if c >= ctx_switch:
+        iota = iota_min
+
+    # Optional: incorporate severity (when severity is low, reduce inertia further)
+    if use_severity and sev is not None:
+        s = clamp(sev, 0.0, 1.0)
+        # g = c*(1-s): when high => negotiation is "globally good"
+        g = clamp(c * (1.0 - s), 0.0, 1.0)
+        # linearly push inertia down as g increases
+        iota = clamp(iota * (1.0 - 0.8 * g), iota_min, iota_max)
+
+    return iota

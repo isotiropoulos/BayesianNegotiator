@@ -1,0 +1,45 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:REAL:consumer:init",
+  "assigner": "did:consumer:C-OK",
+  "assignee": ["did:provider:P-OK"],
+  "target": ["urn:asset:dataset:OK"],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        { "leftOperand": "odrl:dateTime", "operator": "odrl:gteq", "rightOperand": "2025-07-12" },
+        { "leftOperand": "odrl:dateTime", "operator": "odrl:lteq", "rightOperand": "2025-11-12" },
+        { "leftOperand": "odrl:purpose", "operator": "odrl:eq", "rightOperand": "research" },
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isNoneOf", "rightOperand": ["commercial", "monetization"]},
+        { "leftOperand": "odrl:industry", "operator": "odrl:eq", "rightOperand": "research"},
+        { "leftOperand": "odrl:industry", "operator": "odrl:isNoneOf", "rightOperand": ["gambling", "adult"] },
+        { "leftOperand": "odrl:spatial", "operator": "odrl:isAnyOf", "rightOperand": ["EU", "NA"] },
+        { "leftOperand": "odrl:count", "operator": "odrl:lt", "rightOperand": 9000 },
+        { "leftOperand": "odrl:absoluteSize", "operator": "odrl:lt", "rightOperand": 1000},
+        { "leftOperand": "odrl:payAmount", "operator": "odrl:eq", "rightOperand": 5500 },
+        { "leftOperand": "odrl:percentage", "operator": "odrl:eq", "rightOperand": 67 },
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:eq", "rightOperand": "json" },
+        { "leftOperand": "odrl:systemDevice", "operator": "odrl:isAllOf", "rightOperand": ["cloud", "edge"] },
+        { "leftOperand": "odrl:version", "operator": "odrl:isAnyOf", "rightOperand": ["1.0.0", "2.0.0"] },
+        { "leftOperand": "odrl:language", "operator": "odrl:eq", "rightOperand": "en" },
+        { "leftOperand": "odrl:resolution", "operator": "odrl:eq", "rightOperand": "grid:250m" },
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:gteq", "rightOperand": "PT2H" },
+        { "leftOperand": "odrl:timeInterval", "operator": "odrl:lteq", "rightOperand": "P17D" }
+      ]
+    },
+    {
+      "action": "share",
+      "constraint": [
+        { "leftOperand": "odrl:dateTime", "operator": "odrl:gt", "rightOperand": "2025-07-01T00:00:00Z" },
+        { "leftOperand": "odrl:dateTime", "operator": "odrl:lt", "rightOperand": "2025-11-30T00:00:00Z" },
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isNoneOf", "rightOperand": ["resale", "redistribution"] },
+        { "leftOperand": "odrl:recipient", "operator": "odrl:eq", "rightOperand": "did:consumer:A:affiliate" },
+        { "leftOperand": "odrl:industry", "operator": "odrl:neq", "rightOperand": "competitor" }
+      ]
+    }
+  ],
+
+  "obligation": []
+}
