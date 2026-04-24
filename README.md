@@ -133,7 +133,7 @@ python -m unittest -v
 
 ---
 
-## Example Minimal Negotiation Loop
+### Example Minimal Negotiation Loop
 
 ```python
 from negotiator import Bambon
@@ -171,19 +171,77 @@ Bambon behavior is governed by tunable controls, including:
 - `max_rounds` — maximum rounds before infeasibility
 - `hopeless_window`, `hopeless_patience` — detects non-converging negotiation
 
-If negotiation is judged impossible, Bambon raises:
+Negotiation terminates with `NegotiationInfeasible` when:
 
-```python
-from models import NegotiationInfeasible
-```
+- maximum number of rounds is exceeded, or
+- persistent low context and high severity indicate divergence
+
+This enables early stopping in non-converging negotiations.
 
 ---
+## Negotiation Semantics
 
+Bambon operates under incomplete and asymmetric information, modeling opponent preferences through Bayesian belief updates.
+
+Each issue is internally represented in a computational domain (numeric, categorical, or set-based), enabling:
+
+- probabilistic acceptance decisions using Monte Carlo sampling
+- operator-aware constraint compatibility checks
+- adaptive proposal generation based on learned beliefs
+
+Acceptance is not deterministic:
+- numeric issues use credible intervals and probabilistic consistency
+- categorical issues use Dirichlet-based argmax likelihood
+- set issues use Beta-Bernoulli inclusion probabilities
+
+Global negotiation signals:
+- **context score** (overall similarity of offers)
+- **severity** (degree of disagreement)
+
+These signals influence acceptance thresholds dynamically.
+
+---
+## Multi-Action Negotiation
+
+Each action (e.g., `use`, `read`, `share`) is negotiated independently:
+
+- separate belief models per action
+- separate convergence tracking
+- combined into a single ODRL offer
+
+An agreement is reached when all issues for at least one action are accepted.
+
+---
 ## Output Types
 
 Bambon produces ODRL-like structures:
 
 - **Counter-offer**: `@type = "odrl:Offer"`
 - **Agreement**: `@type = "odrl:Agreement"` with constraints filled using accepted values
+---
+## Acknowledgments
+
+This work has been supported by the Horizon Europe research and innovation programme under the project CLIMRES (Grant Agreement No. 101147777). 
+
+The content of this paper reflects only the authors’ views, and the European Commission is not responsible for any use that may be made of the information it contains.
 
 ---
+
+## Experiments (ODRL 2026 Paper)
+
+This repository accompanies the paper:
+
+**“Constrained Adaptive Negotiation Agent of ODRL Offers Under Incomplete and Asymmetric Information”**  
+2nd *ODRL and Beyond: Practical Applications and Challenges for Policy-Based Access and Usage Control*  
+May 10–11, 2026, Dubrovnik, Croatia
+
+### Running Experiments
+
+To reproduce the experimental results:
+
+1. Run negotiation simulations:
+```bash
+python test_negotiator.py
+```
+2. Then open and execute the notebook: `results_analysis.ipynb` 
+The notebook performs the analysis and visualization of the negotiation outcomes.
