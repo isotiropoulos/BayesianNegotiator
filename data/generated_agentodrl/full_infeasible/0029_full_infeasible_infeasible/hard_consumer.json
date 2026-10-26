@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0029_full_infeasible:consumer:hard",
+  "assigner": "did:party:archive-owner",
+  "assignee": [
+    "did:party:reproduction-party",
+    "did:party:unauthorized-party",
+    "did:party:director",
+    "did:party:archive-storage-team"
+  ],
+  "target": [
+    "urn:asset:laureate-manuscripts"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2024-12-18"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1934
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "s3",
+            "https"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "global"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "write",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalType",
+          "operator": "odrl:eq",
+          "rightOperand": "written"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2482
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

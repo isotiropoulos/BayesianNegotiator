@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1143_close_narrow:provider:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-scientists"
+  ],
+  "target": [
+    "urn:asset:crop-yield-records-euagri-yield"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:userAuthentication",
+          "operator": "odrl:eq",
+          "rightOperand": "jointly screened and registered by both entities"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 49
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P43DT4H51M51.933S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:userAuthentication",
+          "operator": "odrl:neq",
+          "rightOperand": "jointly screened and registered by both entities"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 4697
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "JSON",
+            "XML"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P19DT13H54M21.146S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de",
+            "fr",
+            "el"
+          ]
+        }
+      ]
+    }
+  ]
+}

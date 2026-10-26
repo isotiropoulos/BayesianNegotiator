@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1801_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:patient",
+    "did:party:hospital"
+  ],
+  "target": [
+    "urn:asset:electronic-health-records-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1974
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.25
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "internal-only",
+            "European Union"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.37
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "breach"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "courier",
+            "SupportChannel",
+            "https"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 51
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "journalism",
+            "analyzing and evaluating travel patterns of domestic passengers",
+            "genetic_discoveries"
+          ]
+        }
+      ]
+    }
+  ]
+}

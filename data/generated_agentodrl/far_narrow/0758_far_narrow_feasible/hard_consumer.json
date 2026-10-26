@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0758_far_narrow:consumer:hard",
+  "assigner": "did:party:logistics-operator-party",
+  "assignee": [
+    "did:party:approved-logistics-operator"
+  ],
+  "target": [
+    "urn:asset:cross-border-shipment-events"
+  ],
+  "permission": [
+    {
+      "action": "request",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 209
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2027-07-19"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "print",
+            "internal-wiki"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.3
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "global",
+            "inside the territory of the International Financial Data Network",
+            "CentralEuropeanCountries"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P14DT10H18M23.584S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "consortium",
+            "LogisticsFirms"
+          ]
+        }
+      ]
+    }
+  ]
+}

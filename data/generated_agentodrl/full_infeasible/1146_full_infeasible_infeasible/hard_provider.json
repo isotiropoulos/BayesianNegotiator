@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1146_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:analytical-outputs",
+    "urn:asset:clinical-trial-results-data"
+  ],
+  "permission": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sourceData",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "drk:ClinicalTrialResultsData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2001
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT7H20M54.969S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2028-06-19"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sourceData",
+          "operator": "odrl:eq",
+          "rightOperand": "drk:ClinicalTrialResultsData"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 125
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "defence",
+            "mobility",
+            "finance"
+          ]
+        }
+      ]
+    }
+  ]
+}

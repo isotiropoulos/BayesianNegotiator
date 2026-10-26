@@ -1,0 +1,76 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0421_far_wide:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:community-broadcasters"
+  ],
+  "target": [
+    "urn:asset:celtic-ballad-collection",
+    "urn:asset:ad-derived-income"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "hybrid"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "broadcast"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1520
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "payRoyalty",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 49
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P10DT3H7M3.008S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

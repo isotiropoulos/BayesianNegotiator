@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0616_close_narrow:provider:hard",
+  "assigner": "did:party:steward-of-su-326",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:su-326"
+  ],
+  "permission": [
+    {
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "odrl:system",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium-managed-infrastructure"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 285
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-12-22"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P25DT21H43M21.268S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "tee",
+            "container"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "record",
+      "constraint": [
+        {
+          "leftOperand": "odrl:system",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "consortium-managed-infrastructure"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9DT10H37M28.494S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ]
+}

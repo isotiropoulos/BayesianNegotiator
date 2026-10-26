@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1068_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:registrant"
+  ],
+  "target": [
+    "urn:asset:organizational-details"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P77DT17H54M13.892S"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.69
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P22DT6H8.209S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "US"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:neq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2024-06-04"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "http://example.org/servers",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ]
+}

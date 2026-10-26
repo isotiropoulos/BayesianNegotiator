@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0966_far_wide:consumer:hard",
+  "assigner": "did:party:traffic-flow-data-asset",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-j-474"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.4
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 355
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "s3"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 38
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "de"
+          ]
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P7DT7H12M40.714S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ]
+}

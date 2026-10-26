@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1210_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:biotech-firms"
+  ],
+  "target": [
+    "urn:asset:onco-trial-images",
+    "urn:asset:maintenance-fee"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2027-06-18"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "s3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "mobility",
+            "health",
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P74DT6H58M1.497S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "hybrid",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "setMaintenanceFee",
+      "constraint": [
+        {
+          "leftOperand": "odrl:paymentAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "consortium"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0466_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:public"
+  ],
+  "target": [
+    "urn:asset:california-satellite-fire-risk-maps"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 5705
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 28
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P17DT10H12M14.493S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "es"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.48
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

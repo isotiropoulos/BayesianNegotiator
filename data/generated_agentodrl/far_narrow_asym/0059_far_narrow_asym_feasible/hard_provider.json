@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0059_far_narrow_asym:provider:hard",
+  "assigner": "did:party:party-owner",
+  "assignee": [
+    "did:party:party-licensee"
+  ],
+  "target": [
+    "urn:asset:smart-flow-live-feeds",
+    "urn:asset:commercial-license"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT14H3M25.874S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 192
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "public"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.3
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "US"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P31DT6H32M25.854S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1364_far_narrow:consumer:aspiration",
+  "assigner": "did:party:gaia-xplatform",
+  "assignee": [
+    "did:party:authorized-representative"
+  ],
+  "target": [
+    "urn:asset:manufacturing-data",
+    "urn:asset:suspected-misuse",
+    "urn:asset:details",
+    "urn:asset:good-faith",
+    "urn:asset:accuracy"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P106DT12H2M50.248S"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2894
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "supply chain finance credit approval",
+            "MaintainPasswordSecrecy"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "renewal"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "SupportChannel",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-10-22"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "authorized_mixed_reality_headset",
+            "vm"
+          ]
+        }
+      ]
+    }
+  ]
+}

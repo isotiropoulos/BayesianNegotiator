@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1613_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-p-673",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-p-673"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consent",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.08
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-07-02"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "quantitative strategy backtesting"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P19DT10H39M36.392S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "renewal",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 4
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "hsm",
+            "vm"
+          ]
+        }
+      ]
+    }
+  ]
+}

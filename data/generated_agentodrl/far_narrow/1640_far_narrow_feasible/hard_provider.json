@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1640_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:exporter-party",
+    "did:party:trade-authority"
+  ],
+  "target": [
+    "urn:asset:electronic-customs-declaration-data",
+    "urn:asset:trade-facilitation-process"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 16
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 192
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 51
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "takeSteps",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2027-12-05"
+        }
+      ]
+    }
+  ]
+}

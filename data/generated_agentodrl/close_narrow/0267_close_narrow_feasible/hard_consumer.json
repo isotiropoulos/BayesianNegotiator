@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0267_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-su-142",
+  "assignee": [
+    "did:party:green-grid-solutions"
+  ],
+  "target": [
+    "urn:asset:smart-meter-aggregates"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-08-14"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P5DT1H12M28.097S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "structured, commonly used, machine-readable",
+            "HourlyPollutionSensorReadings"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 57
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "http://example.org/servers",
+            "on-prem"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1334
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1721_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-721",
+  "assignee": [
+    "did:party:vehicle-owner"
+  ],
+  "target": [
+    "urn:asset:vehicle-telemetry-data",
+    "urn:asset:data-controller"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P77DT16H34M18.799S"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1956
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "en"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 14
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ]
+}

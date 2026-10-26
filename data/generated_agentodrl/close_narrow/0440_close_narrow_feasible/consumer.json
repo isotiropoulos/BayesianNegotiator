@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0440_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-user"
+  ],
+  "target": [
+    "urn:asset:hospital-device-logs-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actionType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sell",
+            "cross-reference"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 27
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P2DT23H5M24.743S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossReference",
+      "constraint": [
+        {
+          "leftOperand": "odrl:logType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "raw"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P42DT12H54M28.678S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "SupportChannel",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-08-27"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "container",
+            "DesignatedXREquipment"
+          ]
+        }
+      ]
+    }
+  ]
+}

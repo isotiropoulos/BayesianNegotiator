@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0252_close_narrow:provider:aspiration",
+  "assigner": "did:party:new-archive-entries",
+  "assignee": [
+    "did:party:non-contributors"
+  ],
+  "target": [
+    "urn:asset:new-archive-entries"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessType",
+          "operator": "odrl:eq",
+          "rightOperand": "briefPreviews"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 5979
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 282
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "air-gapped",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "termination",
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 9
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RDF",
+            "XML",
+            "PARQUET"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0846_far_narrow_asym:provider:hard",
+  "assigner": "did:party:city-governance-authority",
+  "assignee": [
+    "did:party:municipal-water-authorities"
+  ],
+  "target": [
+    "urn:asset:urban-drainage-sensor-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:authentication",
+          "operator": "odrl:eq",
+          "rightOperand": "bypassed"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P22DT13H25M43.834S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P72DT1H9M36.313S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:authentication",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bypassed"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.08
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "affiliate",
+            "public"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:authentication",
+          "operator": "odrl:neq",
+          "rightOperand": "standard"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 11
+        }
+      ]
+    }
+  ]
+}

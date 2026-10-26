@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1585_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-subject"
+  ],
+  "target": [
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P40DT9M17S"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT7H44M38.137S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:neq",
+          "rightOperand": "retail"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.47
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "courier"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.21
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:neq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ]
+}

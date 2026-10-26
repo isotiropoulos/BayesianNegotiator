@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1243_close_narrow:provider:aspiration",
+  "assigner": "did:party:data-provider-organization",
+  "assignee": [
+    "did:party:user-fee-based-farm-advisory-service"
+  ],
+  "target": [
+    "urn:asset:crop-yield-satellite-imagery2024",
+    "urn:asset:agricultural-data-maintenance-pool"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "http://w3id.org/drk/Purpose:EstablishFeeBasedFarmAdvisoryService"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 100615
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "on-prem",
+            "eu-cloud",
+            "us-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 87
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "breach",
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "contribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 0.01
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "http://w3id.org/drk/Purpose:EstablishFeeBasedFarmAdvisoryService"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-04-06"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1200_full_infeasible:provider:hard",
+  "assigner": "did:party:clean-air-net",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-j-541"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:shareAlike",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "ShareAlike"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 3165
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2024-04-26"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:useType",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "CommercialUse"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P116DT2H18.948S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 17
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ]
+}

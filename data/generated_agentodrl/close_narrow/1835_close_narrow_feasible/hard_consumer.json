@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1835_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-767",
+  "assignee": [
+    "did:party:financial-regulatory-authority"
+  ],
+  "target": [
+    "urn:asset:data-retrieval",
+    "urn:asset:refuse-data-retrieval"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1068
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "s3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "JSON"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "refuse",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article",
+          "operator": "odrl:gteq",
+          "rightOperand": "41.2981"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT15M0.561S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de",
+            "el",
+            "es"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P5DT13H54M16.575S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ]
+}

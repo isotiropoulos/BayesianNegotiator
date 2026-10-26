@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0960_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:auditor"
+  ],
+  "target": [
+    "urn:asset:blockchain-records"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.11
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "regulator",
+            "consortium"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1039
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "vm",
+            "container"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "record",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "immutable"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P22DT4H3M45.292S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ]
+}

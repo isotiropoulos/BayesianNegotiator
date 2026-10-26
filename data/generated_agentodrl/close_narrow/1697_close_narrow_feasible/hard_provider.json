@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1697_close_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:domestic-chinese-consumers"
+  ],
+  "target": [
+    "urn:asset:shopping-preference-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P17DT3H25M19.016S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT11H1M22.822S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P28DT21H56M13.545S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-01-10"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "renewal"
+        }
+      ]
+    }
+  ]
+}

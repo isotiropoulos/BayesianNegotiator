@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1166_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:logistics-partner",
+    "urn:asset:watchlist"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P13DT10H1M37.236S"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 365797
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "third-party"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT8H7M28.67S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:neq",
+          "rightOperand": "es"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.3
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ]
+}

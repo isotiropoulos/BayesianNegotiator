@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1649_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:resident"
+  ],
+  "target": [
+    "urn:asset:personal-health-code-status-data"
+  ],
+  "permission": [
+    {
+      "action": "objecting",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:eq",
+          "rightOperand": "anytime"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-07-25"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-03-15"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalRights",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 3459
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "audit",
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 60
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "mobility",
+            "defence",
+            "retail"
+          ]
+        }
+      ]
+    }
+  ]
+}

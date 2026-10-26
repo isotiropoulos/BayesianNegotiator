@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0239_full_infeasible:provider:hard",
+  "assigner": "did:party:asset-owner",
+  "assignee": [
+    "did:party:partner-institution"
+  ],
+  "target": [
+    "urn:asset:ancient-cities-vrarchive-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessMethod",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "institutional_workstation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 419472
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessMethod",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "VRTerminal"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 7
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

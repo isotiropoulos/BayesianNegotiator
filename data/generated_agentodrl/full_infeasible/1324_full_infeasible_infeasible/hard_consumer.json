@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1324_full_infeasible:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-589",
+  "assignee": [
+    "did:party:all-members",
+    "did:party:members",
+    "did:party:system"
+  ],
+  "target": [
+    "urn:asset:audit-rules",
+    "urn:asset:regulation-documents",
+    "urn:asset:members-notification"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P8DT21H44M39.608S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "print"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "mobility"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.45
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "public_safety",
+            "legitimate interest"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "update",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": 40
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 55
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ]
+}

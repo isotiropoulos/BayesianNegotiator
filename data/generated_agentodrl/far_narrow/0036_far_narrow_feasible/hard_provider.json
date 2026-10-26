@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0036_far_narrow:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:public-channel"
+  ],
+  "target": [
+    "urn:asset:star-feed-calibrated-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 288
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "education"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "2022-08-11"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P8DT12H15M30.27S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hsm",
+            "container",
+            "vm"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.25
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "third-party"
+        }
+      ]
+    }
+  ]
+}

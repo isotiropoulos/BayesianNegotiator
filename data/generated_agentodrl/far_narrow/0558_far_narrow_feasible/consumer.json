@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0558_far_narrow:consumer:aspiration",
+  "assigner": "did:party:european-art-heritage-data-space",
+  "assignee": [
+    "did:party:national-gallery-consortium"
+  ],
+  "target": [
+    "urn:asset:digital-exhibition-catalogues"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-12-23"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "courier",
+            "SupportChannel"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 294362
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "businessID",
+            "//w3id.org/drk/MembershipVerificationParty"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "marketing",
+            "school history fairs or peace-building exhibitions",
+            "researchSeminar"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.94
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "JSON",
+            "secure research terminal",
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ]
+}

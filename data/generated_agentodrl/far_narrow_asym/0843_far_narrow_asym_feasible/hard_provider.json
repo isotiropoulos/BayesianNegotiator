@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0843_far_narrow_asym:provider:hard",
+  "assigner": "did:party:steward-of-su-436",
+  "assignee": [
+    "did:party:gaia-xtrusted-zone"
+  ],
+  "target": [
+    "urn:asset:pacific-northwest-satellite-imagery"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireRiskLevel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Low"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P10DT14H27M1.488S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 4450
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireRiskLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "Low"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.4
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "broadcast",
+            "print",
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 31
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ]
+}

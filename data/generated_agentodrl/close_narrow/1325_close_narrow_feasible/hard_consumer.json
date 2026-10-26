@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1325_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-586",
+  "assignee": [
+    "did:party:medical-data-service-provider",
+    "did:party:health-data-product-supplier"
+  ],
+  "target": [
+    "urn:asset:medical-data-service-provider",
+    "urn:asset:health-data-product-supplier"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.44
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:neq",
+          "rightOperand": "fr"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "exercise",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-07-02"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1255
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "US"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.18
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "PatientPrivacy",
+            "Farm-to-Fork Shipment Data"
+          ]
+        }
+      ]
+    }
+  ]
+}

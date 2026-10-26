@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1059_close_narrow:consumer:hard",
+  "assigner": "did:party:data-provider-entity",
+  "assignee": [
+    "did:party:commercial-analytics-platform"
+  ],
+  "target": [
+    "urn:asset:urban-air-quality-index-layers-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:licensingFeeType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "per-city-block"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 20
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-08-03"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P5DT6H42M6.544S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P13DT14H15M5.956S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "https"
+          ]
+        }
+      ]
+    }
+  ]
+}

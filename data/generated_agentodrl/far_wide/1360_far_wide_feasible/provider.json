@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1360_far_wide:provider:aspiration",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:user-party"
+  ],
+  "target": [
+    "urn:asset:account-details-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:distribute",
+          "operator": "odrl:neq",
+          "rightOperand": true
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P24DT21H25M29.449S"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.14
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "research",
+            "commercial",
+            "statistics"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 12
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "broadcast",
+            "print"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.55
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "termination",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ]
+}

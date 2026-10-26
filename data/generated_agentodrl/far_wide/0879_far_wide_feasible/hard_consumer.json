@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0879_far_wide:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:commercial-company"
+  ],
+  "target": [
+    "urn:asset:alpine-geohazard-maps"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 806
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 450
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 37
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "RDF"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "https"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P11DT20H3M26.861S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ]
+}

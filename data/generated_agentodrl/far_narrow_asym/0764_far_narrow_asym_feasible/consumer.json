@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0764_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:solar-trust",
+  "assignee": [
+    "did:party:certified-renewable-provider"
+  ],
+  "target": [
+    "urn:asset:impact-assessment"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.94
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "JSON",
+            "structured, commonly used, machine-readable",
+            "granular, real-time consumption"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "en",
+            "fr",
+            "de"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "quarterly",
+            "Article 18 of this Law",
+            "anytime"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 407376
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "https",
+            "SupportChannel",
+            "kafka"
+          ]
+        }
+      ]
+    }
+  ]
+}

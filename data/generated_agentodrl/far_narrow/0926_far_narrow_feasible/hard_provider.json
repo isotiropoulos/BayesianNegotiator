@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0926_far_narrow:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:grid-usage-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 20
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 55
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.56
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "renewal"
+          ]
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P17DT18H2M21.008S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1364_far_wide:consumer:hard",
+  "assigner": "did:party:gaia-xplatform",
+  "assignee": [
+    "did:party:authorized-representative"
+  ],
+  "target": [
+    "urn:asset:manufacturing-data",
+    "urn:asset:suspected-misuse",
+    "urn:asset:details",
+    "urn:asset:good-faith",
+    "urn:asset:accuracy"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P65DT3H21M40.277S"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1770
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "supply chain finance credit approval",
+            "MaintainPasswordSecrecy"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT3H24M25.103S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "SupportChannel",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-04-18"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "container"
+        }
+      ]
+    }
+  ]
+}

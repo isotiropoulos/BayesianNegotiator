@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1145_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results-eupharma-trials-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.46
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7DT10H10M55.986S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "air-gapped",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 302027
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT22H3M25.496S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "es"
+          ]
+        }
+      ]
+    }
+  ]
+}

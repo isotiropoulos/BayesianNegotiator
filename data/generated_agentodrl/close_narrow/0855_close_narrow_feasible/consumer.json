@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0855_close_narrow:consumer:aspiration",
+  "assigner": "did:party:utility-operator-entity",
+  "assignee": [
+    "did:party:utility-operators"
+  ],
+  "target": [
+    "urn:asset:nordic-smart-meter-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P50DT7H5M0.363S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "granular, real-time consumption",
+            "image/jpeg"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.34
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "Remote Sensing Contractors",
+            "Farmers"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "retail",
+            "医院数据提供方",
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 52
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "DesignatedXREquipment",
+            "authorized_mixed_reality_headset"
+          ]
+        }
+      ]
+    }
+  ]
+}

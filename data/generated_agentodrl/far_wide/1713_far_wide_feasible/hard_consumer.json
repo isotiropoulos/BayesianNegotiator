@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1713_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:financial-regulators",
+    "did:party:financial-institutions",
+    "did:party:relevant-authorities"
+  ],
+  "target": [
+    "urn:asset:data-asset",
+    "urn:asset:data-access-process"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P69DT8H15M24.663S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 394
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "kafka",
+            "SupportChannel"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1094
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "air-gapped"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "health"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P14DT1H17M0.398S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "broadcast",
+            "print"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1696_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:legal-authority",
+  "assignee": [
+    "did:party:overseas-retailer"
+  ],
+  "target": [
+    "urn:asset:consumer-shopping-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P20DT2H40M23.451S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 713
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2024-07-18"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "XML"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 69
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ]
+}

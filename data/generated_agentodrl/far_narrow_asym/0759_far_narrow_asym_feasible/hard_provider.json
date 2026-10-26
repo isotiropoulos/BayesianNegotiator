@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0759_far_narrow_asym:provider:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:premium-subscribers"
+  ],
+  "target": [
+    "urn:asset:data-asset",
+    "urn:asset:route-optimization-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.3
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2025-08-06"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P28DT14H40M41.878S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "on-prem",
+            "edge",
+            "eu-cloud"
+          ]
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "container"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 2103
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "courier"
+          ]
+        }
+      ]
+    }
+  ]
+}

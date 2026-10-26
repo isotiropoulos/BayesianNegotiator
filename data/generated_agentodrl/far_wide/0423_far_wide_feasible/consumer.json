@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0423_far_wide:consumer:aspiration",
+  "assigner": "did:party:steward-of-su-215",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:su-215"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-10-11"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-12-29"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "SupportChannel",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "mobility",
+            "finance",
+            "health"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "el",
+            "de",
+            "en"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hsm",
+            "videoPlatforms",
+            "Australia Spatial Data Hub"
+          ]
+        }
+      ]
+    }
+  ]
+}

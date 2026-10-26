@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0844_close_narrow:provider:hard",
+  "assigner": "did:party:municipal-water-authorities",
+  "assignee": [
+    "did:party:eudata-space-partner-agencies"
+  ],
+  "target": [
+    "urn:asset:rhine-basin-sensor-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:floodAlertLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P5DT23H58M28.949S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "energy"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P9DT1H30M13.358S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 254577
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ]
+}

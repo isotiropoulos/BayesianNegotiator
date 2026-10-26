@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0727_far_wide:consumer:aspiration",
+  "assigner": "did:party:urban-medication-alert-api",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:city-formulary"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2818
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "secure research terminals",
+            "consortium-approved"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.93
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "affiliate",
+            "//example.org/parties/agriTechCompany",
+            "Remote Sensing Contractors"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "US",
+            "Gaia-X Trusted Zone",
+            "CatenaXDataSpace"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "en",
+            "fr",
+            "es"
+          ]
+        }
+      ]
+    }
+  ]
+}

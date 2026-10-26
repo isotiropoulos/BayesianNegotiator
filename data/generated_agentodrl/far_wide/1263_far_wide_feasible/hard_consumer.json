@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1263_far_wide:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-564",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:agri-flow-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P17DT4M23.597S"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 67
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "sftp",
+            "SupportChannel"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1804
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hsm",
+            "vm",
+            "consortium-approved"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.33
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "structured, commonly used, machine-readable",
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0950_far_wide:provider:aspiration",
+  "assigner": "did:party:clinical-trial-results",
+  "assignee": [
+    "did:party:hospital-data-provider"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results",
+    "urn:asset:data-source"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessTrigger",
+          "operator": "odrl:eq",
+          "rightOperand": "接入临床试验结果"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P51DT23H37M17.902S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "container",
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 400
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "annotate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "医院数据提供方"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "CSV",
+            "PARQUET"
+          ]
+        }
+      ]
+    }
+  ]
+}

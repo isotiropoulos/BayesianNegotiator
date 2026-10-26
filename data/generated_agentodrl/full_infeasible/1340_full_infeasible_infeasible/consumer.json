@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1340_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:data-processor"
+  ],
+  "target": [
+    "urn:asset:personal-energy-data",
+    "urn:asset:statistical-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:encryptionMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "homomorphic encryption"
+          ]
+        },
+        {
+          "leftOperand": "odrl:learningMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "federated learning",
+            "Asset:FederatedLearning"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-12-30"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:privacyParameter",
+          "operator": "odrl:gteq",
+          "rightOperand": 1.8
+        },
+        {
+          "leftOperand": "odrl:encryptionMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "homomorphic encryption"
+          ]
+        },
+        {
+          "leftOperand": "odrl:learningMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "federated learning",
+            "Asset:FederatedLearning"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 592639
+        }
+      ]
+    }
+  ]
+}

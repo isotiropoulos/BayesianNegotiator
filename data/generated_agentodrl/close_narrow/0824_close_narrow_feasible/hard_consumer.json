@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0824_close_narrow:consumer:hard",
+  "assigner": "did:party:port-authority",
+  "assignee": [
+    "did:party:port-operations-managers"
+  ],
+  "target": [
+    "urn:asset:vessel-arrival-predictions"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P15DT1H30M53.329S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P5DT5H53M8.424S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "drk:registeredUser",
+            "ValidatedNetherlandsIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 21
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "US"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "fr",
+            "el",
+            "es"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P4DT23H23M12.211S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ]
+}

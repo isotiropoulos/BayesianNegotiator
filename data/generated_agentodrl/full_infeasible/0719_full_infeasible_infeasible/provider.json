@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0719_full_infeasible:provider:aspiration",
+  "assigner": "did:party:urban-air-quality-consortium",
+  "assignee": [
+    "did:party:environmental-research-institutes"
+  ],
+  "target": [
+    "urn:asset:city-air-platform"
+  ],
+  "permission": [
+    {
+      "action": "aggregate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "HourlyPollutionSensorReadings"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 9
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 242028
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "en",
+            "el"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P25DT11H55M31.3S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "US",
+            "UK"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT8H46M11.286S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "research",
+            "marketing",
+            "journalism"
+          ]
+        }
+      ]
+    }
+  ]
+}

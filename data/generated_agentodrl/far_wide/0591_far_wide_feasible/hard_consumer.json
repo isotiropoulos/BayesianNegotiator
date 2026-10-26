@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0591_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:port-visitors"
+  ],
+  "target": [
+    "urn:asset:port-vessel-movement-logs"
+  ],
+  "permission": [
+    {
+      "action": "view",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "2024-11-25"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P31DT8H22M14.888S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P13DT5H48M38.74S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "vm"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 255
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ]
+}

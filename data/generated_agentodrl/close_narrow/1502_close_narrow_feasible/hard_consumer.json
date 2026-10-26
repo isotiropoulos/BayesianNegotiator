@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1502_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:policy-owner"
+  ],
+  "target": [
+    "urn:asset:energy-consumption-model-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P6DT7H40M48.32S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P21DT18H36M43.888S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "public"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.19
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "CentralEuropeanCountries",
+            "UK"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 24
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ]
+}

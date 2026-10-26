@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0446_close_narrow:provider:hard",
+  "assigner": "did:party:owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:raw-telemetry"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 37
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P36DT7H50M39.284S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "third-party",
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 330521
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "statistics"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P9DT16H52M26.07S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "https"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0459_far_narrow:provider:hard",
+  "assigner": "did:party:eudata-exchange-authority",
+  "assignee": [
+    "did:party:critical-infrastructure-operators"
+  ],
+  "target": [
+    "urn:asset:threat-intelligence-feeds"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7DT16H42M33.24S"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.52
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 52
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "EU",
+            "EEA"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "print",
+            "web"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT7H56M4.708S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        }
+      ]
+    }
+  ]
+}

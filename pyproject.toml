@@ -4,12 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bambon"
-version = "1.0.0"
+version = "2.0.5"
 authors = [
   { name="Iason Sotiropoulos", email="isotiropoulos@singularlogic.eu"},
 ]
 dependencies = [
-    "pydantic>=2.7.0"
+    "pydantic>=2.7.0",
+    # bambon.distributions.distributions imports these at module scope
+    # (numpy, scipy.stats.beta); without them `pip install bambon` yields a
+    # package that raises ModuleNotFoundError on first import.
+    "numpy>=1.24",
+    "scipy>=1.10",
 ]
 
 description = "An SDK to suppoort automated ODRL-policy negotiation."

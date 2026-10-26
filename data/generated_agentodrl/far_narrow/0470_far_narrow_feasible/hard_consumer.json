@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0470_far_narrow:consumer:hard",
+  "assigner": "did:party:party-healthcare-authority",
+  "assignee": [
+    "did:party:healthcare-coordinators"
+  ],
+  "target": [
+    "urn:asset:london-emergency-room-capacity-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:bedOccupancy",
+          "operator": "odrl:lt",
+          "rightOperand": 51
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 50
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "renewal"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 43
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.41
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "kafka"
+          ]
+        }
+      ]
+    }
+  ]
+}

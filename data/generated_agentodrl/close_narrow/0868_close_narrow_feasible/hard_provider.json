@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0868_close_narrow:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:account-holder",
+    "did:party:data-management-team",
+    "did:party:security-team",
+    "did:party:operation-team",
+    "did:party:re-certification-agency"
+  ],
+  "target": [
+    "urn:asset:suspicious-account",
+    "urn:asset:affected-data-resource",
+    "urn:asset:full-space-security-inspection",
+    "urn:asset:root-cause-analysis-report",
+    "urn:asset:security-re-certification"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 19
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2026-10-02"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 4233
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "el",
+            "de"
+          ]
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "renewal",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 330
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "PARQUET"
+          ]
+        }
+      ]
+    }
+  ]
+}

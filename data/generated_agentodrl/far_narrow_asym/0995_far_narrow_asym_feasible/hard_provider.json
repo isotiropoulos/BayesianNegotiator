@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0995_far_narrow_asym:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-486",
+  "assignee": [
+    "did:party:policy-issuer",
+    "did:party:health-data-service-provider"
+  ],
+  "target": [
+    "urn:asset:health-data-service-provider",
+    "urn:asset:health-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 2872
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "2026-07-02"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P23DT9H32M53.706S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "CH"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "rectify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P210DT3H52M5.035S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "CSV"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "tee",
+            "hsm"
+          ]
+        }
+      ]
+    }
+  ]
+}

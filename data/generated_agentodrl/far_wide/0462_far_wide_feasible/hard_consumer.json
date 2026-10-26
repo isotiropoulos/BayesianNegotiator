@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0462_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:water-quality-metrics"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 35
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "delay",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT16H1M0.418S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P11DT1H45M25.679S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "CertifiedEnvironmentalResearcher",
+            "LogisticsFirms"
+          ]
+        }
+      ]
+    }
+  ]
+}

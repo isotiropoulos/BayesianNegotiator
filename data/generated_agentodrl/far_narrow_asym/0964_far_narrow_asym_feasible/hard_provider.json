@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0964_far_narrow_asym:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:party"
+  ],
+  "target": [
+    "urn:asset:data-authorization-proof",
+    "urn:asset:data",
+    "urn:asset:arbitration-result",
+    "urn:asset:city-security-report",
+    "urn:asset:data-flow"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 81
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.75
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "RDF"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P117DT7H29M46.273S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "defence"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "freezeDataFlow",
+      "constraint": [
+        {
+          "leftOperand": "odrl:involvedInCitySecurity",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 60
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ]
+}

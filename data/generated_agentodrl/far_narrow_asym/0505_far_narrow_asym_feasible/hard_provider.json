@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0505_far_narrow_asym:provider:hard",
+  "assigner": "did:party:shipping-authority",
+  "assignee": [
+    "did:party:shipping-company"
+  ],
+  "target": [
+    "urn:asset:asset-email",
+    "urn:asset:asset-imo"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P10DT8H59M33.512S"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2025-10-25"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "renewal",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 55
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "third-party"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "JSON"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.42
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "de"
+          ]
+        }
+      ]
+    }
+  ]
+}

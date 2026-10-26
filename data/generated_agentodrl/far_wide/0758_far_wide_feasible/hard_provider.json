@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0758_far_wide:provider:hard",
+  "assigner": "did:party:logistics-operator-party",
+  "assignee": [
+    "did:party:approved-logistics-operator"
+  ],
+  "target": [
+    "urn:asset:cross-border-shipment-events"
+  ],
+  "permission": [
+    {
+      "action": "request",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 240
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2027-12-05"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "print"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "marketing"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.21
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "global"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P18DT5H57M18.364S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "third-party"
+        }
+      ]
+    }
+  ]
+}

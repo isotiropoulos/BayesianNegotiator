@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0217_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:government-agricultural-departments"
+  ],
+  "target": [
+    "urn:asset:european-agri-data-api"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessMode",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "real-time",
+            "public",
+            "online"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 342098
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "print",
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT4H41M44.761S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "http://example.org/servers",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1799
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ]
+}

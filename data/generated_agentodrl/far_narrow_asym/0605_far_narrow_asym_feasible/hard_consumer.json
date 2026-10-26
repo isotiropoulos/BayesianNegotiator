@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0605_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:regulatory-digest"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:source",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Smart Energy Data Hub",
+            "FieldSense network",
+            "Untraceable"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 706
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P13DT19H8M21.086S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "European Union",
+            "//w3id.org/drk/MembershipVerificationParty"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.47
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P5DT10H52M10.994S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "container"
+          ]
+        }
+      ]
+    }
+  ]
+}

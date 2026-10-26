@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1699_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:processing-party"
+  ],
+  "target": [
+    "urn:asset:travel-data-asset",
+    "urn:asset:international-territory"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2492
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.19
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "global"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2027-12-27"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 60
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "termination",
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ]
+}

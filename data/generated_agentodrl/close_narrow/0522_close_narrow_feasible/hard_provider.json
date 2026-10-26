@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0522_close_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:all-users"
+  ],
+  "target": [
+    "urn:asset:asset-scan"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 313
+        },
+        {
+          "leftOperand": "odrl:usePurpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "academic research",
+            "regulatory_due_diligence",
+            "ecological research",
+            "AI model training",
+            "archival research,public awareness",
+            "paid_exhibition"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 510
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 4989
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P37DT20H7M33.111S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "vm"
+          ]
+        }
+      ]
+    }
+  ]
+}

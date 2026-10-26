@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0571_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:gaia-xauthority",
+  "assignee": [
+    "did:party:university-architecture-departments"
+  ],
+  "target": [
+    "urn:asset:historic-building-scan-data",
+    "urn:asset:university-departments"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-10-15"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 67
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "s3"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-11-03"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "es"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P6DT20H10M38.833S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0098_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:certified-agronomist"
+  ],
+  "target": [
+    "urn:asset:crop-yield-event-repository"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:registrationStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "registered"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P20DT3H19M40.447S"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 526971
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "print",
+            "web",
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.7
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 109
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "on-prem"
+          ]
+        }
+      ]
+    }
+  ]
+}

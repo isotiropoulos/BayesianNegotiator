@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0170_close_narrow:consumer:hard",
+  "assigner": "did:party:w3-c",
+  "assignee": [
+    "did:party:registered-supply-chain-auditors"
+  ],
+  "target": [
+    "urn:asset:aggregated-supplier-reports"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P18DT20H34M6.483S"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.2
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "CSV"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 547
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-07-25"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "es"
+          ]
+        }
+      ]
+    }
+  ]
+}

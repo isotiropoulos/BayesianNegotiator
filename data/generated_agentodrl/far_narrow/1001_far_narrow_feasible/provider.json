@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1001_far_narrow:provider:aspiration",
+  "assigner": "did:party:alliance-admin",
+  "assignee": [
+    "did:party:data-controller"
+  ],
+  "target": [
+    "urn:asset:all-data-activities",
+    "urn:asset:compliance-report"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 3022
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "renewal",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-03-23"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "retail",
+            "mobility",
+            "defence"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "en",
+            "el",
+            "fr"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 42
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "broadcast",
+            "web",
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ]
+}

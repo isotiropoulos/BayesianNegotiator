@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1495_far_wide:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:all-parties-accessed-results"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results-dataset"
+  ],
+  "permission": [
+    {
+      "action": "sendNotification",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "2022-12-23"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P82DT10H22M42.311S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "JSON"
+          ]
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1818
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P12DT42M28.579S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "hybrid"
+          ]
+        }
+      ]
+    }
+  ]
+}

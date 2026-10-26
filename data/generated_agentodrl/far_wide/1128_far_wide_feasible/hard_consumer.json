@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1128_far_wide:consumer:hard",
+  "assigner": "did:party:yield-forecast",
+  "assignee": [
+    "did:party:farm-net",
+    "did:party:agri-metrics"
+  ],
+  "target": [
+    "urn:asset:yield-forecast"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:revenueType",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "subscription"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 214
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-08-15"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "SupportChannel",
+            "courier"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2023
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "container"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 22
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "internal-only"
+          ]
+        }
+      ]
+    }
+  ]
+}

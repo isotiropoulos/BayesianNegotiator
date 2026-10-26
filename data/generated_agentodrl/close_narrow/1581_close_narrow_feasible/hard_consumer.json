@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1581_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-658",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:crop-yield-dataset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 454
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.15
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:license",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "//creativecommons.org/licenses/by/4.0/"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT14H7M29.49S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "license",
+      "constraint": [
+        {
+          "leftOperand": "odrl:license",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "same-as"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 263381
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

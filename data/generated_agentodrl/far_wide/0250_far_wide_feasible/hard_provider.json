@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0250_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:general-users"
+  ],
+  "target": [
+    "urn:asset:short-audio-excerpts"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P18DT21H30M49.799S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 980
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "statistics",
+            "commercial"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 72
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 2931
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "termination",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ]
+}

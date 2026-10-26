@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0609_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:university-consortia"
+  ],
+  "target": [
+    "urn:asset:european-research-cloud-open-science-policy-feed"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Real-time queries",
+            "Real-time energy consumption data",
+            "publicExhibition"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT5H6M15.911S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 3626
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Real-time queries",
+            "projectAccount",
+            "疑问"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P6DT14H34M58.556S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "mobility"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "RDF"
+          ]
+        }
+      ]
+    }
+  ]
+}

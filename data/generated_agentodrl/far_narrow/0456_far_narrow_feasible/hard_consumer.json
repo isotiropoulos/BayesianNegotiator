@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0456_far_narrow:consumer:hard",
+  "assigner": "did:party:health-authority-party",
+  "assignee": [
+    "did:party:user-access-party"
+  ],
+  "target": [
+    "urn:asset:pandemic-response"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:healthEmergencyStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "ended"
+          ]
+        },
+        {
+          "leftOperand": "odrl:healthEmergencyEndDate",
+          "operator": "odrl:lteq",
+          "rightOperand": "2022-08-25"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 261
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "education"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-06-01"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 48
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ]
+}

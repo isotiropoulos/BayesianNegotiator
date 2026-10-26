@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1170_close_narrow:consumer:hard",
+  "assigner": "did:party:data-publication",
+  "assignee": [
+    "did:party:data-originator"
+  ],
+  "target": [
+    "urn:asset:data-publication",
+    "urn:asset:root-cause-explanation",
+    "urn:asset:validated-fix"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "XML"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "publish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT13H43M26.146S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "finance",
+            "mobility",
+            "state credit industry administrative department"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2024-01-06"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "statistics"
+        }
+      ]
+    },
+    {
+      "action": "complete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT13H43M26.146S"
+        }
+      ]
+    }
+  ]
+}

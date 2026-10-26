@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1467_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:data-owner",
+    "did:party:secure-processing-hub"
+  ],
+  "target": [
+    "urn:asset:images"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P69DT20H33M41.917S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2024-06-13"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "reAnonymize",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "2025-07-28"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2028-06-02"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "us-cloud",
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ]
+}

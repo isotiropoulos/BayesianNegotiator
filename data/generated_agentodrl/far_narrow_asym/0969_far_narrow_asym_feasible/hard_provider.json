@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0969_far_narrow_asym:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-480",
+  "assignee": [
+    "did:party:account-holder"
+  ],
+  "target": [
+    "urn:asset:financial-data",
+    "urn:asset:disputed-data",
+    "urn:asset:account"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-10-19"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.09
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "destroyData",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-10-19"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "freezeAccount",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-10-19"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ]
+}

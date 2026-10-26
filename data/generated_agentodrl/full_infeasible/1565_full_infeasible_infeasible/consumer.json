@@ -1,0 +1,96 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1565_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-j-654",
+  "assignee": [
+    "did:party:users",
+    "did:party:health-data-commons"
+  ],
+  "target": [
+    "urn:asset:healthcare-dataset",
+    "urn:asset:operational-report",
+    "urn:asset:revenue-donation"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.87
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "global",
+            "Global Clinical Trial Data Platform",
+            "UserCountry"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "drk:ExternalConsultant",
+            "ValidatedNetherlandsIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-05-26"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "low-resolution images",
+            "image/jpeg"
+          ]
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "audit"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "donate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:revenue",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.8
+        }
+      ]
+    }
+  ]
+}

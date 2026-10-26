@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1450_far_narrow:provider:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:smart-contract"
+  ],
+  "target": [
+    "urn:asset:revenue-split"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 40
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 60
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "eu-cloud",
+            "air-gapped",
+            "us-cloud"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "broadcast",
+            "print"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "exercise",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 60
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 40
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "fr",
+            "de",
+            "es"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "US",
+            "CH",
+            "global"
+          ]
+        }
+      ]
+    }
+  ]
+}

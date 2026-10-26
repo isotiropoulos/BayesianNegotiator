@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0295_full_infeasible:consumer:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:urban-planners"
+  ],
+  "target": [
+    "urn:asset:su-163"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 55
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.27
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "finance",
+            "public",
+            "state credit industry administrative department"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "eu-cloud"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "//example.org/parties/agriTechCompany",
+            "//w3id.org/drk/MembershipVerificationParty"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P6DT12H56M57.187S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ]
+}

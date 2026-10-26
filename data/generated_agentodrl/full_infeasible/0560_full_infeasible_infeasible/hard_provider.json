@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0560_full_infeasible:provider:hard",
+  "assigner": "did:party:steward-of-su-298",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:su-298"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P8DT22H28M20.644S"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.11
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "s3"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT17M55.295S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "third-party"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "public"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 15
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "container",
+            "hsm",
+            "tee"
+          ]
+        }
+      ]
+    }
+  ]
+}

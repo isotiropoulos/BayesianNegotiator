@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0291_far_wide:consumer:aspiration",
+  "assigner": "did:party:air-quality-monitoring-data",
+  "assignee": [
+    "did:party:city-health-departments"
+  ],
+  "target": [
+    "urn:asset:real-time-alert-dashboard",
+    "urn:asset:detailed-sensor-datasets"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-14"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "http://example.org/servers",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "for another person or organization",
+            "citation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EEA",
+            "Global Clinical Trial Data Platform",
+            "inside the territory of the International Financial Data Network"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT11H11M28.598S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hsm",
+            "videoPlatforms",
+            "authorized_mixed_reality_headset"
+          ]
+        }
+      ]
+    }
+  ]
+}

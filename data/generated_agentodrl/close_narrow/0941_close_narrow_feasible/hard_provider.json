@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0941_close_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-466",
+  "assignee": [
+    "did:party:credit-authority",
+    "did:party:applicant",
+    "did:party:foreign-institution"
+  ],
+  "target": [
+    "urn:asset:medical-credit-information-platform",
+    "urn:asset:applicant-history-violations",
+    "urn:asset:applicant-legal-lawsuits",
+    "urn:asset:industry-credit-rating",
+    "urn:asset:cross-border-data-compliance"
+  ],
+  "permission": [
+    {
+      "action": "verify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P9DT1H21M52.024S"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 49
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "hsm",
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 1156
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "CH"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:aggregated-irrigation-advisories",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:aggregated-irrigation-advisories",
+    "urn:asset:field-level-sensor-data",
+    "urn:asset:regional-farm-cooperatives"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "aggregated"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.5
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "SupportChannel"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:eq",
+          "rightOperand": 32
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "limitAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:soilMoisture",
+          "operator": "odrl:eq",
+          "rightOperand": 18
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:eq",
+          "rightOperand": "P5DT2H14M31.301S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "us-cloud"
+        }
+      ]
+    }
+  ]
+}

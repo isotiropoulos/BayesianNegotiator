@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1624_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-681",
+  "assignee": [
+    "did:party:vehicle-owner",
+    "did:party:insurance-company"
+  ],
+  "target": [
+    "urn:asset:vehicle-driving-data",
+    "urn:asset:automotive-manufacturer"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "InsuranceCompany"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-09-17"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1458
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 3379
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P7DT23H24M17.684S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "US"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0893_close_narrow:consumer:aspiration",
+  "assigner": "did:party:aimodel-deployment-license",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:aimodel-deployment-license"
+  ],
+  "permission": [
+    {
+      "action": "revoke",
+      "constraint": [
+        {
+          "leftOperand": "odrl:publicInterestHarm",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "publicInterestHarm"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1337
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.34
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "SupportChannel",
+            "kafka"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.27
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "retail",
+            "state credit industry administrative department",
+            "finance"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-08-23"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "JSON",
+            "PatientPrivacy",
+            "Farm-to-Fork Shipment Data"
+          ]
+        }
+      ]
+    }
+  ]
+}

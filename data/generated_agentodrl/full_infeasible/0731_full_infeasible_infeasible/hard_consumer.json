@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0731_full_infeasible:consumer:hard",
+  "assigner": "did:party:policy-assigner",
+  "assignee": [
+    "did:party:registered-outpatient-clinics"
+  ],
+  "target": [
+    "urn:asset:medication-alerts"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P18DT18H30M30.73S"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2024-11-09"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "courier"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 256287
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "journalism"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "US",
+            "NorthAmerica",
+            "UK"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P5DT3H50M16.211S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "RDF"
+        }
+      ]
+    }
+  ]
+}

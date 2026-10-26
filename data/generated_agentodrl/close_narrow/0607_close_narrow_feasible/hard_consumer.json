@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0607_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-su-323",
+  "assignee": [
+    "did:party:pharmaceutical-companies"
+  ],
+  "target": [
+    "urn:asset:clinical-guidelines-api"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "2023-06-25"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 16
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "structured, commonly used, machine-readable",
+            "low-resolution images"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "us-cloud",
+            "eu-cloud",
+            "air-gapped"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P57DT16H25M42.699S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "broadcast"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2507
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ]
+}

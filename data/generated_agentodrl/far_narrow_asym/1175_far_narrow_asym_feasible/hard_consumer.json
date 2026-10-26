@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1175_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:sectoral-data-exchange-portal"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:validationStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "validation:successful"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 20
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.19
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "courier"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P6DT1H45M38.971S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "hybrid"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 275
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:neq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ]
+}

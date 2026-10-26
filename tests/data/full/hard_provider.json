@@ -1,0 +1,101 @@
+{
+
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+
+  "@type": "Offer",
+
+  "@id": "urn:case:FULL:provider:hard",
+
+  "assigner": "did:provider:P-OK",
+
+  "assignee": ["did:consumer:C-OK"],
+
+  "target": ["urn:asset:dataset:OK"],
+
+  "permission": [
+
+    {
+
+      "action": "use",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:absoluteTemporalPosition", "operator": "odrl:lteq", "rightOperand": "2025-06-26T00:00:00Z" },
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 78 },
+
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1620 },
+
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:lteq", "rightOperand": "PT25M" },
+
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:isAnyOf", "rightOperand": ["JSON", "XML"] },
+
+        { "leftOperand": "odrl:industry", "operator": "odrl:isAnyOf", "rightOperand": ["research", "production"] },
+
+        { "leftOperand": "odrl:language", "operator": "odrl:isAnyOf", "rightOperand": ["en", "fr", "gr"] },
+
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAnyOf", "rightOperand": ["research", "analytics", "publication", "open-source"] }
+
+      ]
+
+    },
+
+    {
+
+      "action": "transform",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 78 },
+
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1620 },
+
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:isAnyOf", "rightOperand": ["JSON", "XML"] }
+
+      ]
+
+    }
+
+  ],
+
+  "obligation": [
+
+    {
+
+      "action": "anonymize",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:lteq", "rightOperand": "PT25M" },
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 78 },
+
+        { "leftOperand": "odrl:industry", "operator": "odrl:isAnyOf", "rightOperand": ["research", "production"] }
+
+      ]
+
+    }
+
+  ],
+
+  "prohibition": [
+
+    {
+
+      "action": "redistribute",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1620 },
+
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAnyOf", "rightOperand": ["research", "analytics", "publication", "open-source"] }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+

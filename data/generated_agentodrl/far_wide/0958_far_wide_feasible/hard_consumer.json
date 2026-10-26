@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0958_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:cross-border-entity"
+  ],
+  "target": [
+    "urn:asset:application-entity",
+    "urn:asset:cross-border-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P28DT1H21M53.725S"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2027-03-02"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2060
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "internal-only"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "verify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:entityType",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "crossBorder"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P8DT19H10M29.645S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "finance",
+            "health",
+            "医院数据提供方"
+          ]
+        }
+      ]
+    }
+  ]
+}

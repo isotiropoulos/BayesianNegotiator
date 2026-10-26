@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0175_far_wide:provider:hard",
+  "assigner": "did:party:european-health-data-space",
+  "assignee": [
+    "did:party:licensed-epidemiologists"
+  ],
+  "target": [
+    "urn:asset:de-identified-clinical-trial-summaries"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.15
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 303694
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "container",
+            "vm",
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 70
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "renewal"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "web"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2028-05-13"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "US"
+        }
+      ]
+    }
+  ]
+}

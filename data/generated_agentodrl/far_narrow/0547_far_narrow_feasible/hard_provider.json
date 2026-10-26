@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0547_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:certified-print-vendors"
+  ],
+  "target": [
+    "urn:asset:high-definition-painting-images",
+    "urn:asset:fee"
+  ],
+  "permission": [
+    {
+      "action": "request",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 230
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.25
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "CSV"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P15DT7H30M56.137S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P75DT8H30M6.327S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "container"
+          ]
+        }
+      ]
+    }
+  ]
+}

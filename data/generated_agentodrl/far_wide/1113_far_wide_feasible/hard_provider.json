@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1113_far_wide:provider:hard",
+  "assigner": "did:party:grid-health-score",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:grid-health-score"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 203
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P20DT15H57M59.353S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:distribution",
+          "operator": "odrl:eq",
+          "rightOperand": "forbidden"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 1891
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "US"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:export",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "forbidden"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P103DT2H31M23.779S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "print"
+          ]
+        }
+      ]
+    }
+  ]
+}

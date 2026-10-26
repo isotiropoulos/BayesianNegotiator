@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0008_close_narrow:consumer:hard",
+  "assigner": "did:party:kupferstich-kabinett",
+  "assignee": [
+    "did:party:user"
+  ],
+  "target": [
+    "urn:asset:vorlagenzeichner-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P35DT4H16M4.776S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 362
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EEA",
+            "Gaia-X Trusted Zone",
+            "Greater Berlin Area"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.16
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P35DT4H16M4.776S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "//example.org/parties/patient",
+            "DesignatedDataServiceProvider"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:neq",
+          "rightOperand": "retail"
+        }
+      ]
+    }
+  ]
+}

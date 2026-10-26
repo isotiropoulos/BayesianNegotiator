@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1474_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:urban-sense-labs"
+  ],
+  "target": [
+    "urn:asset:environmental-sensor-streams"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P15DT16H54M36.243S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P54DT19H50M36.591S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "digitizing Medieval Manuscripts dataset",
+            "NotificationPurpose"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.52
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "s3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "air-gapped"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

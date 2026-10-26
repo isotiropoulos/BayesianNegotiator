@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1501_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:data-user",
+    "did:party:utility-company"
+  ],
+  "target": [
+    "urn:asset:energy-consumption-dataset",
+    "urn:asset:model",
+    "urn:asset:model-transparency-assessment",
+    "urn:asset:fairness-deviation-score"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P8DT4H59M34.586S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "JSON"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "launch",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessDeviationScore",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.25
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 358631
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EU"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1874
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "mobility"
+        }
+      ]
+    }
+  ]
+}

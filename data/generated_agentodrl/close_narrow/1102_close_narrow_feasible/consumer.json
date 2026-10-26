@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1102_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:users-declining-consent"
+  ],
+  "target": [
+    "urn:asset:aggregated-sensor-outputs",
+    "urn:asset:demographic-pattern-analysis"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "demographic pattern analysis",
+            "Purpose restriction review",
+            "http://w3id.org/drk/Right:OptOut"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P51DT19H55M7.011S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 4332
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "collect",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "demographic pattern analysis",
+            "citation",
+            "for another individual or entity"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de",
+            "es",
+            "el"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "demographic pattern analysis",
+            "BiasRobustnessEvaluation",
+            "Fraud Detection API"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 386
+        }
+      ]
+    }
+  ]
+}

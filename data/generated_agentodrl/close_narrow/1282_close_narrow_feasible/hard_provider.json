@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1282_close_narrow:provider:hard",
+  "assigner": "did:party:energy-data-platform-access",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:energy-data-platform-access",
+    "urn:asset:approval-process",
+    "urn:asset:blockchain-evidence",
+    "urn:asset:audit-traceability",
+    "urn:asset:audit-immutability"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.22
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P54DT17H18M56.229S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "global"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "wait",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P4DT4H20M32.559S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT1H59M0.908S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "internal-only"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "recordEvidence",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPart",
+          "operator": "odrl:eq",
+          "rightOperand": "BlockchainEvidence"
+        }
+      ]
+    }
+  ]
+}

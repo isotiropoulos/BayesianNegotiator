@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0477_far_narrow:provider:hard",
+  "assigner": "did:party:steward-of-su-247",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:sunlit-valley-digital-renderings"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usePurpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "paid_exhibition"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 18
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2024-12-19"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usePurpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "archival research,public awareness"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2027-09-12"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usePurpose",
+          "operator": "odrl:neq",
+          "rightOperand": "paid_exhibition"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 2333
+        }
+      ]
+    }
+  ]
+}

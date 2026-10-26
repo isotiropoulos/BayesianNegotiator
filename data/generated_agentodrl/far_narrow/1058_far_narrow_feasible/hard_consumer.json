@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1058_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:external-collaborator"
+  ],
+  "target": [
+    "urn:asset:urban-air-quality-index-layers-dataset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:source",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Gaia-X Trusted Zone",
+            "British Library Source",
+            "Catena-X Automotive Network"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P32DT21H11M21.048S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P12DT21H52M34.08S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:source",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Gaia-X Trusted Zone",
+            "FieldSense network",
+            "Untraceable"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT18H33M37.861S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "research"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 1495
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "JSON"
+        }
+      ]
+    }
+  ]
+}

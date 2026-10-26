@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1239_close_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:users"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-outcomes-dataset2022",
+    "urn:asset:healthcare-impact-reports",
+    "urn:asset:public-health-data-upkeep-fund"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:developedDiagnosticTool",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.24
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 4272
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2026-11-30"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "report",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Healthcare improvements"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 254
+        }
+      ]
+    },
+    {
+      "action": "remit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:developedDiagnosticTool",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        }
+      ]
+    }
+  ]
+}

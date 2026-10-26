@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1550_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:health-analytics-vendors"
+  ],
+  "target": [
+    "urn:asset:pediatric-neuro-imaging-collection",
+    "urn:asset:maintenance-fee",
+    "urn:asset:supplementary-agreement"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 5910
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 244
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "statistics"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.46
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "https",
+            "sftp",
+            "SupportChannel"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "US"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "fr"
+          ]
+        }
+      ]
+    }
+  ]
+}

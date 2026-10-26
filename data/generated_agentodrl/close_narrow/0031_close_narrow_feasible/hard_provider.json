@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0031_close_narrow:provider:hard",
+  "assigner": "did:party:eucommission",
+  "assignee": [
+    "did:party:media-outlets"
+  ],
+  "target": [
+    "urn:asset:api"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delay",
+          "operator": "odrl:lt",
+          "rightOperand": 30
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT22H16M33.925S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "sftp"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 19
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:neq",
+          "rightOperand": "defence"
+        }
+      ]
+    }
+  ]
+}

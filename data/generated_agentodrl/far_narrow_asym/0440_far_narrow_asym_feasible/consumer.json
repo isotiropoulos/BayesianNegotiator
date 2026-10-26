@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0440_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-user"
+  ],
+  "target": [
+    "urn:asset:hospital-device-logs-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actionType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sell",
+            "cross-reference"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 87
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossReference",
+      "constraint": [
+        {
+          "leftOperand": "odrl:logType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "raw"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P78DT23H58M18.974S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "SupportChannel",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-11-09"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "container",
+            "DesignatedXREquipment"
+          ]
+        }
+      ]
+    }
+  ]
+}

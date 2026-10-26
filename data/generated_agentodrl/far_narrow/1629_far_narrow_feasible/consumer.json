@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1629_far_narrow:consumer:aspiration",
+  "assigner": "did:party:consumption-behavior-data-asset",
+  "assignee": [
+    "did:party:scenic-area-operator"
+  ],
+  "target": [
+    "urn:asset:consumption-behavior-data-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "AtDataObtainingTime",
+            "Article 18 of this Law",
+            "ThesePeriods"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "OtherPurposes"
+          ]
+        },
+        {
+          "leftOperand": "odrl:withdrawalRight",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true",
+            "Based on Smart Agriculture Cooperative Charter Article 9.2(A)",
+            "Customer's right to withdraw consent at any time"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 633214
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT3H46M13.132S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "anonymized",
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ]
+}

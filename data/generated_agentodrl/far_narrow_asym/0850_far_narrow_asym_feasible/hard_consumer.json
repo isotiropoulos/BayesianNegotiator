@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0850_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:city-authority",
+  "assignee": [
+    "did:party:urban-planners"
+  ],
+  "target": [
+    "urn:asset:tokyo-traffic-flow-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:trafficCongestionLevel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Level Red"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P27DT22H54M40.606S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 490
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:embargoStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "embargoed"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 293074
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-09-18"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ]
+}

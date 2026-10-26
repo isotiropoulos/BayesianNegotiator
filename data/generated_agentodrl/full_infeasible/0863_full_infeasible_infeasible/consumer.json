@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0863_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:evidence-chain",
+    "urn:asset:disputed-data",
+    "urn:asset:arbitration-result"
+  ],
+  "permission": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-03-01"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "http://example.org/servers",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "destroy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeSpatialPosition",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "涉及国家安全的争议数据"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-03-01"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "http://w3id.org/drk:CatenaXTrustedZone",
+            "Greater Berlin Area"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-03-01"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "container",
+            "authorized_mixed_reality_headset",
+            "consortium-approved"
+          ]
+        }
+      ]
+    }
+  ]
+}

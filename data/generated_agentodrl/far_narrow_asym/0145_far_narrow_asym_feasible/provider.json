@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0145_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:steward-of-su-81",
+  "assignee": [
+    "did:party:accredited-art-historians"
+  ],
+  "target": [
+    "urn:asset:digitized-manuscripts"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 30
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P48DT18H47M49.369S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "eu-cloud",
+            "edge",
+            "on-prem"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 5187
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "global",
+            "CH",
+            "EU"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "limitAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 30
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "audit",
+            "renewal"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "web",
+            "print"
+          ]
+        }
+      ]
+    }
+  ]
+}

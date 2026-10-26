@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1299_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:arbitration-institution"
+  ],
+  "target": [
+    "urn:asset:data-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "自动执行"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:gteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1451
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "destroy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "自动执行"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:gteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "renewal"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "destroy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:gteq",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ]
+}

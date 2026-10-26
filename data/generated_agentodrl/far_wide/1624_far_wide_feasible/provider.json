@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1624_far_wide:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-p-681",
+  "assignee": [
+    "did:party:vehicle-owner",
+    "did:party:insurance-company"
+  ],
+  "target": [
+    "urn:asset:vehicle-driving-data",
+    "urn:asset:automotive-manufacturer"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "InsuranceCompany"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-06-13"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1240
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hybrid",
+            "air-gapped",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 4098
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "print",
+            "broadcast",
+            "web"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P10DT14H34M33.444S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "US",
+            "EU",
+            "UK"
+          ]
+        }
+      ]
+    }
+  ]
+}

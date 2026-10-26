@@ -1,0 +1,102 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0942_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:authorized-party",
+    "did:party:system"
+  ],
+  "target": [
+    "urn:asset:medical-data-space",
+    "urn:asset:blockchain-audit-trail",
+    "urn:asset:process-traceability"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hybrid",
+            "on-prem",
+            "edge"
+          ]
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "health",
+            "defence",
+            "mobility"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "web",
+            "internal-wiki",
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "leaveAuditTrail",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "internal-only",
+            "consortium"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "storeImmutable",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        }
+      ]
+    },
+    {
+      "action": "ensureTraceability",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ]
+}

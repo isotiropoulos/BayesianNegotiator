@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1102_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:users-declining-consent"
+  ],
+  "target": [
+    "urn:asset:aggregated-sensor-outputs",
+    "urn:asset:demographic-pattern-analysis"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "demographic pattern analysis"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P68DT17H48M9.773S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 3354
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "collect",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "demographic pattern analysis"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "es"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 299
+        }
+      ]
+    }
+  ]
+}

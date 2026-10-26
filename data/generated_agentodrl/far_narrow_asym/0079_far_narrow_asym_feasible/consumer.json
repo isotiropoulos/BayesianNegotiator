@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0079_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:data-owner-organization",
+  "assignee": [
+    "did:party:environmental-researchers"
+  ],
+  "target": [
+    "urn:asset:delhi-real-time-aqidata"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "WHO:Stage3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2288
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 89
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "WHO:Stage3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "marketing",
+            "vehicle owner behavior analysis",
+            "immutable"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "WHO:Stage3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT3M35.259S"
+        }
+      ]
+    }
+  ]
+}

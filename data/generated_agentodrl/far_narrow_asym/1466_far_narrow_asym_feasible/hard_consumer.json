@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1466_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:bio-insight-analytics"
+  ],
+  "target": [
+    "urn:asset:med-data-space-clinical-imaging-archive",
+    "urn:asset:national-health-data-compliance-clearance",
+    "urn:asset:verify-compliance"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "national health data compliance clearance",
+            "Rule 6.1(a)",
+            "non-compliance"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 289
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.46
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "national health data compliance clearance",
+            "full-lifecycle-traceability",
+            "interests or fundamental rights and freedoms of the Patient"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 65
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "national health data compliance clearance"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 189902
+        }
+      ]
+    },
+    {
+      "action": "perform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "national health data compliance clearance",
+            "statistics",
+            "demographic pattern analysis"
+          ]
+        }
+      ]
+    }
+  ]
+}

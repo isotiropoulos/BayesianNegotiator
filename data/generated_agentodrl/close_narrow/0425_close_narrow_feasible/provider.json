@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0425_close_narrow:provider:aspiration",
+  "assigner": "did:party:content-owner",
+  "assignee": [
+    "did:party:generative-ai"
+  ],
+  "target": [
+    "urn:asset:derivatives"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 773
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.1
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:trainingDataSource",
+          "operator": "odrl:eq",
+          "rightOperand": "Louvre Museum Open Collection Images"
+        },
+        {
+          "leftOperand": "odrl:networkScope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Gaia-X Creative Industries Network"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 3935
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "public",
+            "consortium"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "breach",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ]
+}

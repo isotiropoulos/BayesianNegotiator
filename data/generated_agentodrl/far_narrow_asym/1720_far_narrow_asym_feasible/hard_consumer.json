@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1720_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:vehicle-owner",
+    "did:party:automaker"
+  ],
+  "target": [
+    "urn:asset:vehicle-telemetry-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT21H55M32.365S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-11-03"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dataNecessity",
+          "operator": "odrl:eq",
+          "rightOperand": "false"
+        },
+        {
+          "leftOperand": "odrl:consentWithdrawn",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 54
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "es"
+          ]
+        }
+      ]
+    }
+  ]
+}

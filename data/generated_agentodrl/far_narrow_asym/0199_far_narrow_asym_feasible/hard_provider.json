@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0199_far_narrow_asym:provider:hard",
+  "assigner": "did:party:european-health-data-authority",
+  "assignee": [
+    "did:party:academic-researchers"
+  ],
+  "target": [
+    "urn:asset:multi-year-clinical-trial-results"
+  ],
+  "permission": [
+    {
+      "action": "browse",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "open"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.31
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.4
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "broadcast"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT6H37M13.289S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "retail",
+            "finance"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 37
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ]
+}

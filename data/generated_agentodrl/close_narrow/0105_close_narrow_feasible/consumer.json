@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0105_close_narrow:consumer:aspiration",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:partner-institutions"
+  ],
+  "target": [
+    "urn:asset:3-dscans-of-sculptures"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:temporal",
+          "operator": "odrl:gteq",
+          "rightOperand": "P42D"
+        },
+        {
+          "leftOperand": "odrl:device",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "authorized digital kiosks",
+            "InstitutionIssuedVRDevice"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.34
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "print"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:device",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "InstitutionIssuedVRDevice",
+            "authorized digital kiosks"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 38
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "marketing",
+            "asset allocation analysis",
+            "visible citation"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.33
+        }
+      ]
+    }
+  ]
+}

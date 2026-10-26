@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0864_far_wide:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:user"
+  ],
+  "target": [
+    "urn:asset:services"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteAge",
+          "operator": "odrl:lt",
+          "rightOperand": 9
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UserCountry",
+            "NorthAmerica",
+            "UK"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 40
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "hybrid"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gt",
+          "rightOperand": 27
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "s3"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "obtainParentOrGuardianConsent",
+      "constraint": [
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gt",
+          "rightOperand": 27
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "tee",
+            "Australia Spatial Data Hub"
+          ]
+        }
+      ]
+    }
+  ]
+}

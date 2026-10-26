@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1481_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:analyst-party",
+    "did:party:catena-x-auditing-node"
+  ],
+  "target": [
+    "urn:asset:supply-chain-traceability-dataset",
+    "urn:asset:user-activity-logs"
+  ],
+  "permission": [
+    {
+      "action": "stream",
+      "constraint": [
+        {
+          "leftOperand": "odrl:analystReviewedAndRegistered",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 156
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 25
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 27
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "el",
+            "fr",
+            "en"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "stream",
+      "constraint": [
+        {
+          "leftOperand": "odrl:realTimeStreaming",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P43DT21H13M23.301S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "health",
+            "医院数据提供方",
+            "public"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1817_far_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:party-researcher",
+    "did:party:party-research-institution"
+  ],
+  "target": [
+    "urn:asset:human-genetic-resource-information",
+    "urn:asset:research-activities",
+    "urn:asset:research-permit",
+    "urn:asset:party-violating-rules"
+  ],
+  "permission": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "suspend",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P115DT23H22M44.505S"
+        }
+      ]
+    },
+    {
+      "action": "cease",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "revoke",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "rectify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    },
+    {
+      "action": "warn",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "overseas"
+          ]
+        }
+      ]
+    }
+  ]
+}

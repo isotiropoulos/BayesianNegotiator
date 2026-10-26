@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:community-dashboard"
+  ],
+  "target": [
+    "urn:asset:sensor-network-air-quality-readings",
+    "urn:asset:validated-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:exclusivityDuration",
+          "operator": "odrl:eq",
+          "rightOperand": "P5913D"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.45
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "on-prem"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:eq",
+          "rightOperand": "P10DT10H54M29.304S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "web"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "release",
+      "constraint": [
+        {
+          "leftOperand": "odrl:exclusivityDuration",
+          "operator": "odrl:eq",
+          "rightOperand": "P5913D"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "global"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "education"
+        }
+      ]
+    }
+  ]
+}

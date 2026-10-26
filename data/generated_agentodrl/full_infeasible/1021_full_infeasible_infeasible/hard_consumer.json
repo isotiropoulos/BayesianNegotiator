@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1021_full_infeasible:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-497",
+  "assignee": [
+    "did:party:participant"
+  ],
+  "target": [
+    "urn:asset:grid-usage-analytics"
+  ],
+  "permission": [
+    {
+      "action": "register",
+      "constraint": [
+        {
+          "leftOperand": "odrl:participantScope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SmartEnergyParticipants"
+          ]
+        },
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gteq",
+          "rightOperand": 28
+        },
+        {
+          "leftOperand": "odrl:requiresConsent",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2024-10-21"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "web"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P52DT15H55M48.918S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "statistics"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ]
+}

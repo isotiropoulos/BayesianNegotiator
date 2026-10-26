@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1807_close_narrow:provider:hard",
+  "assigner": "did:party:platform-operator",
+  "assignee": [
+    "did:party:cargo-owner"
+  ],
+  "target": [
+    "urn:asset:cargo-transport-status-data"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "access and copy"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P6DT11H53M31.651S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P40DT4H39M28.688S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "copy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "Article18"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2026-11-11"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 4351
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ]
+}

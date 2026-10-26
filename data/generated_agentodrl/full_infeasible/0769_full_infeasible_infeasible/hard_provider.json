@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0769_full_infeasible:provider:hard",
+  "assigner": "did:party:steward-of-su-402",
+  "assignee": [
+    "did:party:all-parties",
+    "did:party:network-administrator"
+  ],
+  "target": [
+    "urn:asset:battery-traceability-records",
+    "urn:asset:audit-trails"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P14DT16H45.884S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:destination",
+          "operator": "odrl:neq",
+          "rightOperand": "within the network"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 57
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "RDF",
+            "JSON"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "maintainAuditTrail",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P29DT4H48M"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "defence"
+          ]
+        }
+      ]
+    }
+  ]
+}

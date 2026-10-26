@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0417_full_infeasible:provider:hard",
+  "assigner": "did:party:data-space-owner",
+  "assignee": [
+    "did:party:all-parties"
+  ],
+  "target": [
+    "urn:asset:derivative-creations"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "European Cultural Heritage Data Space"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 49
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "assert",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:eq",
+          "rightOperand": "European Cultural Heritage Data Space"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P22DT20H20M47.945S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P92DT1H19M46.537S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ]
+}

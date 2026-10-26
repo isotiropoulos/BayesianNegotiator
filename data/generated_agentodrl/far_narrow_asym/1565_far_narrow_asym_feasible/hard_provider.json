@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1565_far_narrow_asym:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-654",
+  "assignee": [
+    "did:party:users",
+    "did:party:health-data-commons"
+  ],
+  "target": [
+    "urn:asset:healthcare-dataset",
+    "urn:asset:operational-report",
+    "urn:asset:revenue-donation"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.74
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "global"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P2DT20H3M55.877S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "public"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2027-01-02"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "PARQUET"
+          ]
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        }
+      ]
+    },
+    {
+      "action": "donate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:revenue",
+          "operator": "odrl:lt",
+          "rightOperand": 0.19
+        }
+      ]
+    }
+  ]
+}

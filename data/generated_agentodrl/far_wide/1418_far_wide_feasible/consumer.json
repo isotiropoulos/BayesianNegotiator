@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1418_far_wide:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-j-614",
+  "assignee": [
+    "did:party:vendors"
+  ],
+  "target": [
+    "urn:asset:aggregated-traffic-flow-data",
+    "urn:asset:usage-fee"
+  ],
+  "permission": [
+    {
+      "action": "embed",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usageFee",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "per-gigabyte"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.86
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "non-commercial clinical studies",
+            "storage period or criteria"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "pay",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usageFee",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "per-gigabyte"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-12-21"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "SupportChannel",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1261_close_narrow:consumer:aspiration",
+  "assigner": "did:party:party-policy-owner",
+  "assignee": [
+    "did:party:party-license-issuer"
+  ],
+  "target": [
+    "urn:asset:asset-best-practice-guides"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "annual",
+            "fees",
+            "complimentary"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P10DT6H3M45.704S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P5DT2H3M10.828S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "agriculture commercial expos"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "annual",
+            "perPublication",
+            "free"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.33
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "license",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "annual",
+            "no",
+            "paid"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 32
+        }
+      ]
+    }
+  ]
+}

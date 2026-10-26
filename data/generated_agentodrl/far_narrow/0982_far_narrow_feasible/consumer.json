@@ -1,0 +1,93 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0982_far_narrow:consumer:aspiration",
+  "assigner": "did:party:energy-policy-owner",
+  "assignee": [
+    "did:party:electric-utility-party",
+    "did:party:device-manufacturer-party",
+    "did:party:data-recipient-party",
+    "did:party:data-sender-party",
+    "did:party:data-processor-party"
+  ],
+  "target": [
+    "urn:asset:energy-data-asset",
+    "urn:asset:sensitive-energy-data",
+    "urn:asset:energy-data",
+    "urn:asset:high-sensitivity-energy-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.87
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P59DT20H44M29.458S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "statistics",
+            "//w3id.org/drk/AITrainingAllowed",
+            "Port efficiency studies"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:classification",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "GB/T 43697-2024",
+            "Level3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT8H48M38.336S"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "broadcast",
+            "print"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 88
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ]
+}

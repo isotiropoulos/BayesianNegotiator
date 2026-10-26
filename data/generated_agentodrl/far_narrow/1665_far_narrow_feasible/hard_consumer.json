@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1665_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:social-media-platform"
+  ],
+  "target": [
+    "urn:asset:personal-information"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gt",
+          "rightOperand": 27
+        },
+        {
+          "leftOperand": "odrl:authorization",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "affirmative"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "retail",
+            "energy",
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gteq",
+          "rightOperand": -1
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 254178
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "Farmers",
+            "MaaSOperator"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "courier",
+            "SupportChannel"
+          ]
+        }
+      ]
+    }
+  ]
+}

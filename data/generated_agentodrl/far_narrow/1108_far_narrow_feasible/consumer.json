@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1108_far_narrow:consumer:aspiration",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:visitor"
+  ],
+  "target": [
+    "urn:asset:hospital-visitor-flow-logs"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consent",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "true",
+            "withdrawn"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "occupancy analytics",
+            "artificial intelligence training",
+            "加密传输"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-11-05"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.92
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consent",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "Standard E-6.1(a)",
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "occupancy analytics",
+            "APIValidated",
+            "Registration"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1531
+        }
+      ]
+    }
+  ]
+}

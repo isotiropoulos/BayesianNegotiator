@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1101_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:sensor-data",
+  "assignee": [
+    "did:party:user"
+  ],
+  "target": [
+    "urn:asset:sensor-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:userConsent",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 92
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 454649
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "EU Claims Aggregates",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sensorDataResolution",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "high"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P60DT10H49M15.158S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "InternationalAviationDataExchangeCenter",
+            "EFTA"
+          ]
+        }
+      ]
+    }
+  ]
+}

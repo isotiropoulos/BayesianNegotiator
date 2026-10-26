@@ -1,0 +1,70 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1294_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-user"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PatientPrivacy"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 9
+        },
+        {
+          "leftOperand": "odrl:category",
+          "operator": "odrl:neq",
+          "rightOperand": "核心"
+        },
+        {
+          "leftOperand": "odrl:range",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:range",
+          "operator": "odrl:lt",
+          "rightOperand": 9
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 164
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        }
+      ]
+    }
+  ]
+}

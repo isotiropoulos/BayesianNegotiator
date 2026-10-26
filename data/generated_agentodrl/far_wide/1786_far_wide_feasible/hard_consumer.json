@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1786_far_wide:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-749",
+  "assignee": [
+    "did:party:telecom-operator"
+  ],
+  "target": [
+    "urn:asset:call-location-data",
+    "urn:asset:subscriber"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 21
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:lt",
+          "rightOperand": 10
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:gt",
+          "rightOperand": 17
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 206
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "JSON",
+            "XML"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "public"
+        }
+      ]
+    }
+  ]
+}

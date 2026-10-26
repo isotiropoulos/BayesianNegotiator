@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1755_far_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-p-734",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-p-734"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consent",
+          "operator": "odrl:neq",
+          "rightOperand": "explicit"
+        },
+        {
+          "leftOperand": "odrl:automated",
+          "operator": "odrl:neq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:dataFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "structured, machine-readable, commonly used"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2024-12-25"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2027-11-05"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "block",
+      "constraint": [
+        {
+          "leftOperand": "odrl:blockedBy",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P4DT8H6M5.456S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 52
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0891_far_wide:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:public-portal"
+  ],
+  "target": [
+    "urn:asset:evaluation-summary",
+    "urn:asset:design-purpose",
+    "urn:asset:data-usage-list"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:evaluationSummary",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "publicized"
+          ]
+        },
+        {
+          "leftOperand": "odrl:designPurpose",
+          "operator": "odrl:eq",
+          "rightOperand": "publicized"
+        },
+        {
+          "leftOperand": "odrl:dataUsageList",
+          "operator": "odrl:eq",
+          "rightOperand": "publicized"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2441
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 2585
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.31
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "SupportChannel",
+            "courier"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-04-07"
+        }
+      ]
+    }
+  ]
+}

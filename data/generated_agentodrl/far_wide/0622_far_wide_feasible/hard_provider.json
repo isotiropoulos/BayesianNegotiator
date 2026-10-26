@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0622_far_wide:provider:hard",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:anyone",
+    "did:party:data-custodian"
+  ],
+  "target": [
+    "urn:asset:transcribed-renaissance-letters-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.23
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P3DT4H30M24.843S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Replicating entire documents from 'Transcribed Renaissance Letters'"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2028-01-11"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "global"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:storage",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "encrypted on-premises repository"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 526672
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:eq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ]
+}

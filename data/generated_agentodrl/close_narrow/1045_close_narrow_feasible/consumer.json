@@ -1,0 +1,94 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1045_close_narrow:consumer:aspiration",
+  "assigner": "did:party:reporting-party",
+  "assignee": [
+    "did:party:authorized-agent"
+  ],
+  "target": [
+    "urn:asset:asset-target",
+    "urn:asset:sworn-statement",
+    "urn:asset:authorized-agent-signature",
+    "urn:asset:asset-description",
+    "urn:asset:data-space-location",
+    "urn:asset:full-contact-details",
+    "urn:asset:good-faith-assertion"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.34
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-02-17"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "European Union",
+            "http://w3id.org/drk:CatenaXTrustedZone"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "statistics",
+            "research ethics review regulations",
+            "dialect mapping"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 31
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "JSON",
+            "HourlyPollutionSensorReadings",
+            "secure research terminal"
+          ]
+        }
+      ]
+    }
+  ]
+}

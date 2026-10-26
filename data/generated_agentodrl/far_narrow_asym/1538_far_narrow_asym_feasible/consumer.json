@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1538_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:smart-city-environmental-alliance",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:urban-air-quality-dataset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:attribution",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Attribution",
+            "Explicit attribution of data source and contributors in all reports and publications",
+            "DOI:10.1234/cropyield2023"
+          ]
+        },
+        {
+          "leftOperand": "odrl:shareAlike",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "ShareAlike",
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-12-29"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 96
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "eu-cloud",
+            "air-gapped",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "journalism",
+            "lawful",
+            "internal"
+          ]
+        }
+      ]
+    }
+  ]
+}

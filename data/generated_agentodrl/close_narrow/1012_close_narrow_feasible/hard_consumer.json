@@ -1,0 +1,102 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1012_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:policy-issuer",
+    "did:party:data-operator",
+    "did:party:log-manager",
+    "did:party:zkpservice"
+  ],
+  "target": [
+    "urn:asset:financial-blockchain",
+    "urn:asset:sensitive-financial-fields",
+    "urn:asset:all-data-operations",
+    "urn:asset:logs-retention",
+    "urn:asset:sensitive-financial-fields-or-cross-border",
+    "urn:asset:zkpcontent"
+  ],
+  "permission": [
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P2076DT17H43M10.133S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossBorderTransfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P2076DT17H43M10.133S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RDF",
+            "granular, real-time consumption",
+            "passenger name record data"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "recordLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P2076DT17H43M10.133S"
+        }
+      ]
+    },
+    {
+      "action": "retainLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P2076DT17H43M10.133S"
+        }
+      ]
+    },
+    {
+      "action": "applyZKP",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P2076DT17H43M10.133S"
+        }
+      ]
+    },
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P2076DT17H43M10.133S"
+        }
+      ]
+    }
+  ]
+}

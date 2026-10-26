@@ -1,0 +1,108 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1289_far_wide:consumer:aspiration",
+  "assigner": "did:party:assessment-authority",
+  "assignee": [
+    "did:party:applicant",
+    "did:party:unauthorized-user",
+    "did:party:assessment-team"
+  ],
+  "target": [
+    "urn:asset:application-system",
+    "urn:asset:sensitive-data",
+    "urn:asset:assessment-report"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "自动化检测",
+            "specific purposes",
+            "grid load balancing"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "城市信息安全三级标准",
+            "GB/T 43697-2024"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "自动化检测",
+            "academic study",
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "城市信息安全三级标准",
+            "GB/T 43697-2024"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2712
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "performAssessment",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "自动化检测",
+            "//w3id.org/drk/AITrainingDisallowed",
+            "oil and gas pipeline network"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "城市信息安全三级标准",
+            "GB/T 43697-2024"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.95
+        }
+      ]
+    }
+  ]
+}

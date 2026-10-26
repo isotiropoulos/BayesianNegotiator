@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1339_far_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-592",
+  "assignee": [
+    "did:party:data-custodian",
+    "did:party:authorized-party"
+  ],
+  "target": [
+    "urn:asset:operation-logs",
+    "urn:asset:high-sensitivity-parameters",
+    "urn:asset:key-operation"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:collection",
+          "operator": "odrl:eq",
+          "rightOperand": "null"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 19
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 288
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "accessHighSensitivityParameters",
+      "constraint": [
+        {
+          "leftOperand": "odrl:highSensitivityParameterAccess",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.24
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P102DT16H1M40.575S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "termination"
+          ]
+        }
+      ]
+    }
+  ]
+}

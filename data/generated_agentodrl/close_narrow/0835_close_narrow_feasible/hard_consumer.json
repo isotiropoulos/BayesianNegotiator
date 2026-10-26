@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0835_close_narrow:consumer:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:data-user"
+  ],
+  "target": [
+    "urn:asset:satellite-crop-imaging-data",
+    "urn:asset:proprietary-soil-sensor-datasets"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-12-30"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P10DT12H40M22.835S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:eq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "associate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relatedTo",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SatelliteCropImagingData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P5DT20H35M17.467S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "defence",
+            "finance",
+            "国家工业安全"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P4DT12H34M2.322S"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1422_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:renewable-generation-profiles",
+  "assignee": [
+    "did:party:recognized-energy-analysts"
+  ],
+  "target": [
+    "urn:asset:renewable-generation-profiles"
+  ],
+  "permission": [
+    {
+      "action": "download",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessDuration",
+          "operator": "odrl:gt",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P12DT2H22M41.058S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "XML",
+            "Farm-to-Fork Shipment Data"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "download",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessDuration",
+          "operator": "odrl:gteq",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-11-20"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "mobility"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:eq",
+          "rightOperand": "en"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0386_far_wide:provider:hard",
+  "assigner": "did:party:european-archives-consortium",
+  "assignee": [
+    "did:party:european-archives-consortium"
+  ],
+  "target": [
+    "urn:asset:digitized-parliamentary-debates",
+    "urn:asset:original-speaker-voices",
+    "urn:asset:commentary"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P16DT12H16M30.226S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 124
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "alter",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.64
+        }
+      ]
+    },
+    {
+      "action": "insert",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "altering original speaker voices or inserting dramatized commentary"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "invalidate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 22
+        }
+      ]
+    }
+  ]
+}

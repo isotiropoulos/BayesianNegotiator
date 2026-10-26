@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0153_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:user",
+    "did:party:asset-manager"
+  ],
+  "target": [
+    "urn:asset:image-asset",
+    "urn:asset:licensing-cost"
+  ],
+  "permission": [
+    {
+      "action": "print",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:gteq",
+          "rightOperand": 178
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "US",
+            "global"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:gt",
+          "rightOperand": 178
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "hsm",
+            "tee"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "requestApproval",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:gt",
+          "rightOperand": 178
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    },
+    {
+      "action": "pay",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:gteq",
+          "rightOperand": 178
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:authorized-party",
+    "did:party:system"
+  ],
+  "target": [
+    "urn:asset:medical-data-space",
+    "urn:asset:blockchain-audit-trail",
+    "urn:asset:process-traceability"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:eq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "hybrid"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "energy"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:eq",
+          "rightOperand": "broadcast"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "leaveAuditTrail",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:eq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "third-party"
+        }
+      ]
+    },
+    {
+      "action": "storeImmutable",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:eq",
+          "rightOperand": 1
+        }
+      ]
+    },
+    {
+      "action": "ensureTraceability",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:eq",
+          "rightOperand": 1
+        }
+      ]
+    }
+  ]
+}

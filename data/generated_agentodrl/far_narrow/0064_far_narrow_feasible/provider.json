@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0064_far_narrow:provider:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:swiss-private-bank-transaction-samples"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:eq",
+          "rightOperand": "cross-border"
+        },
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:neq",
+          "rightOperand": "allowed"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 524
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:eq",
+          "rightOperand": "cross-border"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P3DT15H12M17.091S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XML",
+            "PARQUET",
+            "CSV"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.1
+        }
+      ]
+    }
+  ]
+}

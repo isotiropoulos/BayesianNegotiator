@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1536_far_wide:consumer:aspiration",
+  "assigner": "did:party:european-hospital-alliance",
+  "assignee": [
+    "did:party:academic-researcher"
+  ],
+  "target": [
+    "urn:asset:neuro-scan-clinical-images-dataset",
+    "urn:asset:data-provider",
+    "urn:asset:ethics-approval"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "http://purl.org/dc/terms/AcademicResearch",
+            "drk:ArchivalSymposiums",
+            "Real-time energy consumption data"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 489733
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "http://purl.org/dc/terms/AcademicResearch",
+            "academic climate modeling",
+            "emergency response"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "image/jpeg",
+            "granular, real-time consumption"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P26DT7H11M22.959S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hsm",
+            "consortium-approved",
+            "DesignatedXREquipment"
+          ]
+        }
+      ]
+    }
+  ]
+}

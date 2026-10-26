@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1784_close_narrow:provider:aspiration",
+  "assigner": "did:party:in-game-behavior-data",
+  "assignee": [
+    "did:party:game-publisher",
+    "did:party:player-or-parent-guardian"
+  ],
+  "target": [
+    "urn:asset:in-game-behavior-data",
+    "urn:asset:player-authorization"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:eq",
+          "rightOperand": "disregardAge"
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:lt",
+          "rightOperand": 16
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 13
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:lt",
+          "rightOperand": 13
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P32DT12H5M21.812S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:eq",
+          "rightOperand": "disregardAge"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "en",
+            "fr"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "affiliate",
+            "third-party"
+          ]
+        }
+      ]
+    }
+  ]
+}

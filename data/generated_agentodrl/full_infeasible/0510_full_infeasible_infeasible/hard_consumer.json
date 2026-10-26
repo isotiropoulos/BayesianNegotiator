@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0510_full_infeasible:consumer:hard",
+  "assigner": "did:party:steward-of-su-269",
+  "assignee": [
+    "did:party:licensed-urban-planners-party",
+    "did:party:unlicensed-parties"
+  ],
+  "target": [
+    "urn:asset:architectural-blueprints-asset",
+    "urn:asset:licensed-urban-planners-party"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:partyType",
+          "operator": "odrl:eq",
+          "rightOperand": "licensedUrbanPlanners"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-11-23"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P3DT6H3M8.404S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:partyType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "licensedUrbanPlanners"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 690
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideCredentials",
+      "constraint": [
+        {
+          "leftOperand": "odrl:partyType",
+          "operator": "odrl:eq",
+          "rightOperand": "licensedUrbanPlanners"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.45
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1176_close_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-536",
+  "assignee": [
+    "did:party:platform-administrator"
+  ],
+  "target": [
+    "urn:asset:bias-audit-asset",
+    "urn:asset:analytics-model"
+  ],
+  "permission": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "detrimental"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 298258
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-09-03"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "rescindOperationalApproval",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:eq",
+          "rightOperand": "detrimental"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P14DT21H37M17.632S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "https"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "detrimental"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 59
+        }
+      ]
+    }
+  ]
+}

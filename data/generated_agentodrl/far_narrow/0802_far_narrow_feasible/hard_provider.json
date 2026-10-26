@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0802_far_narrow:provider:hard",
+  "assigner": "did:party:content-owner",
+  "assignee": [
+    "did:party:user"
+  ],
+  "target": [
+    "urn:asset:alpine-traditional-music-database"
+  ],
+  "permission": [
+    {
+      "action": "play",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteSpatialPosition",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "domestic"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialPosition",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Eurozone"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P15DT15H42M8.432S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P10DT19H19M17.473S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P3DT51M4.299S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 151
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "RDF",
+            "JSON"
+          ]
+        }
+      ]
+    }
+  ]
+}

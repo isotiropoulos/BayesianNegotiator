@@ -1,0 +1,73 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:vehicle-maintenance-records",
+  "assignee": [
+    "did:party:authorized-dealerships"
+  ],
+  "target": [
+    "urn:asset:vehicle-maintenance-records"
+  ],
+  "permission": [
+    {
+      "action": "download",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "authorized_dealership"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:eq",
+          "rightOperand": "P2DT12H46M48.1S"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:eq",
+          "rightOperand": 16
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "tee"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:eq",
+          "rightOperand": 76
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "EU"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P56DT2H36M46.933S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0372_close_narrow:consumer:aspiration",
+  "assigner": "did:party:asset-owner",
+  "assignee": [
+    "did:party:traffic-data-user"
+  ],
+  "target": [
+    "urn:asset:urban-traffic-sensor-feeds"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:authorizationLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "gold"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.29
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 157
+        }
+      ]
+    },
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:authorizationLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "gold"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 29
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "el",
+            "fr",
+            "de"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.35
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "courier",
+            "sftp",
+            "https"
+          ]
+        }
+      ]
+    }
+  ]
+}

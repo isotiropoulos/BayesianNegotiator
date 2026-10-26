@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1282_far_narrow:consumer:hard",
+  "assigner": "did:party:energy-data-platform-access",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:energy-data-platform-access",
+    "urn:asset:approval-process",
+    "urn:asset:blockchain-evidence",
+    "urn:asset:audit-traceability",
+    "urn:asset:audit-immutability"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.46
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "RDF"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P77DT3H3M20.381S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "CH"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "wait",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P11DT15H13.494S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P14DT12H38M41.843S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "European Union",
+            "urn:party:AccountHolder"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "recordEvidence",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPart",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "BlockchainEvidence"
+          ]
+        }
+      ]
+    }
+  ]
+}

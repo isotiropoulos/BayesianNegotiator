@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1694_close_narrow:provider:aspiration",
+  "assigner": "did:party:legal-entity",
+  "assignee": [
+    "did:party:representative-mainland-china"
+  ],
+  "target": [
+    "urn:asset:financial-transaction-data",
+    "urn:asset:foreign-hedge-funds",
+    "urn:asset:reporting-department"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "inside the territory of the International Financial Data Network"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 91
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT2H36M12.975S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "establish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "inside the territory of the International Financial Data Network"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 817
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "finance",
+            "public",
+            "energy"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "report",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:neq",
+          "rightOperand": "inside the territory of the International Financial Data Network"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P16DT3H12M3.173S"
+        }
+      ]
+    }
+  ]
+}

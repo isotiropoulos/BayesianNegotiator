@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1394_far_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:user"
+  ],
+  "target": [
+    "urn:asset:user-information"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 3130
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:informationAccuracy",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "accurate"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de",
+            "es",
+            "fr"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:informationAccuracy",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "accurate"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    },
+    {
+      "action": "maintain",
+      "constraint": [
+        {
+          "leftOperand": "odrl:informationIntegrity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        }
+      ]
+    }
+  ]
+}

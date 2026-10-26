@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1753_far_wide:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-p-735",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-p-735"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-15"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Framework Article 6.1(a)",
+            "point (a) of Article 6(1) or point (b) of Article 6(1)",
+            "consent"
+          ]
+        },
+        {
+          "leftOperand": "odrl:automatedProcessing",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Framework Article 6.1(a)",
+            "point (e) or (f) of Article 6(1)",
+            "point (a) of Article 6(1) or point (b) of Article 6(1)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:automatedProcessing",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 752567
+        }
+      ]
+    }
+  ]
+}

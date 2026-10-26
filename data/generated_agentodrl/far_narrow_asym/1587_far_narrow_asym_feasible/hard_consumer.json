@@ -1,0 +1,93 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1587_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "disallow",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "racial",
+            "ethnicOrigin",
+            "politicalOpinion",
+            "religiousBelief",
+            "philosophicalBelief",
+            "unionMembership",
+            "geneticData",
+            "biometricData",
+            "healthData",
+            "sexualLifeData",
+            "sexualOrientationData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P5DT5H51M7.845S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P11DT8H18M32.581S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "disclose",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "racial"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.21
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EEA",
+            "European Union",
+            "CH"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "obtainConsent",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "racial"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 4270
+        }
+      ]
+    }
+  ]
+}

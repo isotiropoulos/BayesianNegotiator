@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1788_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:platform-operator"
+  ],
+  "target": [
+    "urn:asset:equipment-operational-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requester",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EquipmentOwner",
+            "DataAssetHolder",
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P28DT9H9M53.153S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2946
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "//example.org/parties/patient",
+            "RegisteredShippingCompanies"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requestTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P24D"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-19"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "Description of Data Asset",
+            "Good-faith statement regarding unauthorized use"
+          ]
+        }
+      ]
+    }
+  ]
+}

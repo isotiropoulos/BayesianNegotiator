@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1146_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:analytical-outputs",
+    "urn:asset:clinical-trial-results-data"
+  ],
+  "permission": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sourceData",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "drk:ClinicalTrialResultsData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1397
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P8DT22H36M19.008S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-10-22"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "CSV"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sourceData",
+          "operator": "odrl:eq",
+          "rightOperand": "drk:ClinicalTrialResultsData"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 517
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "defence",
+            "医院数据提供方",
+            "health"
+          ]
+        }
+      ]
+    }
+  ]
+}

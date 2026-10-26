@@ -1,0 +1,105 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1015_far_narrow:provider:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:security-team",
+    "did:party:account-holder",
+    "did:party:data-owner",
+    "did:party:alliance-partner",
+    "did:party:service-provider"
+  ],
+  "target": [
+    "urn:asset:security-asset",
+    "urn:asset:account",
+    "urn:asset:data",
+    "urn:asset:root-cause-analysis",
+    "urn:asset:security-certification"
+  ],
+  "permission": [
+    {
+      "action": "startSecurityInspection",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "consortium",
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "startSecurityInspection",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "pauseAccount",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    },
+    {
+      "action": "isolateData",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    },
+    {
+      "action": "startSecurityInspection",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    },
+    {
+      "action": "completeRootCauseAnalysis",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    },
+    {
+      "action": "repassSecurityCertification",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dailyAccessVolume",
+          "operator": "odrl:gt",
+          "rightOperand": 1.25
+        }
+      ]
+    }
+  ]
+}

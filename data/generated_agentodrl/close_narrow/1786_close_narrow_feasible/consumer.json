@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1786_close_narrow:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-p-749",
+  "assignee": [
+    "did:party:telecom-operator"
+  ],
+  "target": [
+    "urn:asset:call-location-data",
+    "urn:asset:subscriber"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 22
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:lteq",
+          "rightOperand": 8
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 18
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 157
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "JSON",
+            "XML"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "SupportChannel",
+            "courier"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "on-prem",
+            "hybrid",
+            "http://example.org/servers"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "retail",
+            "energy"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:platform-operator"
+  ],
+  "target": [
+    "urn:asset:equipment-operational-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requester",
+          "operator": "odrl:eq",
+          "rightOperand": "EquipmentOwner"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P7DT9H9M53.153S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:eq",
+          "rightOperand": 1360
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "//example.org/parties/patient"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requestTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P3D"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:eq",
+          "rightOperand": "2025-11-24"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ]
+}

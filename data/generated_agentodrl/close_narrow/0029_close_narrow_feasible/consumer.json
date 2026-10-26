@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0029_close_narrow:consumer:aspiration",
+  "assigner": "did:party:archive-owner",
+  "assignee": [
+    "did:party:reproduction-party",
+    "did:party:unauthorized-party",
+    "did:party:director",
+    "did:party:archive-storage-team"
+  ],
+  "target": [
+    "urn:asset:laureate-manuscripts"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-09-29"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2051
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "s3",
+            "https"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "European Union",
+            "http://w3id.org/drk:CatenaXTrustedZone"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "write",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "written"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1862
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "container",
+            "secure research terminals",
+            "DesignatedXREquipment"
+          ]
+        }
+      ]
+    }
+  ]
+}

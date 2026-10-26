@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0639_far_narrow:provider:aspiration",
+  "assigner": "did:party:steward-of-su-334",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:su-334"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:digitalVaultAccessLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "restricted-access"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT13H40.315S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "copy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:digitalVaultAccessLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "restricted-access"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.06
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "RDF",
+            "XML"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "write",
+      "constraint": [
+        {
+          "leftOperand": "odrl:digitalVaultAccessLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "restricted-access"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 831
+        }
+      ]
+    }
+  ]
+}

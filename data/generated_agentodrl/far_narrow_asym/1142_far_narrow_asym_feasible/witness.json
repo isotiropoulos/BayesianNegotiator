@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:pre-approved-sae",
+    "did:party:data-sharing-party"
+  ],
+  "target": [
+    "urn:asset:crop-yield-data",
+    "urn:asset:trained-models"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "UI:PreApprovedSAE"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P23DT11H18M35.477S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:eq",
+          "rightOperand": "P5DT7H42M36.428S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "export",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "UI:PreApprovedSAE"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:eq",
+          "rightOperand": "2024-06-03"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:eq",
+          "rightOperand": "defence"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "UI:PreApprovedSAE"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P111DT16H30M12.182S"
+        }
+      ]
+    }
+  ]
+}

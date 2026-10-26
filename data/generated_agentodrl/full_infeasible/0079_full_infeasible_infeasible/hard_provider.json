@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0079_full_infeasible:provider:hard",
+  "assigner": "did:party:data-owner-organization",
+  "assignee": [
+    "did:party:environmental-researchers"
+  ],
+  "target": [
+    "urn:asset:delhi-real-time-aqidata"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "WHO:Stage3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1478
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 73
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "WHO:Stage3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 10
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "marketing"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:airPollutionLevel",
+          "operator": "odrl:eq",
+          "rightOperand": "WHO:Stage3"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P23DT4H51M35.259S"
+        }
+      ]
+    }
+  ]
+}

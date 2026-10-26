@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1559_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-651",
+  "assignee": [
+    "did:party:recipient-party",
+    "did:party:profit-sharing-party"
+  ],
+  "target": [
+    "urn:asset:urban-energy-data-set2024-asset",
+    "urn:asset:premium-analytics-platform",
+    "urn:asset:data-driven-efficiency-report",
+    "urn:asset:profit-sharing-platform"
+  ],
+  "permission": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:frequency",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "biannual"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 3962
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-09-15"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "build",
+      "constraint": [
+        {
+          "leftOperand": "odrl:frequency",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "biannual"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT10H12M29.032S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submitReport",
+      "constraint": [
+        {
+          "leftOperand": "odrl:frequency",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "biannual"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        }
+      ]
+    },
+    {
+      "action": "allocateProfits",
+      "constraint": [
+        {
+          "leftOperand": "odrl:frequency",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "semi-annual",
+            "quarterly",
+            "biannual"
+          ]
+        }
+      ]
+    }
+  ]
+}

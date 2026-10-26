@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1651_far_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-688",
+  "assignee": [
+    "did:party:test-vehicle-driver"
+  ],
+  "target": [
+    "urn:asset:driving-behavior-data",
+    "urn:asset:driver-status-monitoring"
+  ],
+  "permission": [
+    {
+      "action": "object",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (e) or (f)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 51
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-02-16"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (e) or (f)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT17H50M7.904S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "ResponsiblePersonnel",
+            "InsuranceCompany"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "include",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:eq",
+          "rightOperand": "point (e) or (f)"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT13H57M45.158S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1466_far_narrow_asym:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:bio-insight-analytics"
+  ],
+  "target": [
+    "urn:asset:med-data-space-clinical-imaging-archive",
+    "urn:asset:national-health-data-compliance-clearance",
+    "urn:asset:verify-compliance"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "national health data compliance clearance"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 242
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.39
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 55
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "national health data compliance clearance"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 225251
+        }
+      ]
+    },
+    {
+      "action": "perform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "national health data compliance clearance"
+          ]
+        }
+      ]
+    }
+  ]
+}

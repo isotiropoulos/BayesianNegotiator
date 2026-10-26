@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1606_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:data-controller",
+  "assignee": [
+    "did:party:health-management-app"
+  ],
+  "target": [
+    "urn:asset:health-records"
+  ],
+  "permission": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:noLongerNecessary",
+          "operator": "odrl:neq",
+          "rightOperand": true
+        },
+        {
+          "leftOperand": "odrl:withdrawsConsent",
+          "operator": "odrl:eq",
+          "rightOperand": true
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "personalized fitness recommendations"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1257
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 7189
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.1
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "third-party",
+            "regulator",
+            "internal-only"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT19H15M35.226S"
+        }
+      ]
+    }
+  ]
+}

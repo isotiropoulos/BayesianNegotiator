@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1432_far_wide:provider:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:administrator"
+  ],
+  "target": [
+    "urn:asset:user-account"
+  ],
+  "permission": [
+    {
+      "action": "disable",
+      "constraint": [
+        {
+          "leftOperand": "odrl:violationOfTerms",
+          "operator": "odrl:eq",
+          "rightOperand": "violation_of_terms"
+        },
+        {
+          "leftOperand": "odrl:prohibitedActivitiesDetected",
+          "operator": "odrl:eq",
+          "rightOperand": "prohibited_activities_detected"
+        },
+        {
+          "leftOperand": "odrl:breachOfApplicableLaw",
+          "operator": "odrl:eq",
+          "rightOperand": "breach_of_applicable_law"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-08-11"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-04-11"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P46DT21H55M2.21S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "third-party",
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.12
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0679_far_narrow:provider:hard",
+  "assigner": "did:party:regional-summary-alerts",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:regional-summary-alerts",
+    "urn:asset:field-level-data"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EU"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 370956
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 151
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "restrictFieldLevelData",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "Germany",
+            "European Digital Art Space",
+            "ASEAN",
+            "SchengenArea",
+            "CentralEuropeanCountries",
+            "European Union",
+            "Greater Berlin Area",
+            "http://w3id.org/drk:CatenaXTrustedZone",
+            "DACH",
+            "Gaia-X Trusted Zone",
+            "NorthAmerica",
+            "EFTA",
+            "GaiaXTrustedZone",
+            "UserCountry",
+            "跨区域联合查询",
+            "中华人民共和国境内",
+            "CatenaXDataSpace",
+            "inside the territory of the International Financial Data Network",
+            "InternationalAviationDataExchangeCenter",
+            "Global Clinical Trial Data Platform",
+            "online privacy policy",
+            "http://w3id.org/drk/territory/China",
+            "EEA",
+            "CH",
+            "UK",
+            "US",
+            "global"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P4DT3H57M45.413S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.26
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ]
+}

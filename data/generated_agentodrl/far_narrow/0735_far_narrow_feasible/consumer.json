@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0735_far_narrow:consumer:aspiration",
+  "assigner": "did:party:health-data-authority",
+  "assignee": [
+    "did:party:hospital-management-tools"
+  ],
+  "target": [
+    "urn:asset:real-time-emergency-room-occupancy-data"
+  ],
+  "permission": [
+    {
+      "action": "display",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "HealthDataSpace",
+            "医疗数据的注册、检索与交付全流程互通",
+            "GlobalOpenArtDataSpace"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-09-25"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 90
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 444400
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "display",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "HealthDataSpace",
+            "ScopePublicInstallations",
+            "Gaia-X Trusted Zone"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "http://example.org/Usage/IdentifyBatch",
+            "Customer Rights"
+          ]
+        }
+      ]
+    }
+  ]
+}

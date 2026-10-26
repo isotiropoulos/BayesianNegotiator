@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0761_far_narrow:consumer:hard",
+  "assigner": "did:party:asset-sustainable-packaging",
+  "assignee": [
+    "did:party:processing-centers-in-apec"
+  ],
+  "target": [
+    "urn:asset:asset-sustainable-packaging",
+    "urn:asset:annual-waste-reduction-reports"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingCenterLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "APEC"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P85DT9M43.312S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P6DT4H15M18.711S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.5
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "RDF"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingCenterLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "APEC"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT10H19M16.096S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "consortium"
+        }
+      ]
+    }
+  ]
+}

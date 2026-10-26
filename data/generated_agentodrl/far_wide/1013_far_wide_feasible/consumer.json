@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1013_far_wide:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:data-recipient",
+    "did:party:unauthorized-party",
+    "did:party:data-processor"
+  ],
+  "target": [
+    "urn:asset:statistical-data",
+    "urn:asset:personal-financial-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "termination"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "edge",
+            "http://example.org/servers",
+            "eu-cloud"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.89
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "CSV",
+            "Farm-to-Fork Shipment Data"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "applyDifferentialPrivacy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:privacyParameterEpsilon",
+          "operator": "odrl:gteq",
+          "rightOperand": 3.38
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "drk:IndustrialEngineeringSchools",
+            "Farmers"
+          ]
+        }
+      ]
+    }
+  ]
+}

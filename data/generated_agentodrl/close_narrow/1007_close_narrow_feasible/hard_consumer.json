@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1007_close_narrow:consumer:hard",
+  "assigner": "did:party:data-activity",
+  "assignee": [
+    "did:party:data-service-provider",
+    "did:party:management",
+    "did:party:data-management",
+    "did:party:security-team"
+  ],
+  "target": [
+    "urn:asset:data-activity",
+    "urn:asset:log",
+    "urn:asset:traceability",
+    "urn:asset:teeproof",
+    "urn:asset:blockchain-hash",
+    "urn:asset:privacy-protection",
+    "urn:asset:statistical-data-sharing",
+    "urn:asset:third-party-report",
+    "urn:asset:security-inspection",
+    "urn:asset:account",
+    "urn:asset:data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P28DT20H13M41.315S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:neq",
+          "rightOperand": "defence"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "on-prem"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P9DT10H46M45.578S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:differentialPrivacy",
+          "operator": "odrl:gteq",
+          "rightOperand": 1.41
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "UK"
+        }
+      ]
+    }
+  ]
+}

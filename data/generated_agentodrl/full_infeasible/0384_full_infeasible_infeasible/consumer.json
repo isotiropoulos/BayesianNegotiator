@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0384_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:party-policy-owner",
+  "assignee": [
+    "did:party:insurance-regulators-euclaims"
+  ],
+  "target": [
+    "urn:asset:access-logs"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Gaia-X Trusted Zone",
+            "European Cultural Data Space",
+            "ScopePublicInstallations"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9490D"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RDF",
+            "low-resolution images",
+            "CSV"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9490D"
+        },
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Gaia-X Trusted Zone",
+            "European Cultural Heritage Data Space",
+            "HealthDataSpace"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "eu-cloud",
+            "us-cloud",
+            "http://example.org/servers"
+          ]
+        }
+      ]
+    }
+  ]
+}

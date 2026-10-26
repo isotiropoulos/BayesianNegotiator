@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:data-exporter-party"
+  ],
+  "target": [
+    "urn:asset:deidentified-data",
+    "urn:asset:data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:data",
+          "operator": "odrl:eq",
+          "rightOperand": "urn:gaiax:node:confidential-computing"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:eq",
+          "rightOperand": "2025-11-17"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P30DT21H6M17.549S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 0.46
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "audit"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "de-identify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:data",
+          "operator": "odrl:eq",
+          "rightOperand": "urn:gaiax:node:confidential-computing"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:eq",
+          "rightOperand": 40
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "hybrid"
+        }
+      ]
+    }
+  ]
+}

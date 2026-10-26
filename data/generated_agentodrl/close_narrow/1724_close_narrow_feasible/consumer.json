@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1724_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:patient",
+    "did:party:research-institution"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 31
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT14H56M35.326S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "false",
+            "no",
+            "necessary for drug efficacy analysis"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1662
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "finance",
+            "mobility",
+            "state credit industry administrative department"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "no",
+            "false",
+            "necessary for drug efficacy analysis"
+          ]
+        },
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "false",
+            "necessary for drug efficacy analysis"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT15H21M53.148S"
+        }
+      ]
+    }
+  ]
+}

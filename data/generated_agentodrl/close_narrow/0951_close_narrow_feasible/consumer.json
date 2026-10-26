@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0951_close_narrow:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-j-471",
+  "assignee": [
+    "did:party:hospital-data-provider"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dataIntegrity",
+          "operator": "odrl:lteq",
+          "rightOperand": 59
+        },
+        {
+          "leftOperand": "odrl:fieldFillRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 57
+        },
+        {
+          "leftOperand": "odrl:realTime",
+          "operator": "odrl:gteq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.35
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hybrid",
+            "eu-cloud",
+            "EU Claims Aggregates"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "courier",
+            "s3",
+            "https"
+          ]
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "consortium-approved",
+            "secure research terminals"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "RegisteredShippingCompanies",
+            "NationalEnvironmentalAgency"
+          ]
+        }
+      ]
+    }
+  ]
+}

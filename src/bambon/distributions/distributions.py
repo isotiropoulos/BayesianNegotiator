@@ -12,6 +12,12 @@ from ..models.models import BaseModel
 from scipy.stats import beta
 import numpy as np
 
+import os as _os
+# Sensitivity hook (ESWA): rho_max is the ceiling of the acceptance-risk
+# ramp. Default 0.9 reproduces every published number; set BAMBON_RHO_MAX to
+# sweep it without touching call sites.
+_RHO_MAX_DEFAULT = float(_os.environ.get("BAMBON_RHO_MAX", 0.9))
+
 # =====================================================================
 #                     NUMERIC BETA (operator-aware)
 # =====================================================================
@@ -117,6 +123,12 @@ class NumericBeta(BaseModel):
         inertia:     probability to keep inertia_val
         """
 
+        # Inertia: hold the previous threshold instead of resampling. Both
+        # arguments used to be accepted and never read, so numeric belief-driven
+        # proposals had no inertia at all while enum/set proposals did.
+        if inertia_val is not None and inertia > 0.0 and random.random() < inertia:
+            return float(inertia_val)
+
         anchor = x
         if operator in ("eq", "neq") or anchor is None:
             z = beta_sample(self.alpha, self.beta)
@@ -141,14 +153,29 @@ class NumericBeta(BaseModel):
         base_risk: float,
         ctx_score: Optional[float],
         severity: Optional[float],
-        max_risk: float = 0.9,
+        max_risk: float = _RHO_MAX_DEFAULT,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> float:
         """
-        Adjust risk upwards (more willingness to accept) when
-        global context is good and severity is low.
+        Effective acceptance risk tolerance rho_eff.
+
+        rho_eff = rho + g_eff * (rho_max - rho), where the alignment gain
+        g_a = c_a*(1-s_a) is blended with a deadline-pressure term so the agent
+        becomes more willing to accept as the deadline nears, even when alignment
+        is only moderate:
+
+            w     = round_frac ** deadline_beta      (>1 -> little pressure early)
+            g_eff = g_a + (1 - g_a) * w
+
+        Early game (w~0) leaves g_eff == g_a, preserving high-value deals; rho_max
+        (< 1) still caps it, and the hard-rule guards are unchanged, so no
+        infeasible/policy-violating deal is ever accepted no matter how late.
         """
         g = _ctx_gain(ctx_score, severity)
-        return float(clamp(base_risk + g * (max_risk - base_risk), base_risk, max_risk))
+        w = clamp(round_frac, 0.0, 1.0) ** max(deadline_beta, 1e-9)
+        g_eff = g + (1.0 - g) * w
+        return float(clamp(base_risk + g_eff * (max_risk - base_risk), base_risk, max_risk))
 
     def _accept_single(
         self,
@@ -219,6 +246,8 @@ class NumericBeta(BaseModel):
         mc: int = 3000,
         ctx_score: Optional[float] = None,
         severity: Optional[float] = None,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> bool:
         """
         Main high-level question:
@@ -255,7 +284,7 @@ class NumericBeta(BaseModel):
             # eq / neq / others: just test at opp_val (or my_val)
             x_eff = opp_val
 
-        eff_risk = self._effective_risk(risk, ctx_score, severity)
+        eff_risk = self._effective_risk(risk, ctx_score, severity, round_frac=round_frac, deadline_beta=deadline_beta)
 
         return self._accept_single(
             x_eff,
@@ -266,6 +295,53 @@ class NumericBeta(BaseModel):
             last_value=last_value,
             sim_weight=0.0,
         )
+
+    # -------------------- belief-based acceptance PROBABILITY --------------------
+
+    def accept_prob(self, x: float, operator: str = "gteq", mc: int = 2000) -> float:
+        """
+        Estimate P(opponent would accept a value ``x`` proposed under *our* operator.
+
+        Used for utility-aware "frontier" bidding (#2): it is read straight off the
+        Bayesian posterior over the opponent's preferred value, so the bid policy
+        stays grounded in the belief without ever sampling our offer *from* it.
+
+          - we propose gteq/gt x : opponent prefers smaller values, so they tolerate
+                                   x with prob P(pref >= x)  (upper tail)
+          - we propose lteq/lt x : P(pref <= x)              (lower tail)
+          - eq/neq               : x must fall in the posterior credible band
+        """
+        z = self._to_unit(x)
+        draws = sorted(beta_sample(self.alpha, self.beta) for _ in range(mc))
+        op = (operator or "").lower()
+        if op in ("gteq", "gt"):
+            return float(_unit_tail_prob(draws, z, side="ge"))
+        if op in ("lteq", "lt"):
+            return float(_unit_tail_prob(draws, z, side="le"))
+        lo = _percentile(draws, 0.05)
+        hi = _percentile(draws, 0.95)
+        return 1.0 if lo <= z <= hi else 0.0
+
+    def accept_probs(self, xs, operator: str = "gteq", mc: int = 512):
+        """Batched version of accept_prob: draw the posterior ONCE and evaluate the
+        opponent-acceptance probability for every candidate value in ``xs``.
+
+        The frontier bid evaluates ~15 candidates per issue per round; resampling
+        inside accept_prob made that O(15 * mc) gamma draws. Sampling once and
+        reusing the sorted draws makes it O(mc) + O(15 * log mc)."""
+        draws = sorted(beta_sample(self.alpha, self.beta) for _ in range(mc))
+        op = (operator or "").lower()
+        out = []
+        for x in xs:
+            z = self._to_unit(x)
+            if op in ("gteq", "gt"):
+                out.append(float(_unit_tail_prob(draws, z, side="ge")))
+            elif op in ("lteq", "lt"):
+                out.append(float(_unit_tail_prob(draws, z, side="le")))
+            else:
+                lo = _percentile(draws, 0.05); hi = _percentile(draws, 0.95)
+                out.append(1.0 if lo <= z <= hi else 0.0)
+        return out
 
 
 # =====================================================================
@@ -491,10 +567,18 @@ class EnumDirichlet(BaseModel):
         base_risk: float,
         ctx_score: Optional[float],
         severity: Optional[float],
-        max_risk: float = 0.9,
+        max_risk: float = _RHO_MAX_DEFAULT,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> float:
+        # rho_eff with deadline pressure: blend the alignment gain
+        # g_a = c_a*(1-s_a) with w = round_frac**deadline_beta so the risk
+        # tolerance ramps toward rho_max as the deadline nears. Early game leaves
+        # g_eff == g_a; rho_max (< 1) still caps it. See NumericBeta._effective_risk.
         g = _ctx_gain(ctx_score, severity)
-        return float(clamp(base_risk + g * (max_risk - base_risk), base_risk, max_risk))
+        w = clamp(round_frac, 0.0, 1.0) ** max(deadline_beta, 1e-9)
+        g_eff = g + (1.0 - g) * w
+        return float(clamp(base_risk + g_eff * (max_risk - base_risk), base_risk, max_risk))
 
     def _accept_core(
         self,
@@ -589,6 +673,12 @@ class EnumDirichlet(BaseModel):
 
         # neq / isNoneOf: P(argmax not in S)
         if operator in ("neq", "isNoneOf"):
+            # If every label the model knows about is forbidden, it has no positive
+            # evidence for an alternative. An exclusion constraint is nonetheless
+            # trivially satisfiable (just avoid the forbidden labels), so accept.
+            if self.labels and all(str(l) in {str(s) for s in S} for l in self.labels):
+                return True, 1.0
+
             cand_idx = set()
             for l in S:
                 if l not in self.labels:
@@ -627,6 +717,8 @@ class EnumDirichlet(BaseModel):
         mc: int = 3000,
         ctx_score: Optional[float] = None,
         severity: Optional[float] = None,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> bool:
         """
         "Given my categorical constraint (my_op, my_val) and my belief,
@@ -638,7 +730,7 @@ class EnumDirichlet(BaseModel):
         severity:        global disagreement severity (0..1)
         """
 
-        eff_risk = self._effective_risk(risk, ctx_score, severity)
+        eff_risk = self._effective_risk(risk, ctx_score, severity, round_frac=round_frac, deadline_beta=deadline_beta)
 
         # We ask: P(argmax ∈ shared) high enough?
         ok, score = self._accept_core(
@@ -720,8 +812,12 @@ class SetBelief(BaseModel):
             max_k: Optional[int] = None,
     ) -> Set[str]:
         prev_set = x or set()
-        req = set() if required else None
-        forbid = set() if required else None
+        # Always real sets: ``S |= req`` / ``S -= forbid`` below are unconditional,
+        # so leaving these as ``None`` when no ``required`` mapping is supplied
+        # raised ``TypeError: unsupported operand type(s) for |=: 'set' and 'NoneType'``.
+        # Empty sets are behaviourally identical for every ``if forbid`` guard.
+        req: Set[str] = set()
+        forbid: Set[str] = set()
 
         # --- universe + ensure ---
         universe = set(self.alpha) | set(self.beta) | set(prev_set) # | set(req)
@@ -756,25 +852,35 @@ class SetBelief(BaseModel):
         S |= req
         S -= forbid
 
-        # helper: enforce max_k by pi sorting
-        def cap_by_pi_desc(T: Set[str]) -> Set[str] | None:
-            if max_k and len(T) > max_k:
-                return set(sorted(T, key=lambda u: pi[u], reverse=True)[:max_k])
-            return T if len(T)>0 else None
+        # Labels this proposal may contain at all. Written out as its own name
+        # because the previous inline `universe - forbid if forbid else universe`
+        # was re-evaluated in five places, and in the `if not S and ...` guards
+        # Python parsed it as `(not S and (universe - forbid)) if forbid else
+        # universe` -- a condition that is simply `universe` (always truthy)
+        # whenever `forbid` is empty. The guard therefore fired unconditionally
+        # and overwrote every sampled set with the single arg-max label, so with
+        # no exclusion rule on the operand BAMBON could only ever emit
+        # singletons: tau_in, max_k and inertia were all dead on this path.
+        admissible: Set[str] = (universe - forbid) if forbid else set(universe)
 
-        def cap_by_pi_asc(T: Set[str]) -> Set[str] | None:
-            if max_k and len(T) > max_k:
-                return set(sorted(T, key=lambda u: pi[u])[:max_k])
-            return T if len(T)>0 else None
+        def cap_keep_required(T: Set[str], descending: bool) -> Set[str]:
+            """Trim T to max_k by pi, never dropping a hard-required label."""
+            if not max_k or len(T) <= max_k:
+                return T
+            keep = set(req & T)
+            rest = sorted(T - keep, key=lambda u: pi[u], reverse=descending)
+            for e in rest:
+                if len(keep) >= max_k:
+                    break
+                keep.add(e)
+            return keep
 
         # --- operator-aware construction ---
         if operator == "eq":
             # propose exactly one highly probable item
-            candidates = universe - forbid if forbid else universe
-            if not candidates:
+            if not admissible:
                 return set()
-            best = max(candidates, key=lambda e: pi[e])
-            return {best}
+            return {max(admissible, key=lambda e: pi[e])}
 
         if operator == "neq":
             # forbid exactly one unlikely item (safe-to-forbid)
@@ -782,27 +888,15 @@ class SetBelief(BaseModel):
             worst = min(candidates, key=lambda e: pi[e]) if candidates else None
             return {worst} if worst is not None else set()
 
-        if operator == "isAnyOf":
-            # propose a small set of likely items; ensure non-empty
-            # Start with inertia-retained items, then add those above tau
-            for e in universe - forbid if forbid else universe:
+        if operator in ("isAnyOf", "isAllOf"):
+            # inertia-retained items and required items are already in S; add
+            # every admissible label the posterior likes well enough.
+            for e in admissible:
                 if pi[e] > tau[0]:
                     S.add(e)
-
-            # cap and ensure non-empty
-            S = cap_by_pi_desc(S)
-            if not S and universe - forbid if forbid else universe:
-                S = {max(universe, key=lambda e: pi[e])}
-            return S
-
-        if operator == "isAllOf":
-            # propose all items that are sufficiently likely + required
-            for e in universe  - forbid if forbid else universe:
-                if pi[e] > tau[0]:
-                    S.add(e)
-            S = cap_by_pi_desc(S)
-            if not S and universe - forbid if forbid else universe:
-                S = {max(universe, key=lambda e: pi[e])}
+            S = cap_keep_required(S, descending=True)
+            if not S and admissible:
+                S = {max(admissible, key=lambda e: pi[e])}
             return S
 
         if operator == "isNoneOf":
@@ -812,25 +906,25 @@ class SetBelief(BaseModel):
                 if pi[e] < (1.0 - tau[1]):
                     S.add(e)
 
-            # if empty, forbid a small number of least-likely items (but never required)
+            # if empty, forbid the single least-likely candidate (never a required one)
             if not S:
                 candidates = list(forbid if forbid else universe)
                 if candidates:
-                    # forbid one worst item (or more if you want; keep it minimal)
                     S = {min(candidates, key=lambda e: pi[e])}
 
             # cap by ascending pi (keep the least-likely items when trimming)
-            S = cap_by_pi_asc(S)
-            if not S and universe - forbid if forbid else universe:
+            S = cap_keep_required(S, descending=False)
+            if not S and universe:
                 S = {min(universe, key=lambda e: pi[e])}
             return S
 
         # fallback: treat unknown operators like isAllOf
-        for e in universe - forbid if forbid else universe:
+        for e in admissible:
             if pi[e] > tau[0]:
                 S.add(e)
-
-        return cap_by_pi_desc(S)
+        if not S and admissible:
+            S = {max(admissible, key=lambda e: pi[e])}
+        return cap_keep_required(S, descending=True)
 
     # -------------------- low-level acceptance of a concrete set --------------------
 
@@ -871,10 +965,18 @@ class SetBelief(BaseModel):
         base_risk: float,
         ctx_score: Optional[float],
         severity: Optional[float],
-        max_risk: float = 0.9,
+        max_risk: float = _RHO_MAX_DEFAULT,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> float:
+        # rho_eff with deadline pressure: blend the alignment gain
+        # g_a = c_a*(1-s_a) with w = round_frac**deadline_beta so the risk
+        # tolerance ramps toward rho_max as the deadline nears. Early game leaves
+        # g_eff == g_a; rho_max (< 1) still caps it. See NumericBeta._effective_risk.
         g = _ctx_gain(ctx_score, severity)
-        return float(clamp(base_risk + g * (max_risk - base_risk), base_risk, max_risk))
+        w = clamp(round_frac, 0.0, 1.0) ** max(deadline_beta, 1e-9)
+        g_eff = g + (1.0 - g) * w
+        return float(clamp(base_risk + g_eff * (max_risk - base_risk), base_risk, max_risk))
 
     # -------------------- acceptance primitives --------------------
 
@@ -995,6 +1097,8 @@ class SetBelief(BaseModel):
         risk: float = 0.2,
         ctx_score: Optional[float] = None,
         severity: Optional[float] = None,
+        round_frac: float = 0.0,
+        deadline_beta: float = 2.0,
     ) -> bool:
         """
         HardGate(tau_in,tau_out)  AND  Conf(opponent_offer) >= 1 - rho_eff
@@ -1015,10 +1119,19 @@ class SetBelief(BaseModel):
         )
 
         # compute effective risk (same style as enum/numeric)
-        rho_eff = self._effective_risk(risk, ctx_score, severity)
+        rho_eff = self._effective_risk(risk, ctx_score, severity, round_frac=round_frac, deadline_beta=deadline_beta)
 
-        # optional out-confidence only when *I* am eq (same as your current design)
-        # (0) optional global set-consistency check (Jaccard)
+        # (0a) deterministic tau_in/tau_out feasibility gate. This was implemented
+        # (`_hard_gate`) but never called from anywhere, so tau_in/tau_out were
+        # computed here and discarded and only influenced *proposals*.
+        if not self._hard_gate(
+            op=opp_op, S=SB, universe=universe, pi=pi,
+            tau_in=eff_tau_in, tau_out=eff_tau_out,
+            require_all_out_confident=(my_op == "eq"),
+        ):
+            return False
+
+        # (0b) optional global set-consistency check (Jaccard)
         if eff_jacc is not None:
             target = (universe - SB) if opp_op in ("isNoneOf", "neq") else SB
             ej = self._expected_jaccard_mc(target=target, universe=universe, pi=pi, mc=mc)

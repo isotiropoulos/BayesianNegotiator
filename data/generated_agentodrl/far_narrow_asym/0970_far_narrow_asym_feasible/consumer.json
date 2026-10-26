@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0970_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:system-admin",
+  "assignee": [
+    "did:party:data-provider"
+  ],
+  "target": [
+    "urn:asset:crop-growth-monitoring-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "数据分类",
+            "drk:BSICompliantFacilities",
+            "商业用途"
+          ]
+        },
+        {
+          "leftOperand": "odrl:classificationLevel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "一般",
+            "重要",
+            "核心"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "GB/T 43697-2024",
+            "城市信息安全三级标准"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 87
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 691135
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "us-cloud",
+            "certified_archival_workstation",
+            "http://example.org/servers"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ]
+}

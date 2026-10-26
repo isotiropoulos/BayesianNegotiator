@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1144_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:bio-compute-gmb-h"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-results-eupharma-trials"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "cross-border pharmaceutical data compliance certificate",
+            "http://example.org/Usage/IdentifyBatch",
+            "commercialDerivative"
+          ]
+        },
+        {
+          "leftOperand": "odrl:assetScope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "//example.org/Scope:PharmaNetDataSpace",
+            "scope:nordicHeritage",
+            "Catena-X Network sandbox"
+          ]
+        },
+        {
+          "leftOperand": "odrl:issuer",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "BioCompute GmbH's home country's authority"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-11-10"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "web",
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 94
+        }
+      ]
+    }
+  ]
+}

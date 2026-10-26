@@ -1,0 +1,101 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1007_close_narrow:consumer:aspiration",
+  "assigner": "did:party:data-activity",
+  "assignee": [
+    "did:party:data-service-provider",
+    "did:party:management",
+    "did:party:data-management",
+    "did:party:security-team"
+  ],
+  "target": [
+    "urn:asset:data-activity",
+    "urn:asset:log",
+    "urn:asset:traceability",
+    "urn:asset:teeproof",
+    "urn:asset:blockchain-hash",
+    "urn:asset:privacy-protection",
+    "urn:asset:statistical-data-sharing",
+    "urn:asset:third-party-report",
+    "urn:asset:security-inspection",
+    "urn:asset:account",
+    "urn:asset:data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P34DT11H24M28.126S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "energy",
+            "retail",
+            "defence"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "on-prem",
+            "edge",
+            "http://example.org/servers"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT26M13.771S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "termination"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:differentialPrivacy",
+          "operator": "odrl:gteq",
+          "rightOperand": 1.68
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "inside the territory of the International Financial Data Network",
+            "SchengenArea"
+          ]
+        }
+      ]
+    }
+  ]
+}

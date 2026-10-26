@@ -1,0 +1,95 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0153_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:user",
+    "did:party:asset-manager"
+  ],
+  "target": [
+    "urn:asset:image-asset",
+    "urn:asset:licensing-cost"
+  ],
+  "permission": [
+    {
+      "action": "print",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:lteq",
+          "rightOperand": 360
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "European Digital Art Space",
+            "CatenaXDataSpace"
+          ]
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:lteq",
+          "rightOperand": 360
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "authorized_mixed_reality_headset",
+            "vm"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "requestApproval",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:lteq",
+          "rightOperand": 360
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "statistics",
+            "research ethics review regulations",
+            "national health data compliance clearance"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "pay",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolutionDPI",
+          "operator": "odrl:lteq",
+          "rightOperand": 360
+        }
+      ]
+    }
+  ]
+}

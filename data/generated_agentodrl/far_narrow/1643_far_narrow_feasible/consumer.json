@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1643_far_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:citizen",
+    "did:party:city-administrator"
+  ],
+  "target": [
+    "urn:asset:city-camera-footage-data",
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "objecting",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (e) or (f) of Article 6(1)",
+            "Framework Article 6.1(a)",
+            "consent"
+          ]
+        },
+        {
+          "leftOperand": "odrl:grounds",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "grounds relating to their particular situation",
+            "grounds related to particular situation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.88
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processing",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "legitimate grounds"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "DesignatedXREquipment",
+            "hsm"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ]
+}

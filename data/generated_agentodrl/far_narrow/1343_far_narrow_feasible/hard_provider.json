@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1343_far_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-594",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:cu-j-594"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:zeroKnowledgeProof",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "必须附加零知识证明"
+          ]
+        },
+        {
+          "leftOperand": "odrl:hashAnchoring",
+          "operator": "odrl:eq",
+          "rightOperand": "哈希锚定至联盟链"
+        },
+        {
+          "leftOperand": "odrl:logCoverage",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "销毁"
+          ]
+        },
+        {
+          "leftOperand": "odrl:logRetention",
+          "operator": "odrl:gteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P78DT10H40M17.897S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2027-10-15"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 1255
+        }
+      ]
+    }
+  ]
+}

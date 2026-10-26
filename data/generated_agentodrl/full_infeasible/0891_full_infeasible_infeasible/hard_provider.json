@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0891_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:public-portal"
+  ],
+  "target": [
+    "urn:asset:evaluation-summary",
+    "urn:asset:design-purpose",
+    "urn:asset:data-usage-list"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:evaluationSummary",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "publicized"
+          ]
+        },
+        {
+          "leftOperand": "odrl:designPurpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "publicized"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataUsageList",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "publicized"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 2443
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 898
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.11
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:neq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2024-05-13"
+        }
+      ]
+    }
+  ]
+}

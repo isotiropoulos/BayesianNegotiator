@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0622_full_infeasible:consumer:hard",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:anyone",
+    "did:party:data-custodian"
+  ],
+  "target": [
+    "urn:asset:transcribed-renaissance-letters-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT2H38M56.121S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-02-10"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EEA"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:storage",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "encrypted on-premises repository"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 359796
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "el",
+            "fr"
+          ]
+        }
+      ]
+    }
+  ]
+}

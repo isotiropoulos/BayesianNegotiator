@@ -1,0 +1,143 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1726_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:grid-operator"
+  ],
+  "target": [
+    "urn:asset:smart-meter-readings"
+  ],
+  "permission": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:smartMeterReadings",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "necessary"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataPurpose",
+          "operator": "odrl:eq",
+          "rightOperand": "load balancing forecasts"
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:neq",
+          "rightOperand": "none"
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EnergyConsumer"
+          ]
+        },
+        {
+          "leftOperand": "odrl:legalBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "none"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1327
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT10H59M38.71S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dataPurpose",
+          "operator": "odrl:eq",
+          "rightOperand": "load balancing forecasts"
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "none"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "none"
+          ]
+        },
+        {
+          "leftOperand": "odrl:legalBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "none"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.47
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:smartMeterReadings",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "necessary"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataPurpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "load balancing forecasts"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "none"
+          ]
+        },
+        {
+          "leftOperand": "odrl:dataSubject",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EnergyConsumer"
+          ]
+        },
+        {
+          "leftOperand": "odrl:legalBasis",
+          "operator": "odrl:eq",
+          "rightOperand": "none"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2027-07-28"
+        }
+      ]
+    }
+  ]
+}

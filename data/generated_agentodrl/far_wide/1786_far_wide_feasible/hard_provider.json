@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1786_far_wide:provider:hard",
+  "assigner": "did:party:steward-of-cu-p-749",
+  "assignee": [
+    "did:party:telecom-operator"
+  ],
+  "target": [
+    "urn:asset:call-location-data",
+    "urn:asset:subscriber"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:lt",
+          "rightOperand": 36
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:gt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:subscriberAge",
+          "operator": "odrl:lt",
+          "rightOperand": 29
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 56
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "PARQUET"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "kafka",
+            "s3"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "public"
+          ]
+        }
+      ]
+    }
+  ]
+}

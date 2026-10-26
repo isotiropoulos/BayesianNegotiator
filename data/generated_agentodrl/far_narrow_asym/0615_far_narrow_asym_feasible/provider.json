@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0615_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:party-policy-issuer",
+  "assignee": [
+    "did:party:accredited-museum-partners"
+  ],
+  "target": [
+    "urn:asset:virtual-tour",
+    "urn:asset:ardevice"
+  ],
+  "permission": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:aRDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "certified"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 932
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-05-10"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:aRDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "non-certified"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 89
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "energy",
+            "mobility",
+            "public"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT21H44M42.643S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "internal-only",
+            "public"
+          ]
+        }
+      ]
+    }
+  ]
+}

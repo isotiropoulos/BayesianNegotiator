@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1334_far_narrow:consumer:hard",
+  "assigner": "did:party:audit-process",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:audit-process",
+    "urn:asset:all-participants"
+  ],
+  "permission": [
+    {
+      "action": "update",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "null"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 224
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "commercial"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 1462
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "null"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.45
+        }
+      ]
+    },
+    {
+      "action": "update",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P16DT22H17M57.878S"
+        },
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:eq",
+          "rightOperand": "null"
+        }
+      ]
+    }
+  ]
+}

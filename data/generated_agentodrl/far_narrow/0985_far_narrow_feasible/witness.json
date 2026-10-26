@@ -1,0 +1,100 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:data-provider",
+    "did:party:data-user",
+    "did:party:data-sender",
+    "did:party:data-processor",
+    "did:party:privacy-computing-platform"
+  ],
+  "target": [
+    "urn:asset:encrypted-data",
+    "urn:asset:unencrypted-sensitive-data",
+    "urn:asset:data",
+    "urn:asset:sensitive-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "//w3id.org/drk/AITrainingAllowed"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "//w3id.org/drk/AITrainingAllowed"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "transmit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "healthcare"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        }
+      ]
+    },
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "healthcare"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        }
+      ]
+    },
+    {
+      "action": "usePrivacyComputing",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "//w3id.org/drk/AITrainingAllowed"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ]
+}

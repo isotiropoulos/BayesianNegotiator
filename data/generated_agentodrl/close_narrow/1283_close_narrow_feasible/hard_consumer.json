@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1283_close_narrow:consumer:hard",
+  "assigner": "did:party:data-sharing-operator",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:shared-data-space"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:applicationAcceptance",
+          "operator": "odrl:eq",
+          "rightOperand": "ApplicationAcceptance"
+        },
+        {
+          "leftOperand": "odrl:technicalComplianceCheck",
+          "operator": "odrl:eq",
+          "rightOperand": "TechnicalComplianceCheck"
+        },
+        {
+          "leftOperand": "odrl:creditEvaluation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "CreditEvaluation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT11H46M18.554S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.44
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "statistics"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 127048
+        }
+      ]
+    }
+  ]
+}

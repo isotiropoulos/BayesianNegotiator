@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1807_close_narrow:provider:aspiration",
+  "assigner": "did:party:platform-operator",
+  "assignee": [
+    "did:party:cargo-owner"
+  ],
+  "target": [
+    "urn:asset:cargo-transport-status-data"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "access and copy"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P3DT6H29M33.599S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P33DT1H57M29.37S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "copy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article",
+          "operator": "odrl:neq",
+          "rightOperand": "Article18"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-07-16"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "renewal",
+            "breach"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 5543
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "air-gapped",
+            "eu-cloud",
+            "on-prem"
+          ]
+        }
+      ]
+    }
+  ]
+}

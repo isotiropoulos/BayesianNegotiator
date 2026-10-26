@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1643_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:citizen",
+    "did:party:city-administrator"
+  ],
+  "target": [
+    "urn:asset:city-camera-footage-data",
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "objecting",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:neq",
+          "rightOperand": "Framework Article 6.1(a)"
+        },
+        {
+          "leftOperand": "odrl:grounds",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "grounds relating to their particular situation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.6
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processing",
+          "operator": "odrl:eq",
+          "rightOperand": "legitimate grounds"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 15
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "vm"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P3DT14H26M7.032S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1802_close_narrow:consumer:hard",
+  "assigner": "did:party:hospital",
+  "assignee": [
+    "did:party:hospital"
+  ],
+  "target": [
+    "urn:asset:hospital",
+    "urn:asset:patient"
+  ],
+  "permission": [
+    {
+      "action": "refrainFromInforming",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidentialityCondition",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "law_or_regulation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 18
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P11DT16H48M32.04S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "third-party"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "inform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidentialityCondition",
+          "operator": "odrl:eq",
+          "rightOperand": "law_or_regulation"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 3390
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "retail"
+          ]
+        }
+      ]
+    }
+  ]
+}

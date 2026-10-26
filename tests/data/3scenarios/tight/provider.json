@@ -1,0 +1,50 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:TIGHT:provider:init",
+  "assigner": "did:provider:P-TIGHT",
+  "assignee": ["did:consumer:C-TIGHT"],
+  "target": ["urn:asset:dataset:TIGHT"],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        { "leftOperand": "odrl:absoluteTemporalPosition", "operator": "odrl:lteq", "rightOperand": "2025-06-05T00:00:00Z" },
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 58 },
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1480 },
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:eq", "rightOperand": "PT10M" },
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:eq", "rightOperand": "JSON" },
+        { "leftOperand": "odrl:industry", "operator": "odrl:eq", "rightOperand": "research" },
+        { "leftOperand": "odrl:language", "operator": "odrl:eq", "rightOperand": "en" },
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAllOf", "rightOperand": ["research"] }
+      ]
+    },
+    {
+      "action": "transform",
+      "constraint": [
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 58 },
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1480 },
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:eq", "rightOperand": "JSON" }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "anonymize",
+      "constraint": [
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:eq", "rightOperand": "PT10M" },
+        { "leftOperand": "odrl:percentage", "operator": "odrl:lteq", "rightOperand": 58 },
+        { "leftOperand": "odrl:industry", "operator": "odrl:eq", "rightOperand": "research" }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "redistribute",
+      "constraint": [
+        { "leftOperand": "odrl:count", "operator": "odrl:lteq", "rightOperand": 1480 },
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAllOf", "rightOperand": ["research"] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1684_close_narrow:consumer:aspiration",
+  "assigner": "did:party:insurance-company",
+  "assignee": [
+    "did:party:policyholder",
+    "did:party:insurance-company"
+  ],
+  "target": [
+    "urn:asset:insurance-contract-information",
+    "urn:asset:transfer-mechanism"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "conditionsMet"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-03-03"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT7H20M12.201S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "conditionsMet"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 28
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideTransferMeans",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "conditionsMet"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 418
+        }
+      ]
+    }
+  ]
+}

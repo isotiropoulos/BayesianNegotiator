@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1339_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-592",
+  "assignee": [
+    "did:party:data-custodian",
+    "did:party:authorized-party"
+  ],
+  "target": [
+    "urn:asset:operation-logs",
+    "urn:asset:high-sensitivity-parameters",
+    "urn:asset:key-operation"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:collection",
+          "operator": "odrl:eq",
+          "rightOperand": "null"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 37
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 565
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "accessHighSensitivityParameters",
+      "constraint": [
+        {
+          "leftOperand": "odrl:highSensitivityParameterAccess",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.47
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "hybrid",
+            "edge",
+            "FrenchIP"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P66DT10H45M13.244S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ]
+}

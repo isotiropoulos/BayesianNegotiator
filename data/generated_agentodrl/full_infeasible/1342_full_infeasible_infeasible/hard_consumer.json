@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1342_full_infeasible:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:alliance-member"
+  ],
+  "target": [
+    "urn:asset:energy-io-tdata",
+    "urn:asset:analysis-report",
+    "urn:asset:data-service-provider"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:lt",
+          "rightOperand": 49
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "termination"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "s3"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:lt",
+          "rightOperand": 104
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "vm"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "completeAnalysisReport",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 104
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "UK"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "passSecurityCertification",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:lt",
+          "rightOperand": 104
+        }
+      ]
+    }
+  ]
+}

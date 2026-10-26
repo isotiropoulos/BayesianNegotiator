@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1684_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:insurance-company",
+  "assignee": [
+    "did:party:policyholder",
+    "did:party:insurance-company"
+  ],
+  "target": [
+    "urn:asset:insurance-contract-information",
+    "urn:asset:transfer-mechanism"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:eq",
+          "rightOperand": "conditionsMet"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-07-27"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P15DT12H13M40.335S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:eq",
+          "rightOperand": "conditionsMet"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 47
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideTransferMeans",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:eq",
+          "rightOperand": "conditionsMet"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 697
+        }
+      ]
+    }
+  ]
+}

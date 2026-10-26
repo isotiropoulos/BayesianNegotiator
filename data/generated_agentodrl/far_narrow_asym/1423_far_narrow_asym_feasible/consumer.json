@@ -1,0 +1,104 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1423_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:recognized-energy-analyst"
+  ],
+  "target": [
+    "urn:asset:renewable-generation-profiles"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "credit",
+            "http://w3id.org/drk/Purpose:EstablishFeeBasedFarmAdvisoryService",
+            "internalReports"
+          ]
+        },
+        {
+          "leftOperand": "odrl:distribute",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "distribute"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P113DT19H16M7.443S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "credit",
+            "academic study",
+            "publicExhibition"
+          ]
+        },
+        {
+          "leftOperand": "odrl:distribute",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "distribute"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "credit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "credit",
+            "confidential",
+            "specific purposes"
+          ]
+        },
+        {
+          "leftOperand": "odrl:distribute",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "distribute"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ]
+}

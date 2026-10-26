@@ -1,0 +1,113 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1587_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "disallow",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "racial",
+            "ethnicOrigin",
+            "politicalOpinion",
+            "religiousBelief",
+            "philosophicalBelief",
+            "unionMembership",
+            "geneticData",
+            "biometricData",
+            "healthData",
+            "sexualLifeData",
+            "sexualOrientationData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P25DT20H4M29.795S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "disclose",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "racial",
+            "ethnicOrigin",
+            "politicalOpinion",
+            "religiousBelief",
+            "philosophicalBelief",
+            "unionMembership",
+            "geneticData",
+            "biometricData",
+            "healthData",
+            "sexualLifeData",
+            "sexualOrientationData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.9
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EEA",
+            "European Union",
+            "CH"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "obtainConsent",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "racial",
+            "ethnicOrigin",
+            "politicalOpinion",
+            "religiousBelief",
+            "philosophicalBelief",
+            "unionMembership",
+            "geneticData",
+            "biometricData",
+            "healthData",
+            "sexualLifeData",
+            "sexualOrientationData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ]
+}

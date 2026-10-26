@@ -1,0 +1,96 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1007_far_wide:provider:hard",
+  "assigner": "did:party:data-activity",
+  "assignee": [
+    "did:party:data-service-provider",
+    "did:party:management",
+    "did:party:data-management",
+    "did:party:security-team"
+  ],
+  "target": [
+    "urn:asset:data-activity",
+    "urn:asset:log",
+    "urn:asset:traceability",
+    "urn:asset:teeproof",
+    "urn:asset:blockchain-hash",
+    "urn:asset:privacy-protection",
+    "urn:asset:statistical-data-sharing",
+    "urn:asset:third-party-report",
+    "urn:asset:security-inspection",
+    "urn:asset:account",
+    "urn:asset:data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P52DT9H8M41.967S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "energy",
+            "finance",
+            "public"
+          ]
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P3DT13H14M45.658S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach",
+            "renewal",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:differentialPrivacy",
+          "operator": "odrl:lteq",
+          "rightOperand": 2.55
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "global"
+          ]
+        }
+      ]
+    }
+  ]
+}

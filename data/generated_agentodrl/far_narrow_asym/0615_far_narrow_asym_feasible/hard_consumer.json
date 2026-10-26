@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0615_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:party-policy-issuer",
+  "assignee": [
+    "did:party:accredited-museum-partners"
+  ],
+  "target": [
+    "urn:asset:virtual-tour",
+    "urn:asset:ardevice"
+  ],
+  "permission": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:aRDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "certified"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 2020
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-02-08"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:aRDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "certified"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 24
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:neq",
+          "rightOperand": "defence"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P1DT20H50M53.968S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "consortium"
+        }
+      ]
+    }
+  ]
+}

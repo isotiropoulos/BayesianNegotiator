@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0105_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:partner-institutions"
+  ],
+  "target": [
+    "urn:asset:3-dscans-of-sculptures"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:temporal",
+          "operator": "odrl:lteq",
+          "rightOperand": "P30D"
+        },
+        {
+          "leftOperand": "odrl:device",
+          "operator": "odrl:eq",
+          "rightOperand": "authorized digital kiosks"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.54
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "web",
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:device",
+          "operator": "odrl:neq",
+          "rightOperand": "authorized digital kiosks"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 63
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "marketing",
+            "audit",
+            "education"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.13
+        }
+      ]
+    }
+  ]
+}

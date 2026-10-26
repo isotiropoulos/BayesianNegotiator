@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1418_close_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-614",
+  "assignee": [
+    "did:party:vendors"
+  ],
+  "target": [
+    "urn:asset:aggregated-traffic-flow-data",
+    "urn:asset:usage-fee"
+  ],
+  "permission": [
+    {
+      "action": "embed",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usageFee",
+          "operator": "odrl:eq",
+          "rightOperand": "per-gigabyte"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P19DT18H47M51.339S"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 3863
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.17
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "commercial"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "pay",
+      "constraint": [
+        {
+          "leftOperand": "odrl:usageFee",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "per-gigabyte"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-11-26"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "kafka"
+          ]
+        }
+      ]
+    }
+  ]
+}

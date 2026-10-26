@@ -1,0 +1,104 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0945_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:interface-standard-authority"
+  ],
+  "target": [
+    "urn:asset:data-collection-system",
+    "urn:asset:data-deletion"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assessmentMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "AutomatedTools",
+            "自动化检测平台"
+          ]
+        },
+        {
+          "leftOperand": "odrl:assessmentTargets",
+          "operator": "odrl:neq",
+          "rightOperand": "InterfaceStandard"
+        },
+        {
+          "leftOperand": "odrl:complianceStandard",
+          "operator": "odrl:eq",
+          "rightOperand": "农业数据安全规范第二级认证"
+        },
+        {
+          "leftOperand": "odrl:securityRequirements",
+          "operator": "odrl:eq",
+          "rightOperand": "DataEncryption"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-08-02"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.2
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assessmentMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "AutomatedTools",
+            "自动化检测平台"
+          ]
+        },
+        {
+          "leftOperand": "odrl:assessmentTargets",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "InterfaceStandard"
+          ]
+        },
+        {
+          "leftOperand": "odrl:complianceStandard",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "农业数据安全规范第二级认证"
+          ]
+        },
+        {
+          "leftOperand": "odrl:securityRequirements",
+          "operator": "odrl:neq",
+          "rightOperand": "AccessControl"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 345
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P17DT22H31M23.288S"
+        }
+      ]
+    }
+  ]
+}

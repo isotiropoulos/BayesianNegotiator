@@ -1,0 +1,104 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1012_far_narrow:provider:aspiration",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:policy-issuer",
+    "did:party:data-operator",
+    "did:party:log-manager",
+    "did:party:zkpservice"
+  ],
+  "target": [
+    "urn:asset:financial-blockchain",
+    "urn:asset:sensitive-financial-fields",
+    "urn:asset:all-data-operations",
+    "urn:asset:logs-retention",
+    "urn:asset:sensitive-financial-fields-or-cross-border",
+    "urn:asset:zkpcontent"
+  ],
+  "permission": [
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "consortium",
+            "affiliate"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossBorderTransfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RDF",
+            "XML",
+            "PARQUET"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "recordLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        }
+      ]
+    },
+    {
+      "action": "retainLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        }
+      ]
+    },
+    {
+      "action": "applyZKP",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        }
+      ]
+    },
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7Y"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:party-policy-owner",
+  "assignee": [
+    "did:party:online-travel-agency"
+  ],
+  "target": [
+    "urn:asset:personal-information",
+    "urn:asset:traveler"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:parentOrGuardianAuthorization",
+          "operator": "odrl:eq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:travelerAge",
+          "operator": "odrl:eq",
+          "rightOperand": 19
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:eq",
+          "rightOperand": 4511
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "CarOwner"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:travelerAge",
+          "operator": "odrl:eq",
+          "rightOperand": 19
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:eq",
+          "rightOperand": 73
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "JSON"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "Australia Spatial Data Hub"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1724_far_narrow_asym:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:patient",
+    "did:party:research-institution"
+  ],
+  "target": [
+    "urn:asset:clinical-trial-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 39
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P8DT39M33.064S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "necessary for drug efficacy analysis"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 2093
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "finance"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:eq",
+          "rightOperand": "no"
+        },
+        {
+          "leftOperand": "odrl:assetNecessity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "false",
+            "no"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P8DT12H5M4.618S"
+        }
+      ]
+    }
+  ]
+}

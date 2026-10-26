@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1595_far_narrow:provider:aspiration",
+  "assigner": "did:party:asset-owner",
+  "assignee": [
+    "did:party:authorized-party"
+  ],
+  "target": [
+    "urn:asset:anonymized-mriscan-library"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPart",
+          "operator": "odrl:eq",
+          "rightOperand": "AnnualCommercialLicense"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P9DT18H54M39.563S"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "medicalDeviceDevelopmentOrPaidDiagnosticServices"
+        },
+        {
+          "leftOperand": "odrl:hasPart",
+          "operator": "odrl:eq",
+          "rightOperand": "AnnualCommercialLicense"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P8DT20H6M24.034S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "kafka",
+            "https"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.57
+        }
+      ]
+    }
+  ]
+}

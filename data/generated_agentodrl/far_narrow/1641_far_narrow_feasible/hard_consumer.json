@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1641_far_narrow:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:job-seeker"
+  ],
+  "target": [
+    "urn:asset:personal-resume-data",
+    "urn:asset:recruitment-platform-a"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Consent"
+          ]
+        },
+        {
+          "leftOperand": "odrl:system",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "rtos"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 2080
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.46
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "block",
+      "constraint": [
+        {
+          "leftOperand": "odrl:agent",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "organization",
+            "RecruitmentPlatformA"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 4036
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 43
+        }
+      ]
+    }
+  ]
+}

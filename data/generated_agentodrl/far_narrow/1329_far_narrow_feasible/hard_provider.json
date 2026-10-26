@@ -1,0 +1,113 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1329_far_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-587",
+  "assignee": [
+    "did:party:data-provider"
+  ],
+  "target": [
+    "urn:asset:substation-operation-data",
+    "urn:asset:full-data-submission"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P344DT5H20M47.597S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:eq",
+          "rightOperand": "SmartEnergyDataSpace"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "SubstationOperationData"
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.51
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.02
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P344DT5H20M47.597S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:neq",
+          "rightOperand": "ex:GaiaXTrustedZone"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "SubstationOperationData"
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.51
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.02
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "review",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P344DT5H20M47.597S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SmartEnergyDataSpace"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SubstationOperationData"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.51
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.02
+        }
+      ]
+    }
+  ]
+}

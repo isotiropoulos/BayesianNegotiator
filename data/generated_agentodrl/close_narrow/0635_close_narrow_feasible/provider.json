@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0635_close_narrow:provider:aspiration",
+  "assigner": "did:party:repository-director",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:historic-clinical-trial-reports-asset"
+  ],
+  "permission": [
+    {
+      "action": "reproduce",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "approved"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.55
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P14DT4H9M41.429S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "reproduce",
+      "constraint": [
+        {
+          "leftOperand": "odrl:storageLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "certified_medical_records_system"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 34
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "health",
+            "defence",
+            "finance"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 903
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "en",
+            "fr"
+          ]
+        }
+      ]
+    }
+  ]
+}

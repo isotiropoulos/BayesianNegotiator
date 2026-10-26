@@ -1,0 +1,120 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1329_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-587",
+  "assignee": [
+    "did:party:data-provider"
+  ],
+  "target": [
+    "urn:asset:substation-operation-data",
+    "urn:asset:full-data-submission"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P389DT21H3M27.28S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:neq",
+          "rightOperand": "ex:GaiaXTrustedZone"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.63
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.01
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P389DT21H3M27.28S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SmartEnergyDataSpace",
+            "ex:GaiaXTrustedZone"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.63
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.01
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "review",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P389DT21H3M27.28S"
+        },
+        {
+          "leftOperand": "odrl:applicableScope",
+          "operator": "odrl:eq",
+          "rightOperand": "SmartEnergyDataSpace"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "SubstationOperationData",
+            "JSON",
+            "CSV"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.63
+        },
+        {
+          "leftOperand": "odrl:unqualifiedRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.01
+        }
+      ]
+    }
+  ]
+}

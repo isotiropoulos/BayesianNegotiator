@@ -1,0 +1,73 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:swiss-private-bank-transaction-samples"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:eq",
+          "rightOperand": "cross-border"
+        },
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:eq",
+          "rightOperand": "cross-border"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:eq",
+          "rightOperand": 419
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transferType",
+          "operator": "odrl:eq",
+          "rightOperand": "cross-border"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P6DT15H12M17.091S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "XML"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.2
+        }
+      ]
+    }
+  ]
+}

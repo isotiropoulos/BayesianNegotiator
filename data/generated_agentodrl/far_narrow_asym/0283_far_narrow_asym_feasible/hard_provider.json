@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0283_far_narrow_asym:provider:hard",
+  "assigner": "did:party:ancient-manuscript-scans",
+  "assignee": [
+    "did:party:academic-research-groups"
+  ],
+  "target": [
+    "urn:asset:ancient-manuscript-scans"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:useIn",
+          "operator": "odrl:eq",
+          "rightOperand": "scholarly conferences"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P15DT19H19M15.126S"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P46DT1H44M3.555S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "charge",
+      "constraint": [
+        {
+          "leftOperand": "odrl:useIn",
+          "operator": "odrl:eq",
+          "rightOperand": "scholarly conferences"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT18H44M41.516S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "affiliate",
+            "consortium",
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "sftp",
+            "https",
+            "kafka"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1440_full_infeasible:consumer:hard",
+  "assigner": "did:party:hospital-visitor-logs",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:hospital-visitor-logs"
+  ],
+  "permission": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "allow"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 37
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P90DT20H19M42.68S"
+        }
+      ]
+    },
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "approved"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "create",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "approved"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2027-01-15"
+        }
+      ]
+    },
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "allow"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.43
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1105_far_wide:provider:aspiration",
+  "assigner": "did:party:live-stream-full-resolution",
+  "assignee": [
+    "did:party:engineers"
+  ],
+  "target": [
+    "urn:asset:live-stream-full-resolution"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:engineers",
+          "operator": "odrl:eq",
+          "rightOperand": "monitoring-permitted"
+        },
+        {
+          "leftOperand": "odrl:liveStream",
+          "operator": "odrl:eq",
+          "rightOperand": "full-resolution"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.54
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P51DT10H50M13.933S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 516
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "container",
+            "vm"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:liveStream",
+          "operator": "odrl:eq",
+          "rightOperand": "full-resolution"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-03-17"
+        }
+      ]
+    }
+  ]
+}

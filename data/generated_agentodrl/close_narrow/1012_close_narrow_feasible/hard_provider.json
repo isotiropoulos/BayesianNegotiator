@@ -1,0 +1,98 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1012_close_narrow:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:policy-issuer",
+    "did:party:data-operator",
+    "did:party:log-manager",
+    "did:party:zkpservice"
+  ],
+  "target": [
+    "urn:asset:financial-blockchain",
+    "urn:asset:sensitive-financial-fields",
+    "urn:asset:all-data-operations",
+    "urn:asset:logs-retention",
+    "urn:asset:sensitive-financial-fields-or-cross-border",
+    "urn:asset:zkpcontent"
+  ],
+  "permission": [
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P2011DT6H16M49.867S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossBorderTransfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P2011DT6H16M49.867S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "recordLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2011DT6H16M49.867S"
+        }
+      ]
+    },
+    {
+      "action": "retainLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2011DT6H16M49.867S"
+        }
+      ]
+    },
+    {
+      "action": "applyZKP",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2011DT6H16M49.867S"
+        }
+      ]
+    },
+    {
+      "action": "hashAndAnchor",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P2011DT6H16M49.867S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0861_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-provider",
+    "did:party:data-sender"
+  ],
+  "target": [
+    "urn:asset:data-resource",
+    "urn:asset:sensitive-data",
+    "urn:asset:data-transmission"
+  ],
+  "permission": [
+    {
+      "action": "encrypt",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "可调用",
+            "legal_standards_breached",
+            "Good-faith statement regarding unauthorized use"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "未授权"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.88
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "plaintextTransfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "可调用",
+            "技术验证",
+            "detection of fraudulent activity"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "未授权"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 263666
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "enforceEncryption",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "可调用",
+            "commercial_license",
+            "guideline overview request"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "未授权"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 91
+        }
+      ]
+    },
+    {
+      "action": "useTrustedExecutionEnvironment",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "可调用",
+            "CommercialApplication",
+            "law or administrative regulations"
+          ]
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "scientific research",
+            "未授权"
+          ]
+        }
+      ]
+    }
+  ]
+}

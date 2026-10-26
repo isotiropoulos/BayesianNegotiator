@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1469_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:organization-owner",
+  "assignee": [
+    "did:party:analysts"
+  ],
+  "target": [
+    "urn:asset:asset-stream",
+    "urn:asset:analysts"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "jointly_vetted_and_enrolled",
+            "real-time irrigation scheduling",
+            "non-commercial research"
+          ]
+        },
+        {
+          "leftOperand": "odrl:vettingStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "jointly_vetted_and_enrolled"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 93
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P134DT21H12M21.72S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2701
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "True",
+            "consortium"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "public",
+            "医院数据提供方",
+            "health"
+          ]
+        }
+      ]
+    }
+  ]
+}

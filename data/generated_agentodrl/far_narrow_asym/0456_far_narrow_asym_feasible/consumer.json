@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0456_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:health-authority-party",
+  "assignee": [
+    "did:party:user-access-party"
+  ],
+  "target": [
+    "urn:asset:pandemic-response"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:healthEmergencyStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "ended"
+          ]
+        },
+        {
+          "leftOperand": "odrl:healthEmergencyEndDate",
+          "operator": "odrl:lteq",
+          "rightOperand": "2021-05-08"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "education",
+            "originality",
+            "renewable energy integration studies"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-09-17"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "web",
+            "print"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "secure research terminal",
+            "passenger name record data"
+          ]
+        }
+      ]
+    }
+  ]
+}

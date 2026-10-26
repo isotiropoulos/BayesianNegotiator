@@ -1,0 +1,96 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1342_full_infeasible:provider:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:alliance-member"
+  ],
+  "target": [
+    "urn:asset:energy-io-tdata",
+    "urn:asset:analysis-report",
+    "urn:asset:data-service-provider"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:gt",
+          "rightOperand": 130
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "renewal",
+            "breach",
+            "termination"
+          ]
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "courier",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:gt",
+          "rightOperand": 130
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "container",
+            "bare-metal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "completeAnalysisReport",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:gt",
+          "rightOperand": 130
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "UK",
+            "EU",
+            "US"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "passSecurityCertification",
+      "constraint": [
+        {
+          "leftOperand": "odrl:abnormalAccessCount",
+          "operator": "odrl:gt",
+          "rightOperand": 130
+        }
+      ]
+    }
+  ]
+}

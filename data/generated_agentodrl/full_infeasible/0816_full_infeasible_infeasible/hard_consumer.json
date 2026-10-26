@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0816_full_infeasible:consumer:hard",
+  "assigner": "did:party:data-space-owner",
+  "assignee": [
+    "did:party:aicontent-creator"
+  ],
+  "target": [
+    "urn:asset:produced-works-asset"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:eq",
+          "rightOperand": "GlobalOpenArtDataSpace"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 61
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 331402
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "GlobalOpenArtDataSpace"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 232
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "third-party"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "attachMetadata",
+      "constraint": [
+        {
+          "leftOperand": "odrl:metadata",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "MetSourceMetadata",
+            "DOI"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P17DT5H44M11.222S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0992_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-485",
+  "assignee": [
+    "did:party:device-supplier",
+    "did:party:factory-operator"
+  ],
+  "target": [
+    "urn:asset:device-operation-data"
+  ],
+  "permission": [
+    {
+      "action": "publish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:encryption",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 26
+        }
+      ]
+    },
+    {
+      "action": "retrieve",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dataAvailable",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:contentAccess",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "unauthorized"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "deliver",
+      "constraint": [
+        {
+          "leftOperand": "odrl:encryption",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:sensitiveDataLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:technology",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "['TEE', 'PrivacyComputing']"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sendPlainText",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sensitiveDataLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT24M42.358S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0897_far_wide:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-j-454",
+  "assignee": [
+    "did:party:researcher"
+  ],
+  "target": [
+    "urn:asset:eu-driving-v2-x",
+    "urn:asset:activity-logs"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reviewStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "jointlyReviewedAndRegistered"
+          ]
+        },
+        {
+          "leftOperand": "odrl:transmissionMode",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "real-time"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-22"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "CreditRiskAssessment",
+            "即时获取"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "European Union",
+            "NationalEnvironmentalAgency"
+          ]
+        }
+      ]
+    }
+  ]
+}

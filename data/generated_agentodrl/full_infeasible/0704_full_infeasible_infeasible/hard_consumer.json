@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0704_full_infeasible:consumer:hard",
+  "assigner": "did:party:global-historical-archives-network",
+  "assignee": [
+    "did:party:cultural-insights-group",
+    "did:party:global-historical-archives-network"
+  ],
+  "target": [
+    "urn:asset:colonial-era-correspondence",
+    "urn:asset:algorithms-not-made-public",
+    "urn:asset:developed-algorithms"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "http://w3id.org/drk/Purpose/HistoricalLinguistics"
+        },
+        {
+          "leftOperand": "odrl:publisher",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "http://w3id.org/drk/GlobalHistoricalArchivesNetwork"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 24
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P6DT8H17M0.316S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "makeAlgorithmsNotPublic",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "http://w3id.org/drk/Purpose/HistoricalLinguistics"
+        },
+        {
+          "leftOperand": "odrl:publisher",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "European Space Agency"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 550
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "publish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:publisher",
+          "operator": "odrl:eq",
+          "rightOperand": "http://w3id.org/drk/GlobalHistoricalArchivesNetwork"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-09-13"
+        }
+      ]
+    }
+  ]
+}

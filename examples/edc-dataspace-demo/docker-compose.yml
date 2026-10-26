@@ -1,0 +1,219 @@
+# Two data space participants, each with an EDC connector and its own BAMBON.
+#
+#   provider: connector 19191-19194 / 19291, BAMBON side channel 8100
+#   consumer: connector 29191-29194 / 29291, BAMBON side channel 8200
+#
+# Run from this directory:  ./run_demo.sh
+#
+# Note the build context is the repository root (../..) so that the image can
+# install BAMBON from this checkout rather than from PyPI.
+
+name: bambon-edc-demo
+
+x-python: &python
+  build:
+    context: ../..
+    dockerfile: examples/edc-dataspace-demo/Dockerfile
+  restart: unless-stopped
+
+# `agmangas/edc-connector` publishes `latest`, `main` and commit-SHA tags only -
+# there are no semver tags. Pin to a SHA from Docker Hub if you need stability.
+x-connector: &connector
+  image: agmangas/edc-connector:${CONNECTOR_TAG:-latest}
+  restart: unless-stopped
+
+# Environment for the one-shot runners. They talk to BOTH connectors: the
+# consumer's Management API to fetch the catalog, send contract requests and run
+# the transfer, and the provider's so the provider's BAMBON can read what was
+# requested and republish its counter-offer. Each BAMBON still only ever reads
+# and writes its own connector.
+x-runner-env: &runner-env
+  # edcpy reads these for the *consumer* connector (transfer process + EDR).
+  EDC_CONNECTOR_HOST: consumer-connector
+  EDC_CONNECTOR_MANAGEMENT_PORT: "29193"
+  EDC_CONNECTOR_CONTROL_PORT: "29192"
+  EDC_CONNECTOR_PUBLIC_PORT: "29291"
+  EDC_CONNECTOR_PROTOCOL_PORT: "29194"
+  EDC_CONNECTOR_CONNECTOR_ID: example-consumer
+  EDC_CONNECTOR_PARTICIPANT_ID: example-consumer
+  EDC_CONNECTOR_API_KEY: ${API_AUTH_KEY:-demo-api-key}
+  # Where the pull credentials (EndpointDataReference) are republished.
+  EDC_RABBIT_URL: amqp://guest:guest@consumer-broker:5672
+  # Both Management APIs, for the connector-to-connector negotiation.
+  CONSUMER_MANAGEMENT_URL: http://consumer-connector:29193/management
+  PROVIDER_MANAGEMENT_URL: http://provider-connector:19193/management
+  API_AUTH_KEY: ${API_AUTH_KEY:-demo-api-key}
+  # Dialled by the consumer *connector*, so a service name and not localhost.
+  PROVIDER_PROTOCOL_URL: http://provider-connector:19194/protocol
+  PROVIDER_PARTICIPANT_ID: example-provider
+  CONSUMER_PARTICIPANT_ID: example-consumer
+  PROVIDER_CONNECTOR_ID: example-provider
+  PROVIDER_SIDECHANNEL_URL: http://provider-negotiator:8100
+  BAMBON_EDC_DIALECT: ${BAMBON_EDC_DIALECT:-vanilla}
+  E2E_MAX_ROUNDS: ${E2E_MAX_ROUNDS:-12}
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+
+services:
+
+  # ----------------------------------------------------------------- provider
+  provider-backend:
+    <<: *python
+    container_name: provider-backend
+    command: uvicorn app:app --host 0.0.0.0 --port 8080 --app-dir /app/mock-backend
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx;httpx.get('http://localhost:8080/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  provider-connector:
+    <<: *connector
+    container_name: provider-connector
+    environment:
+      PROPERTIES_FILE_PATH: /etc/edc/provider.properties
+      KEYSTORE_PATH: /etc/edc/certs/cert.pfx
+      KEYSTORE_PASSWORD: datacellar
+      API_AUTH_KEY: ${API_AUTH_KEY:-demo-api-key}
+    volumes:
+      - ./dev-config/provider.properties:/etc/edc/provider.properties:ro
+      - ./dev-config/certs-provider:/etc/edc/certs:ro
+    ports:
+      - "19191:19191"
+      - "19192:19192"
+      - "19193:19193"
+      - "19194:19194"
+      - "19291:19291"
+    depends_on:
+      provider-backend:
+        condition: service_healthy
+
+  # The provider's BAMBON. Reaches its own connector's Management API to publish
+  # whatever it agrees to.
+  provider-negotiator:
+    <<: *python
+    container_name: provider-negotiator
+    command: uvicorn bambon_edc.service:app --host 0.0.0.0 --port 8100
+    environment:
+      BAMBON_ROLE: provider
+      BAMBON_AUTO_MATERIALISE: "true"
+      # "vanilla" for upstream EDC, "tractusx" for Tractus-X 0.12+ (different
+      # JSON-LD context, and a mandatory Catena-X constraint baseline).
+      BAMBON_EDC_DIALECT: ${BAMBON_EDC_DIALECT:-vanilla}
+      # Left operands the provider connector can actually evaluate. Leave empty
+      # to disable the pre-flight check; see README "Policy functions".
+      BAMBON_REGISTERED_OPERANDS: "${PROVIDER_REGISTERED_OPERANDS:-}"
+      EDC_CONNECTOR_HOST: provider-connector
+      EDC_CONNECTOR_MANAGEMENT_PORT: "19193"
+      EDC_CONNECTOR_PARTICIPANT_ID: example-provider
+      EDC_CONNECTOR_API_KEY: ${API_AUTH_KEY:-demo-api-key}
+      PROVIDER_BACKEND_URL: http://provider-backend:8080/data
+    ports:
+      - "8100:8100"
+    depends_on:
+      - provider-connector
+
+  # ----------------------------------------------------------------- consumer
+  consumer-broker:
+    image: rabbitmq:3.11-management
+    container_name: consumer-broker
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  consumer-connector:
+    <<: *connector
+    container_name: consumer-connector
+    environment:
+      PROPERTIES_FILE_PATH: /etc/edc/consumer.properties
+      KEYSTORE_PATH: /etc/edc/certs/cert.pfx
+      KEYSTORE_PASSWORD: datacellar
+      API_AUTH_KEY: ${API_AUTH_KEY:-demo-api-key}
+    volumes:
+      - ./dev-config/consumer.properties:/etc/edc/consumer.properties:ro
+      - ./dev-config/certs-consumer:/etc/edc/certs:ro
+    ports:
+      - "29191:29191"
+      - "29192:29192"
+      - "29193:29193"
+      - "29194:29194"
+      - "29291:29291"
+
+  # edcpy's off-the-shelf backend: receives pull credentials from the provider
+  # and forwards them to RabbitMQ.
+  consumer-backend:
+    <<: *python
+    container_name: consumer-backend
+    command: run-http-backend
+    environment:
+      EDC_CONNECTOR_HOST: consumer-connector
+      EDC_CONNECTOR_MANAGEMENT_PORT: "29193"
+      EDC_CONNECTOR_CONTROL_PORT: "29192"
+      EDC_CONNECTOR_PUBLIC_PORT: "29291"
+      EDC_CONNECTOR_PROTOCOL_PORT: "29194"
+      EDC_CONNECTOR_PARTICIPANT_ID: example-consumer
+      EDC_CONNECTOR_API_KEY: ${API_AUTH_KEY:-demo-api-key}
+      EDC_RABBIT_URL: amqp://guest:guest@consumer-broker:5672
+      EDC_HTTP_API_PORT: "28000"
+    ports:
+      - "28000:28000"
+    depends_on:
+      consumer-broker:
+        condition: service_healthy
+
+  # The consumer's BAMBON. Symmetric with the provider's - same image, same
+  # code path, different role and profile.
+  consumer-negotiator:
+    <<: *python
+    container_name: consumer-negotiator
+    command: uvicorn bambon_edc.service:app --host 0.0.0.0 --port 8200
+    environment:
+      BAMBON_ROLE: consumer
+      BAMBON_AUTO_MATERIALISE: "false"
+      EDC_CONNECTOR_HOST: consumer-connector
+      EDC_CONNECTOR_MANAGEMENT_PORT: "29193"
+      EDC_CONNECTOR_PARTICIPANT_ID: example-consumer
+      EDC_CONNECTOR_API_KEY: ${API_AUTH_KEY:-demo-api-key}
+    ports:
+      - "8200:8200"
+    depends_on:
+      - consumer-connector
+
+  # ----------------------------------------------------------------- runner
+  # One-shot: drives the whole story - catalog, counter-offers across DSP,
+  # agreement, dataset pull. `profiles` keeps it out of `up -d`.
+  #
+  # It reaches BOTH connectors' Management APIs: the consumer's to fetch the
+  # catalog and send contract requests, the provider's so the provider's BAMBON
+  # can read what was requested and republish its counter. Each BAMBON still
+  # only ever sees its own connector.
+  runner:
+    <<: *python
+    container_name: bambon-runner
+    profiles: ["run"]
+    restart: "no"
+    environment: *runner-env
+    command: python -m bambon_edc.two_connector_flow
+    depends_on:
+      - provider-connector
+      - consumer-connector
+      - consumer-backend
+
+  # The same flow, but with the two BAMBONs talking over the private HTTP side
+  # channel instead of through DSP. Kept for comparison; see README.
+  runner-sidechannel:
+    <<: *python
+    container_name: bambon-runner-sidechannel
+    profiles: ["sidechannel"]
+    restart: "no"
+    environment: *runner-env
+    command: python -m bambon_edc.consumer_flow
+    depends_on:
+      - provider-negotiator
+      - consumer-negotiator
+      - consumer-backend

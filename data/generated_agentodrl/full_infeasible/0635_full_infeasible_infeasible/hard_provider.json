@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0635_full_infeasible:provider:hard",
+  "assigner": "did:party:repository-director",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:historic-clinical-trial-reports-asset"
+  ],
+  "permission": [
+    {
+      "action": "reproduce",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "approved"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 1.0
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P2DT20H1M56.286S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "reproduce",
+      "constraint": [
+        {
+          "leftOperand": "odrl:storageLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "TISAXCertifiedStorage"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 7
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "defence"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 2059
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:eq",
+          "rightOperand": "es"
+        }
+      ]
+    }
+  ]
+}

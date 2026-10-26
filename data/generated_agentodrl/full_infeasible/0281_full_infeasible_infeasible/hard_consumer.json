@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0281_full_infeasible:consumer:hard",
+  "assigner": "did:party:steward-of-su-156",
+  "assignee": [
+    "did:party:geo-research-labs"
+  ],
+  "target": [
+    "urn:asset:summary-hazard-overlays",
+    "urn:asset:full-resolution-imagery"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reportingEruptionRisk",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "AlertLevel2"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P8DT9H37M27.062S"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 2193
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reportingEruptionRisk",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "AlertLevel2"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gt",
+          "rightOperand": 0.27
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:neq",
+          "rightOperand": "internal-wiki"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "annotate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reportingEruptionRisk",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "AlertLevel2"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 30
+        }
+      ]
+    }
+  ]
+}

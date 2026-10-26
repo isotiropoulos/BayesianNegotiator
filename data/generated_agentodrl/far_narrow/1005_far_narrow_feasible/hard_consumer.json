@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1005_far_narrow:consumer:hard",
+  "assigner": "did:party:urban-infrastructure-data-service",
+  "assignee": [
+    "did:party:compliance-checker",
+    "did:party:all-urban-infrastructure-data-service-providers",
+    "did:party:service-providers",
+    "did:party:service-provider-registry"
+  ],
+  "target": [
+    "urn:asset:urban-infrastructure-data-service",
+    "urn:asset:non-compliant-service-providers",
+    "urn:asset:data-products-and-services",
+    "urn:asset:rectification-period"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lt",
+          "rightOperand": "P11DT13H6M21.449S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "statistics"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 42
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "reassess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "https"
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "broadcast"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "wait",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P50DT14H6M41.164S"
+        }
+      ]
+    }
+  ]
+}

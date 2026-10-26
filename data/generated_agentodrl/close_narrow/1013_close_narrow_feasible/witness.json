@@ -1,0 +1,76 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:data-recipient",
+    "did:party:unauthorized-party",
+    "did:party:data-processor"
+  ],
+  "target": [
+    "urn:asset:statistical-data",
+    "urn:asset:personal-financial-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:eq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "breach"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "edge"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.19
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "PARQUET"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "applyDifferentialPrivacy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:privacyParameterEpsilon",
+          "operator": "odrl:eq",
+          "rightOperand": 1.56
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 0.45
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ]
+}

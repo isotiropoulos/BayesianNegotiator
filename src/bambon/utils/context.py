@@ -109,11 +109,26 @@ def _num_similarity(issue: Issue, with_init) -> float:
     - Higher when operators/values are compatible and close
     - Inequalities are treated more forgivingly than strict eq
     """
-    if with_init:
-        ai = issue.to_internal(issue.initValue)
-    else:
-        ai = issue.to_internal(issue.lastValue)
-    bi = issue.to_internal(issue.oppLastValue)
+    # Guard BEFORE converting, not after. ``to_internal`` for a numeric issue
+    # is ``lambda x: float(x)``, which raises TypeError on None -- so the
+    # None-check below could never be reached, and the exception escaped all
+    # the way out of ``observe()``.
+    #
+    # ``oppLastValue`` is None whenever the counterparty has not spoken to this
+    # issue yet, which is the normal state on round 1 for any issue our offer
+    # names and theirs does not. ``_range_similarity`` already gets this right
+    # (see the ``if v is not None`` at the end of this module); this one did
+    # not, so a negotiation crashed the moment our offer carried a numeric
+    # constraint the peer had not mentioned.
+    raw_a = issue.initValue if with_init else issue.lastValue
+    raw_b = issue.oppLastValue
+    if raw_a is None or raw_b is None:
+        return 0.0
+    try:
+        ai = issue.to_internal(raw_a)
+        bi = issue.to_internal(raw_b)
+    except (TypeError, ValueError):
+        return 0.0
     if ai is None or bi is None:
         return 0.0
 
@@ -171,7 +186,40 @@ def _num_similarity(issue: Issue, with_init) -> float:
 
 
 
+def _range_similarity(issue: Issue, with_init) -> float:
+    """Similarity for a merged numeric interval: based on overlap of the two windows."""
+    if not issue.oppLastValue:
+        return 0.5
+    mine = issue.initValue if with_init else issue.lastValue
+    if not mine:
+        return 0.5
+
+    def _i(v):
+        return issue.to_internal(v) if v is not None else None
+
+    a_lo, a_hi = _i(mine[0]), _i(mine[1])
+    b_lo, b_hi = _i(issue.oppLastValue[0]), _i(issue.oppLastValue[1])
+
+    inf = float("inf")
+    a_lo = a_lo if a_lo is not None else -inf
+    a_hi = a_hi if a_hi is not None else inf
+    b_lo = b_lo if b_lo is not None else -inf
+    b_hi = b_hi if b_hi is not None else inf
+
+    lo = max(a_lo, b_lo)
+    hi = min(a_hi, b_hi)
+    if lo > hi:
+        return 0.0
+    inter = hi - lo
+    union = max(a_hi, b_hi) - min(a_lo, b_lo)
+    if union in (0.0, inf, -inf) or inter == inf:
+        return 1.0
+    return float(clamp(inter / union, 0.0, 1.0))
+
+
 def _issue_similarity(issue: Issue, with_init=False) -> float:
+    if issue.kind == "numrange":
+        return _range_similarity(issue, with_init)
     if issue.kind == "num":
         return _num_similarity(issue, with_init)
     # treat enums as sets (singletons)

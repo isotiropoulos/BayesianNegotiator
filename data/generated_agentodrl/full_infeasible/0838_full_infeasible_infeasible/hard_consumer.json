@@ -1,0 +1,95 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0838_full_infeasible:consumer:hard",
+  "assigner": "did:party:australian-natural-resources-authority",
+  "assignee": [
+    "did:party:forestry-management-team"
+  ],
+  "target": [
+    "urn:asset:satellite-vegetation-indices"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "October"
+          ]
+        },
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-10-18"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT11H48M25.399S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "bypassSecurityChecks",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:eq",
+          "rightOperand": "August"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "bypassSecurityChecks",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "August",
+            "September",
+            "October"
+          ]
+        },
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9DT2H44M56.206S"
+        }
+      ]
+    }
+  ]
+}

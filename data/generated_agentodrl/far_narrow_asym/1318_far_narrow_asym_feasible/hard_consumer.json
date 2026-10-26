@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1318_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:bank-alliance",
+  "assignee": [
+    "did:party:data-provider",
+    "did:party:user",
+    "did:party:data-recipient",
+    "did:party:unauthorized-party",
+    "did:party:all-parties",
+    "did:party:privacy-framework",
+    "did:party:data-sender"
+  ],
+  "target": [
+    "urn:asset:credit-data",
+    "urn:asset:sensitive-credit-data"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2024-07-09"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "send",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transmissionMethod",
+          "operator": "odrl:eq",
+          "rightOperand": "encryption"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 130
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-wiki",
+            "broadcast"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "transmit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:transmissionMethod",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "encryption",
+            "plaintext"
+          ]
+        },
+        {
+          "leftOperand": "odrl:sensitivityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 8
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 586498
+        }
+      ]
+    }
+  ]
+}

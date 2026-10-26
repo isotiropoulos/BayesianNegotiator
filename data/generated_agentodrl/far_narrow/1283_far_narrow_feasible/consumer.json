@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1283_far_narrow:consumer:aspiration",
+  "assigner": "did:party:data-sharing-operator",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:shared-data-space"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:applicationAcceptance",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "ApplicationAcceptance"
+          ]
+        },
+        {
+          "leftOperand": "odrl:technicalComplianceCheck",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "TechnicalComplianceCheck"
+          ]
+        },
+        {
+          "leftOperand": "odrl:creditEvaluation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CreditEvaluation"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "prior steps before agreement",
+            "non-commercial"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 278140
+        }
+      ]
+    }
+  ]
+}

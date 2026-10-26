@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1003_full_infeasible:provider:aspiration",
+  "assigner": "did:party:policy-owner-party",
+  "assignee": [
+    "did:party:data-verifier-party",
+    "did:party:data-submitter-party"
+  ],
+  "target": [
+    "urn:asset:crop-growth-monitoring-data",
+    "urn:asset:full-data-set"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:interval",
+          "operator": "odrl:lt",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "bare-metal",
+            "hsm",
+            "vm"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "PARQUET",
+            "RDF",
+            "XML"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gt",
+          "rightOperand": 5
+        },
+        {
+          "leftOperand": "odrl:interval",
+          "operator": "odrl:lt",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "broadcast",
+            "print",
+            "internal-wiki"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "submit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:interval",
+          "operator": "odrl:lt",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "health",
+            "energy",
+            "public"
+          ]
+        }
+      ]
+    }
+  ]
+}

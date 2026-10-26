@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0734_close_narrow:consumer:aspiration",
+  "assigner": "did:party:health-data-provider",
+  "assignee": [
+    "did:party:party-owner"
+  ],
+  "target": [
+    "urn:asset:real-time-erdata"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:gteq",
+          "rightOperand": 26
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1541
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CommercialContractSecured",
+            "可调用",
+            "medicalDeviceDevelopmentOrPaidDiagnosticServices"
+          ]
+        },
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "HealthDataSpace",
+            "European Cultural Data Space",
+            "European Cultural Heritage Data Space"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-03-23"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EEA",
+            "inside the territory of the International Financial Data Network",
+            "US"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1422
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "XLSX",
+            "structured, commonly used, machine-readable",
+            "RDF"
+          ]
+        }
+      ]
+    }
+  ]
+}

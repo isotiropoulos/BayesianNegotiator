@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0735_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:health-data-authority",
+  "assignee": [
+    "did:party:hospital-management-tools"
+  ],
+  "target": [
+    "urn:asset:real-time-emergency-room-occupancy-data"
+  ],
+  "permission": [
+    {
+      "action": "display",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:eq",
+          "rightOperand": "HealthDataSpace"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-05-03"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 10
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 170923
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "renewal",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "display",
+      "constraint": [
+        {
+          "leftOperand": "odrl:scope",
+          "operator": "odrl:eq",
+          "rightOperand": "HealthDataSpace"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "education",
+            "journalism"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1176_far_wide:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-j-536",
+  "assignee": [
+    "did:party:platform-administrator"
+  ],
+  "target": [
+    "urn:asset:bias-audit-asset",
+    "urn:asset:analytics-model"
+  ],
+  "permission": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:neq",
+          "rightOperand": "detrimental"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lteq",
+          "rightOperand": 244608
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-05-06"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "rescindOperationalApproval",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:neq",
+          "rightOperand": "detrimental"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P19DT2H5M44.81S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "https",
+            "courier",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:neq",
+          "rightOperand": "detrimental"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 76
+        }
+      ]
+    }
+  ]
+}

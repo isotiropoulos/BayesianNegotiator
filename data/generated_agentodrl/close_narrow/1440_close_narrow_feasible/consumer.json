@@ -1,0 +1,95 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1440_close_narrow:consumer:aspiration",
+  "assigner": "did:party:hospital-visitor-logs",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:hospital-visitor-logs"
+  ],
+  "permission": [
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "approved",
+            "allow"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 28
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P66DT5H49M22.371S"
+        }
+      ]
+    },
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "approved",
+            "allow"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "create",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "approved",
+            "allow"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-02-28"
+        }
+      ]
+    },
+    {
+      "action": "store",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "approved",
+            "allow"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.34
+        }
+      ]
+    }
+  ]
+}

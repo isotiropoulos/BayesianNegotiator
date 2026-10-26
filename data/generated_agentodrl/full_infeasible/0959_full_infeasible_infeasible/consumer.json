@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0959_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:data-space",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:data-space",
+    "urn:asset:public-notice",
+    "urn:asset:approval-list"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-24"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.87
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "anonymized",
+            "granular, real-time consumption"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "publish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:approvalList",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Asset:PublicNoticePeriod"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P26DT16H30M50.887S"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "health",
+            "state credit industry administrative department",
+            "defence"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "wait",
+      "constraint": [
+        {
+          "leftOperand": "odrl:publicNoticeStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "no_objection"
+          ]
+        }
+      ]
+    }
+  ]
+}

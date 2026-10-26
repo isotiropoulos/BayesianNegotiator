@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1796_far_narrow:provider:hard",
+  "assigner": "did:party:automaker",
+  "assignee": [
+    "did:party:vehicle-owner"
+  ],
+  "target": [
+    "urn:asset:vehicle-driving-behavior-data",
+    "urn:asset:vehicle-owner"
+  ],
+  "permission": [
+    {
+      "action": "inform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "law or administrative regulations"
+        },
+        {
+          "leftOperand": "odrl:notification",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "notification not required"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.25
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 52
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "inform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "law or administrative regulations"
+          ]
+        },
+        {
+          "leftOperand": "odrl:notification",
+          "operator": "odrl:eq",
+          "rightOperand": "notification not required"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "inform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "law or administrative regulations"
+          ]
+        },
+        {
+          "leftOperand": "odrl:notification",
+          "operator": "odrl:eq",
+          "rightOperand": "notification not required"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 420894
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1192_close_narrow:provider:hard",
+  "assigner": "did:party:satellite-imagery-data",
+  "assignee": [
+    "did:party:environmental-research-consortia"
+  ],
+  "target": [
+    "urn:asset:satellite-imagery-data",
+    "urn:asset:model-impact-disclosure",
+    "urn:asset:fairness-index"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.16
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "research"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lt",
+          "rightOperand": 0.16
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "EU"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.16
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "internal-wiki"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "check",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 11.16
+        },
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.16
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0285_far_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:environmental-ngos"
+  ],
+  "target": [
+    "urn:asset:heatmaps",
+    "urn:asset:wildlife-tracker-logs"
+  ],
+  "permission": [
+    {
+      "action": "anonymize",
+      "constraint": [
+        {
+          "leftOperand": "odrl:proximitySignal",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RiskTier4"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-19"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "retrieveGranularLogs",
+      "constraint": [
+        {
+          "leftOperand": "odrl:signalEndangeredSpeciesProximity",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RiskTier4"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "audit",
+            "Broadcast Production",
+            "payment account numbers"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 720460
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "s3",
+            "sftp",
+            "SupportChannel"
+          ]
+        }
+      ]
+    }
+  ]
+}

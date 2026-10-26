@@ -1,0 +1,101 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-provider",
+    "did:party:data-sender"
+  ],
+  "target": [
+    "urn:asset:data-resource",
+    "urn:asset:sensitive-data",
+    "urn:asset:data-transmission"
+  ],
+  "permission": [
+    {
+      "action": "encrypt",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "Good-faith statement regarding unauthorized use"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.24
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:eq",
+          "rightOperand": 0.44
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "plaintextTransfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "可调用"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:eq",
+          "rightOperand": 133861
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "enforceEncryption",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "可调用"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:eq",
+          "rightOperand": 27
+        }
+      ]
+    },
+    {
+      "action": "useTrustedExecutionEnvironment",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "可调用"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        }
+      ]
+    }
+  ]
+}

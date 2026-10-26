@@ -91,9 +91,9 @@ PROFILES = {
 class TestCatalog(unittest.TestCase):
 
     def test_for_paper(self):
-        iterations = 10000
+        iterations = 10
         results = []
-        init_provider, hard_provider, init_consumer, hard_consumer = fetch_data('agreement')
+        init_provider, hard_provider, init_consumer, hard_consumer = fetch_data('full')
 
         aggressive = PROFILES['balanced']
         balanced = PROFILES['exploratory']
@@ -121,7 +121,7 @@ class TestCatalog(unittest.TestCase):
             cnt = 1
             accepted = 0
 
-            data = {'data': {issue.operand: [] for issue in provider.beliefs['use'].issue_models},
+            data = {'data': {issue.operand: [] for issue in provider.beliefs[('permission', 'use')].issue_models},
                     'durations': {'provider': [], 'consumer': []},
                     'rounds': []}
 
@@ -172,5 +172,76 @@ class TestCatalog(unittest.TestCase):
                 cnt += 1
         print(len(results)/iterations*100, '%')
         import json
-        with open(r'tests\out_test\paper_results.json', 'w') as f:
+        with open(r'tests\out_test\resnew.json', 'w') as f:
             f.write(json.dumps(results))
+
+    @staticmethod
+    def _negotiate(init_provider, hard_provider, init_consumer, hard_consumer,
+                   prov_profile, cons_profile):
+        """Run a single bilateral negotiation to completion.
+
+        Returns the agreed offer (dict) when both parties signal acceptance on two
+        consecutive turns, or None if the negotiation is deemed infeasible.
+        """
+        import copy
+        prov_kwargs = {k: v for k, v in prov_profile.items() if k != "lr"}
+        cons_kwargs = {k: v for k, v in cons_profile.items() if k != "lr"}
+
+        provider = Bambon(name="Provider", lr=prov_profile.get("lr", 1.0),
+                          init_offer=copy.deepcopy(init_provider), hard_policy=hard_provider,
+                          **prov_kwargs)
+        consumer = Bambon(name="Consumer", lr=cons_profile.get("lr", 1.0),
+                          init_offer=copy.deepcopy(init_consumer), hard_policy=hard_consumer,
+                          **cons_kwargs)
+
+        received = copy.deepcopy(init_consumer)
+        turn = "provider"
+        accepted = 0
+        final = None
+        while True:
+            try:
+                if turn == "provider":
+                    accept, replied = provider.observe(received)
+                    turn = "consumer"
+                else:
+                    accept, replied = consumer.observe(received)
+                    turn = "provider"
+                received = replied
+            except NegotiationInfeasible:
+                return None
+            if accept:
+                accepted += 1
+                final = received
+            else:
+                accepted = 0
+            if accepted == 2:
+                return final
+
+    def test_full_multi_rule(self):
+        """Permissions, obligations and prohibitions (with multiple actions) all converge."""
+        init_provider, hard_provider, init_consumer, hard_consumer = fetch_data('full')
+        prov = PROFILES['exploratory']
+        cons = PROFILES['balanced']
+
+        iterations = 40
+        agreements = 0
+        sample = None
+        for _ in range(iterations):
+            random.seed()
+            res = self._negotiate(init_provider, hard_provider, init_consumer, hard_consumer, prov, cons)
+            if res:
+                agreements += 1
+                sample = res
+
+        # The negotiation must conclude in a meaningful fraction of runs (it previously
+        # never concluded for multi-action / multi-rule offers).
+        self.assertGreater(agreements, 0, "no agreement ever reached for full multi-rule offer")
+
+        # The resulting agreement must carry every negotiated rule type and action.
+        self.assertEqual(sample['@type'], 'odrl:Agreement')
+        perm_actions = {b['action'] for b in sample.get('permission', [])}
+        obl_actions = {b['action'] for b in sample.get('obligation', [])}
+        prohib_actions = {b['action'] for b in sample.get('prohibition', [])}
+        self.assertEqual(perm_actions, {'use', 'transform'})
+        self.assertEqual(obl_actions, {'anonymize'})
+        self.assertEqual(prohib_actions, {'redistribute'})

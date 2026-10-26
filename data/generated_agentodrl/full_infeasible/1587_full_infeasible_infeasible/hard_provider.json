@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1587_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:personal-data"
+  ],
+  "permission": [
+    {
+      "action": "disallow",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "racial"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P12DT52M29.795S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P2DT15H28M24.265S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "disclose",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "racial"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.74
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EEA"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "obtainConsent",
+      "constraint": [
+        {
+          "leftOperand": "odrl:personalDataCategory",
+          "operator": "odrl:eq",
+          "rightOperand": "racial"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 995
+        }
+      ]
+    }
+  ]
+}

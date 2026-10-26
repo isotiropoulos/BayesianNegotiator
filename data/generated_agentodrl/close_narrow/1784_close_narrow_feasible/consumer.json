@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1784_close_narrow:consumer:aspiration",
+  "assigner": "did:party:in-game-behavior-data",
+  "assignee": [
+    "did:party:game-publisher",
+    "did:party:player-or-parent-guardian"
+  ],
+  "target": [
+    "urn:asset:in-game-behavior-data",
+    "urn:asset:player-authorization"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "disregardAge",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 22
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:lteq",
+          "rightOperand": 8
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 18
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P45DT12H7M30.537S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "disregardAge",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "de",
+            "el"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "drk:ExternalConsultant",
+            "ValidatedNetherlandsIP"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1387_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:authorized-person"
+  ],
+  "target": [
+    "urn:asset:notification-asset",
+    "urn:asset:signature",
+    "urn:asset:clinical-data-description",
+    "urn:asset:repository-location",
+    "urn:asset:contact-details",
+    "urn:asset:good-faith-statement",
+    "urn:asset:declaration-of-accuracy",
+    "urn:asset:declaration-of-authority"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "NotificationPurpose",
+            "behavioral analytics",
+            "educational"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 132392
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lt",
+          "rightOperand": 343
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "NotificationPurpose",
+            "household energy efficiency analysis and optimization",
+            "journalism"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2026-12-26"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "sign",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "NotificationPurpose",
+            "non-compliance",
+            "public health policy development"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 998
+        }
+      ]
+    },
+    {
+      "action": "describe",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "NotificationPurpose"
+        }
+      ]
+    },
+    {
+      "action": "reference",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "contact",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        }
+      ]
+    },
+    {
+      "action": "statement",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "NotificationPurpose"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "declaration",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "declare",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "NotificationPurpose"
+          ]
+        }
+      ]
+    }
+  ]
+}

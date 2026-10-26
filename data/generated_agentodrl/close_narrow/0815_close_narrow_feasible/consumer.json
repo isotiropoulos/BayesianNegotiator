@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0815_close_narrow:consumer:aspiration",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:hospital-research-teams"
+  ],
+  "target": [
+    "urn:asset:aggregated-patient-outcome-trends"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "real-time clinical intervention planning",
+            "educational and research purposes",
+            "commercial modeling"
+          ]
+        },
+        {
+          "leftOperand": "odrl:priorApproval",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "False"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P2DT3H46M46.688S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9DT15H14M0.381S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "deploy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:priorApproval",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "False",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.34
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "internal-only",
+            "NationalEnvironmentalAgency"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 917
+        }
+      ]
+    }
+  ]
+}

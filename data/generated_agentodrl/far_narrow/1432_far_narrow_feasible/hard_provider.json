@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1432_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:administrator"
+  ],
+  "target": [
+    "urn:asset:user-account"
+  ],
+  "permission": [
+    {
+      "action": "disable",
+      "constraint": [
+        {
+          "leftOperand": "odrl:violationOfTerms",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "violation_of_terms"
+          ]
+        },
+        {
+          "leftOperand": "odrl:prohibitedActivitiesDetected",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "prohibited_activities_detected"
+          ]
+        },
+        {
+          "leftOperand": "odrl:breachOfApplicableLaw",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "breach_of_applicable_law"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2027-12-18"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2024-12-03"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P89DT4H59M49.167S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.57
+        }
+      ]
+    }
+  ]
+}

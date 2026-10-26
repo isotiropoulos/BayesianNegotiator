@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1652_close_narrow:consumer:hard",
+  "assigner": "did:party:steward-of-cu-p-688",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:personal-data",
+    "urn:asset:automotive-r-dinstitution"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "LegalClaims",
+            "Data lineage traceability",
+            "Industrial IoT Data Space"
+          ]
+        },
+        {
+          "leftOperand": "odrl:interest",
+          "operator": "odrl:eq",
+          "rightOperand": "TestVehicleDriver"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2026-01-09"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P33DT16H32M54.127S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:interest",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "TestVehicleDriver"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.22
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "demonstrate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "LegalClaims"
+        },
+        {
+          "leftOperand": "odrl:interest",
+          "operator": "odrl:eq",
+          "rightOperand": "TestVehicleDriver"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gt",
+          "rightOperand": 253353
+        }
+      ]
+    }
+  ]
+}

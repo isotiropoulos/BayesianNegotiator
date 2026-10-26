@@ -1,0 +1,110 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1746_far_narrow_asym:provider:hard",
+  "assigner": "did:party:device-usage-logs",
+  "assignee": [
+    "did:party:smart-home-system",
+    "did:party:platform-operator"
+  ],
+  "target": [
+    "urn:asset:device-usage-logs",
+    "urn:asset:platform-operator"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "Framework Article 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:processingPurpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Terms of Service Article 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P3DT8H38M53.596S"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "PT21H2M38.579S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "block",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "Framework Article 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:processingPurpose",
+          "operator": "odrl:eq",
+          "rightOperand": "Terms of Service Article 6.1(a)"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.09
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "automatedProcessing",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:eq",
+          "rightOperand": "consent"
+        },
+        {
+          "leftOperand": "odrl:processingPurpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "Terms of Service Article 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1184
+        }
+      ]
+    },
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consent"
+          ]
+        },
+        {
+          "leftOperand": "odrl:processingPurpose",
+          "operator": "odrl:eq",
+          "rightOperand": "Terms of Service Article 6.1(a)"
+        }
+      ]
+    }
+  ]
+}

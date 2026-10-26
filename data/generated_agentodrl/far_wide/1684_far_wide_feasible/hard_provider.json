@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1684_far_wide:provider:hard",
+  "assigner": "did:party:insurance-company",
+  "assignee": [
+    "did:party:policyholder",
+    "did:party:insurance-company"
+  ],
+  "target": [
+    "urn:asset:insurance-contract-information",
+    "urn:asset:transfer-mechanism"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:neq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "conditionsMet"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2028-03-28"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P4DT16H49M58.056S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:eq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:eq",
+          "rightOperand": "conditionsMet"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gt",
+          "rightOperand": 14
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideTransferMeans",
+      "constraint": [
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:stateInsuranceSupervisionConditions",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "conditionsMet"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 211
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1301_far_wide:consumer:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:third-party-arbitrator"
+  ],
+  "target": [
+    "urn:asset:dispute-resolution"
+  ],
+  "permission": [
+    {
+      "action": "resolve",
+      "constraint": [
+        {
+          "leftOperand": "odrl:disputeResolutionType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "arbitration"
+          ]
+        },
+        {
+          "leftOperand": "odrl:ownershipStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "unknown"
+        },
+        {
+          "leftOperand": "odrl:complianceRisk",
+          "operator": "odrl:eq",
+          "rightOperand": "high"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lt",
+          "rightOperand": 0.32
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P13DT16H32M48.221S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1564
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 346
+        }
+      ]
+    }
+  ]
+}

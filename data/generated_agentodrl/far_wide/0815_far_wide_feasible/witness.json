@@ -1,0 +1,73 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:hospital-research-teams"
+  ],
+  "target": [
+    "urn:asset:aggregated-patient-outcome-trends"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "real-time clinical intervention planning"
+        },
+        {
+          "leftOperand": "odrl:priorApproval",
+          "operator": "odrl:eq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:eq",
+          "rightOperand": "P4DT1H53M23.344S"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P15DT15H14M0.381S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "deploy",
+      "constraint": [
+        {
+          "leftOperand": "odrl:priorApproval",
+          "operator": "odrl:eq",
+          "rightOperand": "False"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:eq",
+          "rightOperand": 0.54
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "public"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:eq",
+          "rightOperand": 1179
+        }
+      ]
+    }
+  ]
+}

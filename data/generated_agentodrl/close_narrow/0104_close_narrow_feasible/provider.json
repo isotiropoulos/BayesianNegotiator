@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0104_close_narrow:provider:aspiration",
+  "assigner": "did:party:data-space-owner",
+  "assignee": [
+    "did:party:registered-curators"
+  ],
+  "target": [
+    "urn:asset:restoration-documentation-files",
+    "urn:asset:all-servers"
+  ],
+  "permission": [
+    {
+      "action": "retrieve",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:lt",
+          "rightOperand": "2023-11-04T00:00:00Z"
+        },
+        {
+          "leftOperand": "odrl:accessLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "certifiedArchivalServers"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "global",
+            "EEA",
+            "US"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:accessLocation",
+          "operator": "odrl:neq",
+          "rightOperand": "certifiedArchivalServers"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "kafka",
+            "https",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.13
+        }
+      ]
+    }
+  ]
+}

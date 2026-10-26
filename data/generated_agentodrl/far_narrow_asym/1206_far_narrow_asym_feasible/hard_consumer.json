@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1206_far_narrow_asym:consumer:hard",
+  "assigner": "did:party:anti-fraud-model",
+  "assignee": [
+    "did:party:validator-party"
+  ],
+  "target": [
+    "urn:asset:anti-fraud-model"
+  ],
+  "permission": [
+    {
+      "action": "validate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:modelStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "trained"
+        },
+        {
+          "leftOperand": "odrl:validationEnvironment",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "independent financial data sandbox"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 1710
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P20DT14H19M13.4S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:eq",
+          "rightOperand": "termination"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2024-05-29"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:neq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

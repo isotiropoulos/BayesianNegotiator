@@ -1,0 +1,108 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1676_far_narrow:consumer:hard",
+  "assigner": "did:party:data-asset-holder",
+  "assignee": [
+    "did:party:data-trading-platform"
+  ],
+  "target": [
+    "urn:asset:data-product-asset",
+    "urn:asset:data-trading-platform"
+  ],
+  "permission": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requester",
+          "operator": "odrl:eq",
+          "rightOperand": "DataAssetHolder"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        },
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:neq",
+          "rightOperand": "true"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT6H42M3.91S"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2025-02-09"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requester",
+          "operator": "odrl:eq",
+          "rightOperand": "DataAssetHolder"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:neq",
+          "rightOperand": "regulator"
+        },
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True",
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2027-06-29"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provideTransferMeans",
+      "constraint": [
+        {
+          "leftOperand": "odrl:requester",
+          "operator": "odrl:eq",
+          "rightOperand": "DataAssetHolder"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "DesignatedDataServiceProvider"
+          ]
+        },
+        {
+          "leftOperand": "odrl:conditionsMet",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P53DT11H50M22.578S"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1614_close_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:farmer",
+    "did:party:provider"
+  ],
+  "target": [
+    "urn:asset:farmer-data",
+    "urn:asset:provider-data"
+  ],
+  "permission": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:eq",
+          "rightOperand": "data no longer necessary in relation to 'precision irrigation model training'"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P6DT2H39M28.304S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P15DT4H55M9.532S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:neq",
+          "rightOperand": "Farmer withdraws consent for 'crop pest and disease prediction' use case based on GDPR Article 6(1)(a)"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-08-25"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "tee"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "data no longer necessary in relation to 'precision irrigation model training'",
+            "Farmer withdraws consent for 'crop pest and disease prediction' use case based on GDPR Article 6(1)(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2025-11-09"
+        }
+      ]
+    }
+  ]
+}

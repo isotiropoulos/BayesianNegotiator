@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1301_far_narrow:provider:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:third-party-arbitrator"
+  ],
+  "target": [
+    "urn:asset:dispute-resolution"
+  ],
+  "permission": [
+    {
+      "action": "resolve",
+      "constraint": [
+        {
+          "leftOperand": "odrl:disputeResolutionType",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "arbitration"
+          ]
+        },
+        {
+          "leftOperand": "odrl:ownershipStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "unknown"
+          ]
+        },
+        {
+          "leftOperand": "odrl:complianceRisk",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "high"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.24
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P17DT5H18M30.922S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 1785
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "hybrid"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 258
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1206_close_narrow:provider:hard",
+  "assigner": "did:party:anti-fraud-model",
+  "assignee": [
+    "did:party:validator-party"
+  ],
+  "target": [
+    "urn:asset:anti-fraud-model"
+  ],
+  "permission": [
+    {
+      "action": "validate",
+      "constraint": [
+        {
+          "leftOperand": "odrl:modelStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "trained"
+        },
+        {
+          "leftOperand": "odrl:validationEnvironment",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "independent financial data sandbox"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gt",
+          "rightOperand": 5450
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P5DT19H54M47.203S"
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "renewal"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2025-11-19"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "hsm"
+          ]
+        }
+      ]
+    }
+  ]
+}

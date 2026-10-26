@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0511_far_narrow:provider:hard",
+  "assigner": "did:party:data-space-owner",
+  "assignee": [
+    "did:party:public-users"
+  ],
+  "target": [
+    "urn:asset:low-medium-resolution-images"
+  ],
+  "permission": [
+    {
+      "action": "view",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resource",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "AmazonianPlantSpecimens"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resource",
+          "operator": "odrl:neq",
+          "rightOperand": "urn:gaia-x:distributed-manufacturing-schedules"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT12H38M30.422S"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gt",
+          "rightOperand": 250
+        }
+      ]
+    },
+    {
+      "action": "download",
+      "constraint": [
+        {
+          "leftOperand": "odrl:resource",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "AmazonianPlantSpecimens"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resource",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "LowMediumResolutionImages"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 52
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P16DT4H39M51.506S"
+        }
+      ]
+    }
+  ]
+}

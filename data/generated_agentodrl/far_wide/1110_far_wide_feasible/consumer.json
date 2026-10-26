@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1110_far_wide:consumer:aspiration",
+  "assigner": "did:party:summary-data",
+  "assignee": [
+    "did:party:visitor"
+  ],
+  "target": [
+    "urn:asset:summary-data",
+    "urn:asset:raw-data"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:option",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "opt-out",
+            "de-identified"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P95DT14H18M4.646S"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-12-07"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:option",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de-identified",
+            "opt-out"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P26DT17H40M3.349S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "vm",
+            "authorized_mixed_reality_headset",
+            "videoPlatforms"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "US",
+            "CH",
+            "NorthAmerica"
+          ]
+        }
+      ]
+    }
+  ]
+}

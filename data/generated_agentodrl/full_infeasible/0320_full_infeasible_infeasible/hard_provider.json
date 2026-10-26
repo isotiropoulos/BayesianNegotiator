@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0320_full_infeasible:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:subject"
+  ],
+  "target": [
+    "urn:asset:cambridge-trials-repository"
+  ],
+  "permission": [
+    {
+      "action": "withdrawAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reIdentificationBehavior",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "re-identification attempt"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P12DT16H1M36.703S"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P2DT5H32M7.391S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 0.11
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:neq",
+          "rightOperand": "renewal"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "withdrawAccess",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reIdentificationBehavior",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "re-identification attempt"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT7H21M9.271S"
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "de",
+            "es",
+            "en"
+          ]
+        }
+      ]
+    }
+  ]
+}

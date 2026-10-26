@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0897_close_narrow:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-j-454",
+  "assignee": [
+    "did:party:researcher"
+  ],
+  "target": [
+    "urn:asset:eu-driving-v2-x",
+    "urn:asset:activity-logs"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:reviewStatus",
+          "operator": "odrl:eq",
+          "rightOperand": "jointlyReviewedAndRegistered"
+        },
+        {
+          "leftOperand": "odrl:transmissionMode",
+          "operator": "odrl:eq",
+          "rightOperand": "real-time"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 5742
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-03-16"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P15DT19H7M15.471S"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "marketing",
+            "research"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.55
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "consortium",
+            "public",
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ]
+}

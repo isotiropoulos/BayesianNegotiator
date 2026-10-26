@@ -1,0 +1,83 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1334_full_infeasible:provider:aspiration",
+  "assigner": "did:party:audit-process",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:audit-process",
+    "urn:asset:all-participants"
+  ],
+  "permission": [
+    {
+      "action": "update",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:neq",
+          "rightOperand": "null"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 397
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "commercial",
+            "statistics",
+            "education"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2590
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:neq",
+          "rightOperand": "null"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.1
+        }
+      ]
+    },
+    {
+      "action": "update",
+      "constraint": [
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P30D"
+        },
+        {
+          "leftOperand": "odrl:legalRegulationOrStandardRevisionOrRelease",
+          "operator": "odrl:neq",
+          "rightOperand": "null"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1289_far_narrow_asym:provider:hard",
+  "assigner": "did:party:assessment-authority",
+  "assignee": [
+    "did:party:applicant",
+    "did:party:unauthorized-user",
+    "did:party:assessment-team"
+  ],
+  "target": [
+    "urn:asset:application-system",
+    "urn:asset:sensitive-data",
+    "urn:asset:assessment-report"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "自动化检测"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:eq",
+          "rightOperand": "城市信息安全三级标准"
+        },
+        {
+          "leftOperand": "odrl:spatialResolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 53
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 996
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:neq",
+          "rightOperand": "GB/T 43697-2024"
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lteq",
+          "rightOperand": 2484
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "performAssessment",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:standard",
+          "operator": "odrl:neq",
+          "rightOperand": "GB/T 43697-2024"
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.84
+        }
+      ]
+    }
+  ]
+}

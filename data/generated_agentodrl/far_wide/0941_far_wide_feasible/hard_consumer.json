@@ -1,0 +1,85 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0941_far_wide:consumer:hard",
+  "assigner": "did:party:steward-of-cu-j-466",
+  "assignee": [
+    "did:party:credit-authority",
+    "did:party:applicant",
+    "did:party:foreign-institution"
+  ],
+  "target": [
+    "urn:asset:medical-credit-information-platform",
+    "urn:asset:applicant-history-violations",
+    "urn:asset:applicant-legal-lawsuits",
+    "urn:asset:industry-credit-rating",
+    "urn:asset:cross-border-data-compliance"
+  ],
+  "permission": [
+    {
+      "action": "verify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P7DT11H22M9.167S"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lt",
+          "rightOperand": 38
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lt",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "vm"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gteq",
+          "rightOperand": 1545
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CH",
+            "CentralEuropeanCountries",
+            "Greater Berlin Area"
+          ]
+        }
+      ]
+    }
+  ]
+}

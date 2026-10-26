@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1033_full_infeasible:consumer:hard",
+  "assigner": "did:party:market-trend-dashboards",
+  "assignee": [
+    "did:party:registered-users",
+    "did:party:users"
+  ],
+  "target": [
+    "urn:asset:market-trend-dashboards"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:minimumAge",
+          "operator": "odrl:lteq",
+          "rightOperand": 6
+        },
+        {
+          "leftOperand": "odrl:countryMinimumAge",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "countryMinimumAge"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P4DT1H20M59.934S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "tee"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:age",
+          "operator": "odrl:gteq",
+          "rightOperand": 22
+        },
+        {
+          "leftOperand": "odrl:countryMinimumAge",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "countryMinimumAge"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gt",
+          "rightOperand": "P7DT17H42M6.394S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        }
+      ]
+    }
+  ]
+}

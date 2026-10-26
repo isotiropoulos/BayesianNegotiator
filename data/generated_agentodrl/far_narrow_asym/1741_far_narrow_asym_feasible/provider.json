@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1741_far_narrow_asym:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-p-731",
+  "assignee": [
+    "did:party:user-party"
+  ],
+  "target": [
+    "urn:asset:personal-transaction-records-asset",
+    "urn:asset:apiinterface"
+  ],
+  "permission": [
+    {
+      "action": "transmit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPolicy",
+          "operator": "odrl:eq",
+          "rightOperand": "Protocol 6.1(a)"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P49DT9H56M51.795S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P21DT14H27.553S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.11
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "on-prem",
+            "us-cloud",
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "useAPI",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPolicy",
+          "operator": "odrl:eq",
+          "rightOperand": "Protocol 6.1(a)"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-07-05"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "education",
+            "journalism",
+            "research"
+          ]
+        }
+      ]
+    }
+  ]
+}

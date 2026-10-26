@@ -1,0 +1,17 @@
+# Pinned loosely: edcpy tracks EDC releases closely, so let pip resolve a
+# compatible pair rather than freezing a combination that ages badly.
+edcpy>=0.11,<0.12
+# edcpy calls broker.subscriber(..., no_ack=False). FastStream 0.6 removed
+# no_ack in favour of ack_policy, so a fresh build resolves a FastStream that
+# edcpy cannot call: the EDR consumer dies with
+#   TypeError: RabbitRegistrator.subscriber() got an unexpected keyword 'no_ack'
+# and, because edcpy's with_consumer_messaging_app has a `return` inside its
+# `finally`, the cause is discarded and only "generator didn't yield" is seen.
+faststream[rabbit]>=0.5,<0.6
+fastapi>=0.109
+uvicorn[standard]>=0.27
+httpx>=0.26
+pydantic>=2.7
+numpy>=1.24
+scipy>=1.10
+pytest>=7.4

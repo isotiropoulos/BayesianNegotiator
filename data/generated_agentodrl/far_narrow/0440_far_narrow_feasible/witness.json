@@ -1,0 +1,73 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Agreement",
+  "@id": "urn:witness",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:data-user"
+  ],
+  "target": [
+    "urn:asset:hospital-device-logs-asset"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actionType",
+          "operator": "odrl:eq",
+          "rightOperand": "sell"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:eq",
+          "rightOperand": 47
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:eq",
+          "rightOperand": "P4DT11H32M42.372S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "crossReference",
+      "constraint": [
+        {
+          "leftOperand": "odrl:logType",
+          "operator": "odrl:eq",
+          "rightOperand": "raw"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:eq",
+          "rightOperand": "P54DT16H35M45.443S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "kafka"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:eq",
+          "rightOperand": "2025-01-20"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "bare-metal"
+        }
+      ]
+    }
+  ]
+}

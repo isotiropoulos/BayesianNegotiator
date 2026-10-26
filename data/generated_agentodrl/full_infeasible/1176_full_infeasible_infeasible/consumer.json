@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1176_full_infeasible:consumer:aspiration",
+  "assigner": "did:party:steward-of-cu-j-536",
+  "assignee": [
+    "did:party:platform-administrator"
+  ],
+  "target": [
+    "urn:asset:bias-audit-asset",
+    "urn:asset:analytics-model"
+  ],
+  "permission": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "detrimental"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:gteq",
+          "rightOperand": 635981
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2028-09-28"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "rescindOperationalApproval",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "detrimental"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "https",
+            "SupportChannel",
+            "sftp"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "performBiasAudit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:consumerWelfare",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "detrimental"
+          ]
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ]
+}

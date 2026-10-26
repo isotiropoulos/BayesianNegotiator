@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1651_far_wide:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-p-688",
+  "assignee": [
+    "did:party:test-vehicle-driver"
+  ],
+  "target": [
+    "urn:asset:driving-behavior-data",
+    "urn:asset:driver-status-monitoring"
+  ],
+  "permission": [
+    {
+      "action": "object",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:eq",
+          "rightOperand": "point (e) or (f)"
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 15
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-03-20"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:neq",
+          "rightOperand": "point (e) or (f)"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P10DT12H12M47.776S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "consortium",
+            "third-party"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "include",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:neq",
+          "rightOperand": "point (e) or (f)"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "P10DT5H7M35.155S"
+        }
+      ]
+    }
+  ]
+}

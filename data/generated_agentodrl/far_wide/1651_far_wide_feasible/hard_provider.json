@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1651_far_wide:provider:hard",
+  "assigner": "did:party:steward-of-cu-p-688",
+  "assignee": [
+    "did:party:test-vehicle-driver"
+  ],
+  "target": [
+    "urn:asset:driving-behavior-data",
+    "urn:asset:driver-status-monitoring"
+  ],
+  "permission": [
+    {
+      "action": "object",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (e) or (f)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 64
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2024-09-27"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (e) or (f)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P4DT1H31.322S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "regulator"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "include",
+      "constraint": [
+        {
+          "leftOperand": "odrl:article6Paragraph1",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "point (e) or (f)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P3DT22H16M58.412S"
+        }
+      ]
+    }
+  ]
+}

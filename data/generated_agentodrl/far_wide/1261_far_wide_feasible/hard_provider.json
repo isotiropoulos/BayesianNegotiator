@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1261_far_wide:provider:hard",
+  "assigner": "did:party:party-policy-owner",
+  "assignee": [
+    "did:party:party-license-issuer"
+  ],
+  "target": [
+    "urn:asset:asset-best-practice-guides"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "annual"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P19DT10H35M39.383S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gt",
+          "rightOperand": "P4DT1H40M36.311S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "scientific research"
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "annual"
+          ]
+        },
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lt",
+          "rightOperand": 0.64
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "license",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:eq",
+          "rightOperand": "annual"
+        },
+        {
+          "leftOperand": "odrl:resolution",
+          "operator": "odrl:gteq",
+          "rightOperand": 20
+        }
+      ]
+    }
+  ]
+}

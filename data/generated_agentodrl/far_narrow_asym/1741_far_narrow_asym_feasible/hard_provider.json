@@ -1,0 +1,82 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1741_far_narrow_asym:provider:hard",
+  "assigner": "did:party:steward-of-cu-p-731",
+  "assignee": [
+    "did:party:user-party"
+  ],
+  "target": [
+    "urn:asset:personal-transaction-records-asset",
+    "urn:asset:apiinterface"
+  ],
+  "permission": [
+    {
+      "action": "transmit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPolicy",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Protocol 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P69DT16H26M34.528S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:gteq",
+          "rightOperand": "P16DT1H11M53.276S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.32
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "useAPI",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPolicy",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "Protocol 6.1(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2027-02-15"
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "education"
+          ]
+        }
+      ]
+    }
+  ]
+}

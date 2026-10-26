@@ -1,0 +1,93 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0754_close_narrow:provider:hard",
+  "assigner": "did:party:eco-friendly-concrete-blueprints",
+  "assignee": [
+    "did:party:members-green-construction-consortium",
+    "did:party:manufacturing-plants-eu"
+  ],
+  "target": [
+    "urn:asset:eco-friendly-concrete-blueprints",
+    "urn:asset:environmental-compliance-documentation"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:memberStatus",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "LEED Certified"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "EU"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 2
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 3090
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:memberStatus",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "LEED Certified"
+          ]
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P5DT21H50M24.207S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:memberStatus",
+          "operator": "odrl:neq",
+          "rightOperand": "LEEDCertified"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "EU"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 315745
+        }
+      ]
+    }
+  ]
+}

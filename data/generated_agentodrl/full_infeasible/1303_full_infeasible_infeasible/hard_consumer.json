@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1303_full_infeasible:consumer:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:smart-contract",
+    "did:party:system"
+  ],
+  "target": [
+    "urn:asset:smart-contract",
+    "urn:asset:data-asset"
+  ],
+  "permission": [
+    {
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:executionTrigger",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "automatic"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.45
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2024-10-10"
+        }
+      ]
+    },
+    {
+      "action": "delete",
+      "constraint": [
+        {
+          "leftOperand": "odrl:violationDetected",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "true"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 3038
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "XLSX"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:gt",
+          "rightOperand": 1162
+        },
+        {
+          "leftOperand": "odrl:deliveryChannel",
+          "operator": "odrl:eq",
+          "rightOperand": "courier"
+        }
+      ]
+    }
+  ]
+}

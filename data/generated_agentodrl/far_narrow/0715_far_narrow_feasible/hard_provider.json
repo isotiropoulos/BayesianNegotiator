@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0715_far_narrow:provider:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:hospital-network",
+    "did:party:end-user"
+  ],
+  "target": [
+    "urn:asset:apidata",
+    "urn:asset:pharmacist-approved-notifications"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:show",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "unprocessed API data"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P16DT18H18M23.807S"
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 407496
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:show",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "unprocessed API data"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2024-12-09"
+        },
+        {
+          "leftOperand": "odrl:virtualLocation",
+          "operator": "odrl:eq",
+          "rightOperand": "us-cloud"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "show",
+      "constraint": [
+        {
+          "leftOperand": "odrl:show",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "unprocessed API data"
+          ]
+        },
+        {
+          "leftOperand": "odrl:unitOfCount",
+          "operator": "odrl:lt",
+          "rightOperand": 2496
+        }
+      ]
+    }
+  ]
+}

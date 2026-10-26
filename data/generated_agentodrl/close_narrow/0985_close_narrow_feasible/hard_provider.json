@@ -1,0 +1,102 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0985_close_narrow:provider:hard",
+  "assigner": "did:party:data-owner",
+  "assignee": [
+    "did:party:data-provider",
+    "did:party:data-user",
+    "did:party:data-sender",
+    "did:party:data-processor",
+    "did:party:privacy-computing-platform"
+  ],
+  "target": [
+    "urn:asset:encrypted-data",
+    "urn:asset:unencrypted-sensitive-data",
+    "urn:asset:data",
+    "urn:asset:sensitive-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "transfer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "transmit",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:neq",
+          "rightOperand": "audit"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    },
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:eq",
+          "rightOperand": "healthcare"
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    },
+    {
+      "action": "usePrivacyComputing",
+      "constraint": [
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "audit"
+          ]
+        },
+        {
+          "leftOperand": "odrl:securityLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    }
+  ]
+}

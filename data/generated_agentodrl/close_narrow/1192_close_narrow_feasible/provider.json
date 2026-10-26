@@ -1,0 +1,92 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1192_close_narrow:provider:aspiration",
+  "assigner": "did:party:satellite-imagery-data",
+  "assignee": [
+    "did:party:environmental-research-consortia"
+  ],
+  "target": [
+    "urn:asset:satellite-imagery-data",
+    "urn:asset:model-impact-disclosure",
+    "urn:asset:fairness-index"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lt",
+          "rightOperand": 0.05
+        },
+        {
+          "leftOperand": "odrl:purpose",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "research",
+            "journalism",
+            "education"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lt",
+          "rightOperand": 0.05
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "EU",
+            "EEA",
+            "CH"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "provide",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lt",
+          "rightOperand": 0.05
+        },
+        {
+          "leftOperand": "odrl:media",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "print",
+            "internal-wiki",
+            "web"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "check",
+      "constraint": [
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lt",
+          "rightOperand": 0.05
+        },
+        {
+          "leftOperand": "odrl:fairnessIndex",
+          "operator": "odrl:lt",
+          "rightOperand": 0.05
+        }
+      ]
+    }
+  ]
+}

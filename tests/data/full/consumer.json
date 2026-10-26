@@ -1,0 +1,101 @@
+{
+
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+
+  "@type": "Offer",
+
+  "@id": "urn:case:FULL:consumer:init",
+
+  "assigner": "did:consumer:C-OK",
+
+  "assignee": ["did:provider:P-OK"],
+
+  "target": ["urn:asset:dataset:OK"],
+
+  "permission": [
+
+    {
+
+      "action": "use",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:absoluteTemporalPosition", "operator": "odrl:gteq", "rightOperand": "2025-07-15T00:00:00Z" },
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:gteq", "rightOperand": 82 },
+
+        { "leftOperand": "odrl:count", "operator": "odrl:gteq", "rightOperand": 1670 },
+
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:gteq", "rightOperand": "PT27M" },
+
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:eq", "rightOperand": "XML" },
+
+        { "leftOperand": "odrl:industry", "operator": "odrl:isAllOf", "rightOperand": ["research", "production"] },
+
+        { "leftOperand": "odrl:language", "operator": "odrl:eq", "rightOperand": "en" },
+
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAnyOf", "rightOperand": ["analytics", "publication"] }
+
+      ]
+
+    },
+
+    {
+
+      "action": "transform",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:gteq", "rightOperand": 82 },
+
+        { "leftOperand": "odrl:count", "operator": "odrl:gteq", "rightOperand": 1670 },
+
+        { "leftOperand": "odrl:fileFormat", "operator": "odrl:eq", "rightOperand": "XML" }
+
+      ]
+
+    }
+
+  ],
+
+  "obligation": [
+
+    {
+
+      "action": "anonymize",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:delayPeriod", "operator": "odrl:gteq", "rightOperand": "PT27M" },
+
+        { "leftOperand": "odrl:percentage", "operator": "odrl:gteq", "rightOperand": 82 },
+
+        { "leftOperand": "odrl:industry", "operator": "odrl:isAllOf", "rightOperand": ["research", "production"] }
+
+      ]
+
+    }
+
+  ],
+
+  "prohibition": [
+
+    {
+
+      "action": "redistribute",
+
+      "constraint": [
+
+        { "leftOperand": "odrl:count", "operator": "odrl:gteq", "rightOperand": 1670 },
+
+        { "leftOperand": "odrl:purpose", "operator": "odrl:isAllOf", "rightOperand": ["analytics", "publication"] }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+

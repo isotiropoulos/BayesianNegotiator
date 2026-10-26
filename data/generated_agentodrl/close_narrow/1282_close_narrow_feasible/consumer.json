@@ -1,0 +1,98 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1282_close_narrow:consumer:aspiration",
+  "assigner": "did:party:energy-data-platform-access",
+  "assignee": [
+    "did:party:counterparty"
+  ],
+  "target": [
+    "urn:asset:energy-data-platform-access",
+    "urn:asset:approval-process",
+    "urn:asset:blockchain-evidence",
+    "urn:asset:audit-traceability",
+    "urn:asset:audit-immutability"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.31
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "RDF",
+            "XML",
+            "PatientPrivacy"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P63DT4H57M12.395S"
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CH",
+            "European Union",
+            "GaiaXTrustedZone"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "wait",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dateTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P7D"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P9DT21H38M28.349S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "internal-only",
+            "European Union",
+            "urn:party:AccountHolder"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "recordEvidence",
+      "constraint": [
+        {
+          "leftOperand": "odrl:hasPart",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "BlockchainEvidence",
+            "web-quality",
+            "compressed"
+          ]
+        }
+      ]
+    }
+  ]
+}

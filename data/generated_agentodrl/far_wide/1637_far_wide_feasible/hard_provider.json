@@ -1,0 +1,78 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1637_far_wide:provider:hard",
+  "assigner": "did:party:policy-issuer",
+  "assignee": [
+    "did:party:individual-user"
+  ],
+  "target": [
+    "urn:asset:personal-account-statements",
+    "urn:asset:commercial-bank-a"
+  ],
+  "permission": [
+    {
+      "action": "access",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        },
+        {
+          "leftOperand": "odrl:processingBasis",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "point (a) of Article 6(1) or point (b) of Article 6(1)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:processingMethod",
+          "operator": "odrl:eq",
+          "rightOperand": "automated"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:lteq",
+          "rightOperand": "P114DT9H50M8.908S"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P4DT4M10.638S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "block",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sender",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "drk:CommercialBankA"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:gteq",
+          "rightOperand": 998
+        }
+      ]
+    }
+  ]
+}

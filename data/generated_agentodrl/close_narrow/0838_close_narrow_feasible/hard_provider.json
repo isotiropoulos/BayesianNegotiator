@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0838_close_narrow:provider:hard",
+  "assigner": "did:party:australian-natural-resources-authority",
+  "assignee": [
+    "did:party:forestry-management-team"
+  ],
+  "target": [
+    "urn:asset:satellite-vegetation-indices"
+  ],
+  "permission": [
+    {
+      "action": "use",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:eq",
+          "rightOperand": "August"
+        },
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:eq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-10-03"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gteq",
+          "rightOperand": "P2DT10H13M26.941S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "bypassSecurityChecks",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:eq",
+          "rightOperand": "August"
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "bypassSecurityChecks",
+      "constraint": [
+        {
+          "leftOperand": "odrl:wildfireMonth",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "October"
+          ]
+        },
+        {
+          "leftOperand": "odrl:wildfirePeak",
+          "operator": "odrl:eq",
+          "rightOperand": "True"
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT17H19M55.322S"
+        }
+      ]
+    }
+  ]
+}

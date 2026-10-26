@@ -1,0 +1,77 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1432_far_wide:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:administrator"
+  ],
+  "target": [
+    "urn:asset:user-account"
+  ],
+  "permission": [
+    {
+      "action": "disable",
+      "constraint": [
+        {
+          "leftOperand": "odrl:violationOfTerms",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "violation_of_terms"
+          ]
+        },
+        {
+          "leftOperand": "odrl:prohibitedActivitiesDetected",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "prohibited_activities_detected"
+          ]
+        },
+        {
+          "leftOperand": "odrl:breachOfApplicableLaw",
+          "operator": "odrl:eq",
+          "rightOperand": "breach_of_applicable_law"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gt",
+          "rightOperand": "2027-05-26"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-06-27"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P71DT13H17M7.764S"
+        },
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:eq",
+          "rightOperand": "consortium"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:samplingRate",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.38
+        }
+      ]
+    }
+  ]
+}

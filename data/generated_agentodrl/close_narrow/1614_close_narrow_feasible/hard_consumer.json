@@ -1,0 +1,81 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1614_close_narrow:consumer:hard",
+  "assigner": "did:party:policy-owner",
+  "assignee": [
+    "did:party:farmer",
+    "did:party:provider"
+  ],
+  "target": [
+    "urn:asset:farmer-data",
+    "urn:asset:provider-data"
+  ],
+  "permission": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "Farmer withdraws consent for 'crop pest and disease prediction' use case based on GDPR Article 6(1)(a)"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P5DT5H52M56.592S"
+        },
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "P16DT8H13M42.698S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:eq",
+          "rightOperand": "data no longer necessary in relation to 'precision irrigation model training'"
+        },
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:gteq",
+          "rightOperand": "2026-07-25"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "tee",
+            "Australia Spatial Data Hub",
+            "videoPlatforms"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "erase",
+      "constraint": [
+        {
+          "leftOperand": "odrl:ground",
+          "operator": "odrl:neq",
+          "rightOperand": "Farmer withdraws consent for 'crop pest and disease prediction' use case based on GDPR Article 6(1)(a)"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-12-10"
+        }
+      ]
+    }
+  ]
+}

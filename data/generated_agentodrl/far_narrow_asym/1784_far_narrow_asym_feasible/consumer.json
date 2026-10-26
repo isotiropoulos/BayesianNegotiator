@@ -1,0 +1,89 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1784_far_narrow_asym:consumer:aspiration",
+  "assigner": "did:party:in-game-behavior-data",
+  "assignee": [
+    "did:party:game-publisher",
+    "did:party:player-or-parent-guardian"
+  ],
+  "target": [
+    "urn:asset:in-game-behavior-data",
+    "urn:asset:player-authorization"
+  ],
+  "permission": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "disregardAge",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 42
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:lteq",
+          "rightOperand": 0
+        },
+        {
+          "leftOperand": "odrl:playerAge",
+          "operator": "odrl:gteq",
+          "rightOperand": 34
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P84DT12H13M56.711S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sell",
+      "constraint": [
+        {
+          "leftOperand": "odrl:actualKnowledge",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "disregardAge",
+            "True"
+          ]
+        },
+        {
+          "leftOperand": "odrl:language",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "es",
+            "de",
+            "el"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:recipient",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "regulator",
+            "drk:ExternalConsultant",
+            "ValidatedNetherlandsIP"
+          ]
+        }
+      ]
+    }
+  ]
+}

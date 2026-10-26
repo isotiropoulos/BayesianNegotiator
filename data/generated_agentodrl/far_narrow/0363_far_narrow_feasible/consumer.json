@@ -1,0 +1,86 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0363_far_narrow:consumer:aspiration",
+  "assigner": "did:party:auto-sense-owner",
+  "assignee": [
+    "did:party:user-interface"
+  ],
+  "target": [
+    "urn:asset:dynamic-road-condition-feeds-asset",
+    "urn:asset:user-interface"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:disclaimerType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "accuracy"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.0
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "share",
+      "constraint": [
+        {
+          "leftOperand": "odrl:timeInterval",
+          "operator": "odrl:lteq",
+          "rightOperand": "PT0S"
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "CSV",
+            "SubstationOperationData",
+            "image/jpeg"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "displayDisclaimer",
+      "constraint": [
+        {
+          "leftOperand": "odrl:disclaimerType",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "accuracy"
+          ]
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2023-10-05"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "mobility",
+            "国家工业安全",
+            "医院数据提供方"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1110_far_wide:consumer:hard",
+  "assigner": "did:party:summary-data",
+  "assignee": [
+    "did:party:visitor"
+  ],
+  "target": [
+    "urn:asset:summary-data",
+    "urn:asset:raw-data"
+  ],
+  "permission": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:option",
+          "operator": "odrl:eq",
+          "rightOperand": "opt-out"
+        },
+        {
+          "leftOperand": "odrl:elapsedTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P55DT4H31M19.991S"
+        },
+        {
+          "leftOperand": "odrl:relativeTemporalPosition",
+          "operator": "odrl:lt",
+          "rightOperand": "2025-07-31"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "odrl:option",
+          "operator": "odrl:isNoneOf",
+          "rightOperand": [
+            "opt-out"
+          ]
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:gteq",
+          "rightOperand": "P10DT6H1M45.864S"
+        },
+        {
+          "leftOperand": "odrl:systemDevice",
+          "operator": "odrl:eq",
+          "rightOperand": "vm"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lt",
+          "rightOperand": 2301
+        },
+        {
+          "leftOperand": "odrl:spatial",
+          "operator": "odrl:eq",
+          "rightOperand": "US"
+        }
+      ]
+    }
+  ]
+}

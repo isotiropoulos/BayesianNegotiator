@@ -1,0 +1,96 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1830_far_wide:provider:hard",
+  "assigner": "did:party:chinese-government",
+  "assignee": [
+    "did:party:critical-information-infrastructure-operator",
+    "did:party:other-airlines",
+    "did:party:national-cyberspace-administration"
+  ],
+  "target": [
+    "urn:asset:passenger-name-record-data"
+  ],
+  "permission": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:operatorName",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "TravelSky Technology Limited"
+          ]
+        },
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:neq",
+          "rightOperand": "XLSX"
+        },
+        {
+          "leftOperand": "odrl:geographicalScope",
+          "operator": "odrl:isAllOf",
+          "rightOperand": [
+            "China"
+          ]
+        },
+        {
+          "leftOperand": "odrl:count",
+          "operator": "odrl:lt",
+          "rightOperand": 233517
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:gt",
+          "rightOperand": 0
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:eq",
+          "rightOperand": "passenger name record data"
+        },
+        {
+          "leftOperand": "odrl:geographicalScope",
+          "operator": "odrl:eq",
+          "rightOperand": "China"
+        },
+        {
+          "leftOperand": "odrl:delayPeriod",
+          "operator": "odrl:gt",
+          "rightOperand": "P2DT12H10.991S"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "distribute",
+      "constraint": [
+        {
+          "leftOperand": "odrl:fileFormat",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "passenger name record data"
+          ]
+        },
+        {
+          "leftOperand": "odrl:geographicalScope",
+          "operator": "odrl:eq",
+          "rightOperand": "China"
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:gteq",
+          "rightOperand": 0.15
+        }
+      ]
+    }
+  ]
+}

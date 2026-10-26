@@ -1,0 +1,88 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:1689_far_narrow:provider:aspiration",
+  "assigner": "did:party:steward-of-cu-p-704",
+  "assignee": [
+    "did:party:credit-reporting-agency"
+  ],
+  "target": [
+    "urn:asset:credit-report",
+    "urn:asset:enterprise"
+  ],
+  "permission": [
+    {
+      "action": "process",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalOrRegulatoryRequirement",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "confidential",
+            "no_notification_required"
+          ]
+        },
+        {
+          "leftOperand": "odrl:version",
+          "operator": "odrl:lteq",
+          "rightOperand": 3
+        },
+        {
+          "leftOperand": "odrl:payAmount",
+          "operator": "odrl:lteq",
+          "rightOperand": 6030
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "inform",
+      "constraint": [
+        {
+          "leftOperand": "odrl:legalOrRegulatoryRequirement",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "confidential",
+            "no_notification_required"
+          ]
+        },
+        {
+          "leftOperand": "odrl:confidenceLevel",
+          "operator": "odrl:lteq",
+          "rightOperand": 0.54
+        },
+        {
+          "leftOperand": "odrl:event",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "termination",
+            "breach",
+            "audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "action": "notify",
+      "constraint": [
+        {
+          "leftOperand": "odrl:absoluteTemporalPosition",
+          "operator": "odrl:lteq",
+          "rightOperand": "2026-08-03"
+        },
+        {
+          "leftOperand": "odrl:industry",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "defence",
+            "public",
+            "finance"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "@type": "Offer",
+  "@id": "urn:case:0992_close_narrow:provider:hard",
+  "assigner": "did:party:steward-of-cu-j-485",
+  "assignee": [
+    "did:party:device-supplier",
+    "did:party:factory-operator"
+  ],
+  "target": [
+    "urn:asset:device-operation-data"
+  ],
+  "permission": [
+    {
+      "action": "publish",
+      "constraint": [
+        {
+          "leftOperand": "odrl:encryption",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:percentage",
+          "operator": "odrl:lteq",
+          "rightOperand": 24
+        }
+      ]
+    },
+    {
+      "action": "retrieve",
+      "constraint": [
+        {
+          "leftOperand": "odrl:dataAvailable",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:contentAccess",
+          "operator": "odrl:eq",
+          "rightOperand": "unauthorized"
+        }
+      ]
+    },
+    {
+      "action": "deliver",
+      "constraint": [
+        {
+          "leftOperand": "odrl:encryption",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "true"
+          ]
+        },
+        {
+          "leftOperand": "odrl:sensitiveDataLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:technology",
+          "operator": "odrl:isAnyOf",
+          "rightOperand": [
+            "['TEE', 'PrivacyComputing']"
+          ]
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "action": "sendPlainText",
+      "constraint": [
+        {
+          "leftOperand": "odrl:sensitiveDataLevel",
+          "operator": "odrl:gt",
+          "rightOperand": 1
+        },
+        {
+          "leftOperand": "odrl:meteredTime",
+          "operator": "odrl:lt",
+          "rightOperand": "P7DT11H31M20.653S"
+        }
+      ]
+    }
+  ]
+}
